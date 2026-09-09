@@ -1,0 +1,2756 @@
+{
+  "updated_at": "2026-08-20",
+  "items": [
+    {
+      "question": "can builders easily reuse company design standards across apps?",
+      "priority": null,
+      "segment": "Build",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Standards ship as code: private starter templates, skill packs for coding agents, and shared design systems mean every new app starts on company standards, and agents follow them automatically. Rules can additionally be enforced at CI level via automated code review.",
+          "sources": [
+            "https://vercel.com/templates",
+            "https://vercel.com/docs/deploy-button",
+            "https://vercel.com/docs/agent"
+          ],
+          "needs_review": false
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "AWS documents reusable Amplify UI themes and design tokens, plus Figma-to-code components. It does not document an organization-level catalog or enforcement mechanism, so company-wide standards still require shared packages, templates, or CI governance.",
+          "sources": [
+            "https://ui.docs.amplify.aws/react/theming",
+            "https://docs.amplify.aws/react/how-amplify-works/concepts/"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Team-authored Agent Runner prompt templates can be reused across projects, and project context can point agents to a public design system or style guide. The docs do not describe automatic organization-wide enforcement of those standards.",
+          "sources": [
+            "https://docs.netlify.com/prompt-templates/manage/",
+            "https://docs.netlify.com/build/build-with-ai/agent-runners/make-changes-with-agent-runners/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "C3 can start from a company-maintained Git template, and Cloudflare publishes Skills and MCP tooling for coding agents. Reuse is template- and agent-driven; the official docs do not describe an organization-enforced design-system catalog or automatic conformance checks.",
+          "sources": [
+            "https://developers.cloudflare.com/pages/get-started/c3/",
+            "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Dokploy can deploy reusable Docker Compose templates, including from a custom template base URL, so a company can publish app starters. It does not provide a design-system registry or enforce UI and code standards in arbitrary apps.",
+          "sources": [
+            "https://docs.dokploy.com/docs/templates",
+            "https://github.com/Dokploy/templates"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "The internal middleware covers repository creation and code sync; there is no template catalog, shared design system, or enforcement layer, so each app starts from a blank page. Standardized app design would be a net-new workstream for the platform team to build and keep current. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can a builder add a database without any infrastructure knowledge (no accounts, credentials, or networking)?",
+      "priority": null,
+      "segment": "Build",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Marketplace databases (Aurora PostgreSQL, DynamoDB, Aurora DSQL, Neon, Supabase, Redis) are provisioned in one click or directly by the coding agent via CLI; credentials are auto-injected as environment variables and billing is unified — the builder never creates an account or touches networking.",
+          "sources": [
+            "https://vercel.com/marketplace",
+            "https://vercel.com/docs/marketplace"
+          ],
+          "needs_review": false
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "`defineData` turns a TypeScript schema into an AppSync API and DynamoDB tables without database-network setup. Local sandboxing and deployment still require an AWS account and configured credentials or profile, so this does not meet the no-accounts-or-credentials condition.",
+          "sources": [
+            "https://docs.amplify.aws/react/build-a-backend/data/set-up-data/",
+            "https://docs.amplify.aws/react/start/account-setup/"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Netlify Database provisions a fully managed Postgres database automatically and creates isolated database branches for Deploy Previews; the builder does not configure database infrastructure or networking.",
+          "sources": [
+            "https://docs.netlify.com/build/data-and-storage/netlify-database/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "D1 is provisioned inside the Cloudflare account and attached through a binding. Worker code uses the binding rather than a database connection string, database credential, or network setup; the builder still needs normal Cloudflare project access.",
+          "sources": [
+            "https://developers.cloudflare.com/d1/get-started/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Dokploy provides UI and API lifecycle management for PostgreSQL, MySQL, MariaDB, MongoDB, and Redis. The database still runs on company-provisioned servers, and credentials, capacity, backups, and networking remain operator responsibilities.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/databases",
+            "https://docs.dokploy.com/docs/core/deployment-options"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "Self-service database provisioning is not part of the internal platform; a builder gets a database by going through the platform team or handling cloud accounts, credentials, and networking themselves. A guarded one-click path would have to be designed, built, and operated in-house.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can the builder do everything in plain language through a coding agent (no git, deployment, or infrastructure vocabulary required)?",
+      "priority": null,
+      "segment": "Build",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "The official Vercel MCP server, CLI and skill packs let a coding agent (e.g. Claude Code) build, deploy, verify, provision databases and read logs from plain-language prompts; company skill packs and templates remove remaining setup steps for non-technical builders.",
+          "sources": [
+            "https://vercel.com/docs/agent-resources/vercel-plugin",
+            "https://vercel.com/docs/cli"
+          ],
+          "needs_review": false
+        },
+        "AWS": {
+          "answer": "No",
+          "justification": "Amazon Q Developer accepts natural-language tasks, can edit code, and can call AWS APIs, but the documented workflow still uses an IDE or CLI plus AWS authentication. AWS does not document an end-to-end builder flow that removes Git, deployment, and infrastructure concepts.",
+          "sources": [
+            "https://aws.amazon.com/q/developer/build/",
+            "https://docs.amplify.aws/react/start/account-setup/"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Agent Runners let non-technical users prompt hosted coding agents from the dashboard to create, update, and ship code, with previews and a supported no-Git publish path.",
+          "sources": [
+            "https://docs.netlify.com/build/build-with-ai/agent-runners/overview/",
+            "https://docs.netlify.com/build/build-with-ai/agent-runners/make-changes-with-agent-runners/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Cloudflare's managed MCP/API servers and Skills let an authorized coding agent inspect and change much of the platform. The builder must still connect and authorize an external agent, and the underlying concepts remain developer-oriented rather than a documented no-vocabulary citizen-builder flow.",
+          "sources": [
+            "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "The built-in AI can turn natural-language prompts into Docker Compose templates, and the official MCP server exposes the Dokploy API to external coding agents. Provider setup, source code, deployments, and server concepts are not eliminated.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/ai",
+            "https://github.com/Dokploy/mcp"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "The middleware hides Git well (builders never install Git or learn its vocabulary), but the abstraction stops at code sync: deployment, databases, auth, and connectors still surface infrastructure concepts. A full plain-language experience would require agent tooling around every one of those steps. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "does creating a new app automatically create the source repository and wire it to the platform, with no manual linking?",
+      "priority": null,
+      "segment": "Build",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Deploying a template (dashboard or Deploy Button) clones the template into the company's Git account, creates the Vercel project, and links the two automatically. No manual wiring.",
+          "sources": [
+            "https://vercel.com/docs/deploy-button",
+            "https://vercel.com/templates"
+          ],
+          "needs_review": false
+        },
+        "AWS": {
+          "answer": "No",
+          "justification": "Amplify's documented connected-deploy flow starts with code already in a Git repository; its alternative manual deployment starts from an existing build artifact. Neither documented flow creates a source repository and wires it automatically.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/getting-started-next.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/manual-deploys.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Creating with AI can generate and deploy a new project from a prompt, but an external source repository is not automatic: for an unlinked project, the user must explicitly create and push a GitHub repository and complete the linking prompts.",
+          "sources": [
+            "https://docs.netlify.com/start/quickstarts/create-new-project-with-ai-agent/",
+            "https://docs.netlify.com/build/git-workflows/create-a-repo-from-netlify/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Deploy to Cloudflare buttons clone a public template into the user's GitHub or GitLab account, configure the Worker, and connect Workers Builds. Standard C3 and existing-project flows do not automatically create a remote repository, and Deploy buttons do not cover every new-app path.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/platform/deploy-buttons/",
+            "https://developers.cloudflare.com/pages/get-started/c3/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Dokploy's documented source flows start from an existing Git repository, Docker image, uploaded ZIP, or raw Compose definition. No documented flow creates a remote source repository when an app is created.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/providers",
+            "https://docs.dokploy.com/docs/api/application"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "Repository creation is genuinely automatic: the backend creates the repo and a GitHub App commits on the builder's behalf. Wiring that repo to hosting, domains, and environments is a separate manual step, so the automation covers the source side only. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": false
+        }
+      }
+    },
+    {
+      "question": "can agents be easily created and deployed?",
+      "priority": null,
+      "segment": "Build",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "With the open-source agent framework (Eve), an agent is a directory: instructions, channels (Slack in one file), connections, schedules and tools; deploys like any app with durable sessions, approval gates and per-run observability built in.",
+          "sources": [
+            "https://eve.dev",
+            "https://vercel.com/docs/workflows"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "Amazon Bedrock provides a console workflow to create an agent from instructions and optional action groups or knowledge bases, then deploy it by creating an alias and version. Production permissions and integrations still need configuration.",
+          "sources": [
+            "https://docs.aws.amazon.com/bedrock/latest/userguide/agents-create.html",
+            "https://docs.aws.amazon.com/bedrock/latest/userguide/deploy-agent.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Agent Runners host supported coding agents. AI Gateway handles model access, and Async Workloads handles durable background execution. The docs describe these as separate products and do not document an integrated deployment and lifecycle flow for production agents, so this remains Partial.",
+          "sources": [
+            "https://docs.netlify.com/build/build-with-ai/agent-runners/overview/",
+            "https://docs.netlify.com/build/ai-gateway/overview/",
+            "https://docs.netlify.com/build/async-workloads/overview/"
+          ],
+          "needs_review": true
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "The Agents SDK provides managed agent identity, state, sessions, scheduling, tools, observability, and global deployment on Workers. It is a genuine agent runtime, although its setup is aimed at developers.",
+          "sources": [
+            "https://developers.cloudflare.com/agents/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "A containerized agent can be deployed as an Application or Compose service, and an external coding agent can manage it through Dokploy's MCP server. Dokploy does not provide an agent runtime, durable run model, approvals, or agent-specific observability.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/applications",
+            "https://github.com/Dokploy/mcp"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "There is no internal agent runtime; every agent is a bespoke project where hosting, triggers, identity, and logging get assembled case by case. Making agent creation easy would mean building and operating a dedicated runtime in-house.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "builder can easily provision DB that runs in the company's own AWS account?",
+      "priority": null,
+      "segment": "Build",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "AWS databases on the Vercel Marketplace (Aurora PostgreSQL, DynamoDB, Aurora DSQL) provision in one click with automatic credentials and networking, and support linking the company's own AWS account via delegated permissions.",
+          "sources": [
+            "https://vercel.com/marketplace",
+            "https://vercel.com/docs/marketplace"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "Amplify Data provisions an AppSync API and DynamoDB tables from the backend definition in the selected AWS account; the builder does not configure database networking.",
+          "sources": [
+            "https://docs.amplify.aws/react/build-a-backend/data/set-up-data/",
+            "https://docs.amplify.aws/react/how-amplify-works/concepts/"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "No",
+          "justification": "The documented Netlify Database path is a fully managed Netlify service; current public docs do not describe deploying it into a customer's AWS account. Any private or BYOC Enterprise option needs contractual confirmation.",
+          "sources": [
+            "https://docs.netlify.com/build/data-and-storage/netlify-database/"
+          ],
+          "needs_review": true
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "D1 is Cloudflare-hosted. Hyperdrive can securely connect a Worker to an existing PostgreSQL or MySQL database, including one hosted in AWS, but it does not provision that database in the company's AWS account.",
+          "sources": [
+            "https://developers.cloudflare.com/hyperdrive/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Dokploy can create a supported database on a registered AWS server, so the data plane can remain in the company's AWS account. A platform operator must first provision, connect, secure, size, and maintain that server; this is not managed RDS provisioning.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/databases",
+            "https://docs.dokploy.com/docs/core/remote-servers/instructions"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "An internal platform naturally lands databases in DH-owned AWS, which satisfies the ownership requirement. What is missing is the builder-facing part: a self-service flow with guardrails does not exist today, so provisioning still runs through engineers.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can promotion to production require a named human's approval?",
+      "priority": null,
+      "segment": "Build",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Production can be locked to Git only (trusted deployment sources), so promotion is enforced through standard required-reviewer rules on the company GitHub org; project roles additionally restrict who can promote or roll back, and Rolling Releases stage the rollout.",
+          "sources": [
+            "https://vercel.com/docs/deployment-protection",
+            "https://vercel.com/docs/rolling-releases",
+            "https://vercel.com/docs/rbac/access-roles"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "CodePipeline manual-approval actions can pause a release and restrict approval to IAM-authorized identities. This is a separately configured pipeline rather than a native approval gate in Amplify's Git-push deployment workflow.",
+          "sources": [
+            "https://docs.aws.amazon.com/codepipeline/latest/userguide/approvals.html",
+            "https://docs.amplify.aws/react/deploy-and-host/fullstack-branching/branch-deployments/"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "An Internal Builder cannot publish and can open a pull request for review; locked deploys require a permitted user to publish. Netlify does not document assignment to a named approver as an in-product release step.",
+          "sources": [
+            "https://docs.netlify.com/manage/accounts-and-billing/team-management/roles-and-permissions/",
+            "https://docs.netlify.com/deploy/manage-deploys/manage-deploys-overview/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Workers Builds can make a production branch the normal deployment path, while Workers also permits separately authorized version uploads and direct Wrangler deployments. The Cloudflare docs reviewed do not document a built-in named-human approval gate, so that approval must be enforced in an external repository or CI workflow.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/ci-cd/builds/configuration/",
+            "https://developers.cloudflare.com/workers/versions-and-deployments/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Dokploy supports direct push, webhook, UI, and API deployment triggers and granular deployment permissions, but it has no documented named-approver state. An external CI system can require approval before calling the deployment API, while other enabled Dokploy triggers must also be restricted.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/auto-deploy",
+            "https://docs.dokploy.com/docs/core/enterprise/custom-roles"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "The middleware is trunk-only: builders' changes commit straight to main with no branches or pull requests, so there is no point in the flow where a named approver can gate production. Adding one means building a review and promotion workflow first. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can builders ship through the company GitHub organization without each needing a paid GitHub license?",
+      "priority": null,
+      "segment": "Build",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Vercel built this workflow for an enterprise customer. A single GitHub App performs repository operations in the company organization, and commits attribute the acting builder as a co-author. Builders can create repositories, commit changes, open pull requests, and deploy without individual paid GitHub seats. The workflow is ready to demonstrate and hand over.",
+          "sources": [
+            "https://github.com/blurrah-poc/gh-principal-broker",
+            "https://vercel.slack.com/archives/C0BH24R600Z/p1786959346763599 (internal)"
+          ],
+          "needs_review": false
+        },
+        "AWS": {
+          "answer": "No",
+          "justification": "AWS documentation confirms that the Amplify GitHub App can be limited to selected repositories, but it does not define GitHub user-seat entitlements. The paid-license part of this verdict cannot be verified from AWS-primary sources alone.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html"
+          ],
+          "needs_review": true
+        },
+        "Netlify": {
+          "answer": "No",
+          "justification": "Netlify supports a no-Git publish path and separately requires a GitHub account for Git-backed repository creation. It does not remove the GitHub organization's own access or licensing requirement, so that part cannot be verified from Netlify documentation alone.",
+          "sources": [
+            "https://docs.netlify.com/build/build-with-ai/agent-runners/make-changes-with-agent-runners/",
+            "https://docs.netlify.com/build/git-workflows/create-a-repo-from-netlify/"
+          ],
+          "needs_review": true
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Workers Builds can deploy from a connected GitHub organization repository, and Deploy to Cloudflare can clone public templates. Cloudflare documentation does not determine GitHub seat or license requirements for 2,500 builders; direct Wrangler deployment avoids GitHub but no longer satisfies the governed-organization path.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/ci-cd/builds/git-integration/github-integration/",
+            "https://developers.cloudflare.com/workers/platform/deploy-buttons/"
+          ],
+          "needs_review": true
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "An organization-installed GitHub App lets Dokploy deploy selected organization repositories without giving every Dokploy user separate deployment credentials. Whether each builder can author or contribute without a paid GitHub seat is a GitHub licensing and repository-access question, not a Dokploy capability.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/github"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "Yes",
+          "justification": "This is the internal platform's proven strength: a GitHub App with a service account commits on each builder's behalf, so builders need neither a GitHub seat nor Git on their machine while all code stays in the DH organization. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": false
+        }
+      }
+    },
+    {
+      "question": "does every change produce a live, shareable draft version that reviewers open in a browser?",
+      "priority": null,
+      "segment": "Share",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Every change in Vercel will instantly come with a preview website that they or their agent can inspect to verify everything works. This comes out of the box. Sharing this preview environment is also really easy.",
+          "sources": [
+            "https://vercel.com/academy/vercel-foundations/deployments",
+            "https://vercel.com/docs/deployments/sharing-deployments"
+          ],
+          "needs_review": false
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Amplify can generate a unique browser URL and optional temporary backend for each pull request, but PR previews must be enabled and are available only for repository-connected continuous-deployment apps. That is not an automatic distinct draft for every change.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/pr-previews.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Deploy Previews automatically create a unique browser URL for pull or merge requests and for file-changing Agent Runner runs.",
+          "sources": [
+            "https://docs.netlify.com/deploy/deploy-types/deploy-previews/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Workers can create a browser-openable URL for each uploaded version when preview URLs are enabled, and Pages creates preview deployments for eligible pull requests. This is not universal: Workers preview URLs have documented exclusions, including Workers that implement Durable Objects, and can be disabled with workers.dev.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/versions-and-deployments/preview-urls/",
+            "https://developers.cloudflare.com/pages/configuration/preview-deployments/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "GitHub pull requests can create and update isolated browser previews, but previews are GitHub-only, disabled by default, and limited to pull requests targeting the configured branch. Traefik.me works without wildcard DNS; a custom wildcard domain is optional.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/applications/preview-deployments"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "With commits going straight to main and no branches, there is nothing to build a per-change preview from; the only live version is the current one. Preview environments (isolated builds, URLs, teardown) would be a new subsystem. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can a stakeholder review a draft without creating an account, installing anything, or opening a developer tool?",
+      "priority": null,
+      "segment": "Share",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Reviewers open the preview URL in a browser; protected previews are unlocked with the company SSO login (Passport) or a shareable link — no Vercel account, install, or developer tool needed.",
+          "sources": [
+            "https://vercel.com/docs/deployments/sharing-deployments",
+            "https://vercel.com/docs/passport"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "An enabled PR preview is a browser URL. Reviewers do not need an AWS account or developer tool; optional Hosting access control can instead require a shared username and password.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/pr-previews.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/access-control.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Preview URLs can be viewed by anyone with the link unless protection is configured; using the Netlify Drawer to leave feedback requires a free Reviewer login.",
+          "sources": [
+            "https://docs.netlify.com/deploy/deploy-overview/",
+            "https://docs.netlify.com/deploy/review-deploys/netlify-drawer-for-feedback/overview/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "A public preview opens directly in a browser. If it is protected with Access, a reviewer can use company SSO or an approved-email one-time PIN without a Cloudflare account or developer tooling.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/versions-and-deployments/preview-urls/",
+            "https://developers.cloudflare.com/cloudflare-one/integrations/identity-providers/one-time-pin/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Yes",
+          "justification": "A preview receives an ordinary browser URL. The default Traefik.me preview is not account-gated, so a stakeholder can open it without a Dokploy account; operators must add protection separately if the preview should not be public.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/applications/preview-deployments"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "Because drafts do not exist as deployments, showing work in progress means either publishing it live or walking the stakeholder through it locally. There is no browser link a reviewer can simply open.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can stakeholders leave feedback directly on the draft app?",
+      "priority": null,
+      "segment": "Share",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "The Vercel Toolbar lets reviewers comment directly on the preview, with screenshots and integrations that route feedback into Jira, Linear, or GitHub Issues.",
+          "sources": [
+            "https://vercel.com/docs/comments",
+            "https://vercel.com/docs/vercel-toolbar"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "No",
+          "justification": "The documented PR-preview workflow provides a preview URL and uses the pull request as the review unit; AWS documents no built-in annotation or commenting control on the rendered preview itself. Feedback therefore needs the pull request or another tool.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/pr-previews.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "The Netlify Drawer supports comments, screenshots, screen recordings, and issue-tracker integrations on previews; Reviewer logins are free and unlimited.",
+          "sources": [
+            "https://docs.netlify.com/deploy/review-deploys/netlify-drawer-for-feedback/overview/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "No",
+          "justification": "The official Pages and Workers preview documentation provides browser previews and Git-provider deployment status, but does not document an in-preview commenting or annotation feature. Feedback would need another channel such as the pull request or a separate tool.",
+          "sources": [
+            "https://developers.cloudflare.com/pages/configuration/preview-deployments/",
+            "https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/"
+          ],
+          "needs_review": true
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Dokploy documents preview creation and URLs but no native annotation or stakeholder-commenting layer on the rendered preview. Teams can add a separate feedback tool, but that is not an integrated Dokploy workflow.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/applications/preview-deployments"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "In-app commenting presupposes preview deployments, and the platform has neither. Feedback today travels over chat, tickets, or meetings rather than living on the draft itself.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "is a newly deployed internal app not exposed to the public internet by default?",
+      "priority": null,
+      "segment": "Share",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Team-wide Deployment Protection defaults plus a default Passport mean every new project is born behind company SSO; only team Owners can remove protection, so builders cannot expose an app by omission.",
+          "sources": [
+            "https://vercel.com/docs/deployment-protection",
+            "https://vercel.com/docs/passport"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "No",
+          "justification": "Amplify publishes deployments on a default `amplifyapp.com` domain. Hosting password protection and WAF association are optional controls, so a new deployment is not private by default.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/getting-started-next.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/access-control.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/amplify-waf-configuration.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Credit-based teams created on or after July 28, 2026 start private for new projects, and Team Owners can set a private default; older teams remain public unless changed. Enterprise and other non-credit plans use separate access controls, so private-by-default is not universal.",
+          "sources": [
+            "https://docs.netlify.com/manage/security/secure-access-to-sites/project-visibility/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Workers on workers.dev and preview URLs are public when enabled. Administrators can disable workers.dev and enable Access for all Workers, but private-by-default behavior is an account setting rather than the unconfigured service default.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/configuration/routing/workers-dev/",
+            "https://developers.cloudflare.com/workers/configuration/cloudflare-access/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "A standard Application is not internet-reachable until a domain or published port is added. Dokploy also accepts raw Compose definitions that can publish ports, and it does not enforce an 'internal app' classification, so this is a default rather than a platform-wide guarantee.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/applications",
+            "https://docs.dokploy.com/docs/core/domains",
+            "https://docs.dokploy.com/docs/core/docker-compose/domains"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "Apps deployed inside DH's network are typically not internet-facing, which is a real safety net. But that is a property of the network, not a per-app platform guarantee — exposure depends on how each app is routed, and nothing in the middleware enforces it. Default posture to be confirmed with the DH infra team.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can a builder share an app with exactly one person — e.g. only their manager — without creating a team or filing a ticket?",
+      "priority": null,
+      "segment": "Share",
+      "vendors": {
+        "Vercel": {
+          "answer": "No",
+          "justification": "Passport grants access via IdP app assignment, so per-person sharing today requires an Okta assignment change (automatable via Okta APIs as a self-service workflow, which is the demonstrated workaround). Google-Docs-style native sharing controls are on the product roadmap.",
+          "sources": [
+            "https://vercel.com/docs/passport",
+            "https://vercel.slack.com/archives/C0AQ6BMLQCQ/p1786738463652929 (internal)"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Native Hosting access control is a shared username and password at app or branch scope, not a named-person share. Cognito can admit one administratively created user, but only after the app adds its own authentication and user-pool setup.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/access-control.html",
+            "https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-create-user-accounts.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "On a credit-based Pro plan, a private project can be shared with one email and scoped to that project, but the docs assign granular access administration to Team Owners and the invitee must use a Netlify login.",
+          "sources": [
+            "https://docs.netlify.com/manage/accounts-and-billing/team-management/manage-project-access/",
+            "https://docs.netlify.com/manage/security/secure-access-to-sites/project-visibility/"
+          ],
+          "needs_review": true
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "An Access policy can allow one email address, and one-time PIN lets that recipient authenticate without an IdP account. Whether a builder can do this without a ticket depends on the builder having permission to manage the relevant Access policy.",
+          "sources": [
+            "https://developers.cloudflare.com/cloudflare-one/access-controls/policies/",
+            "https://developers.cloudflare.com/cloudflare-one/integrations/identity-providers/one-time-pin/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Enterprise Application Authentication has no per-email or per-group allow-list in Dokploy; any user accepted by the configured OIDC application is admitted. Restricting access to one person must be done through the upstream IdP, normally outside the builder's Dokploy workflow.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/enterprise/sso/application-authentication"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "The Catalog UI manages contributors (who may edit an app), not viewers (who may open it). Restricting a running app to a single colleague requires auth work inside the app itself, not a self-service toggle. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can access be granted to an existing IdP group, or a union of groups?",
+      "priority": null,
+      "segment": "Share",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Passport gates an app on an IdP application; assigning one or several Okta groups to that application grants exactly those groups (union) access — demonstrated live during the DH PoC.",
+          "sources": [
+            "https://vercel.com/docs/passport"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Cognito user pools can federate SAML or OIDC identity providers and place a user in multiple groups, with group claims in tokens. The hosted app must integrate Cognito and implement authorization or group mapping; Amplify Hosting does not apply IdP groups as its native share control.",
+          "sources": [
+            "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html",
+            "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-user-groups.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Enterprise Directory Sync maps existing IdP groups to Netlify teams and roles and can restrict Developer or Reviewer group access to specific sites; users in multiple groups receive the effective mapped access.",
+          "sources": [
+            "https://docs.netlify.com/manage/security/secure-netlify-access/directory-sync/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "Access policies can match identity-provider groups and combine multiple Include rules with OR semantics, so a single policy can allow the union of existing groups.",
+          "sources": [
+            "https://developers.cloudflare.com/cloudflare-one/access-controls/policies/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "An IdP can restrict its OIDC application to one or more existing groups, which limits who can pass Dokploy's forward-auth gate. Dokploy itself has no group selector, and all protected applications on a server share one OIDC provider, so per-app group policies live upstream.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/enterprise/sso/application-authentication"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "Okta (with SailPoint as source of truth) makes group-based access technically available to any DH app, but each app has to wire it up individually. A platform-level \"grant access to these groups\" control would have to be built.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can it handle a rush of 20000 people going to the same internal app at the same time?",
+      "priority": null,
+      "segment": "Deploy",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Fluid compute auto-scales concurrency (100k+ concurrent executions on Enterprise) behind a global edge network with zero capacity planning by the builder or platform team.",
+          "sources": [
+            "https://vercel.com/docs/fluid-compute",
+            "https://vercel.com/docs/functions/concurrency-scaling"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Amplify Hosting uses a global CDN and has an adjustable default 20,000 request-token-per-second quota per app. Concurrent people are not equivalent to request tokens, and SSR or backend quotas depend on workload, so a 20,000-person event still needs load testing and quota planning.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/quotas-chapter.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Netlify markets global edge delivery and autoscaling for traffic spikes, but official material does not provide a 20,000-concurrent-user guarantee for a dynamic internal app; workload limits and load testing still need validation.",
+          "sources": [
+            "https://www.netlify.com/platform/",
+            "https://www.netlify.com/support-scope/"
+          ],
+          "needs_review": true
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "Paid Workers scale automatically across Cloudflare's network and have no general requests-per-second limit or per-app server capacity to provision. A specific app's CPU, subrequests, storage, and downstream dependencies still require load testing before treating 20,000 simultaneous users as proven.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/platform/limits/"
+          ],
+          "needs_review": true
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Dokploy supports multiple replicas across Docker Swarm nodes with Traefik load balancing, so a suitably designed app can be scaled for a large spike. Dokploy does not provide a 20,000-user capacity guarantee or automatic demand scaling; the company must provision nodes and validate the application under load.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/deployment-options",
+            "https://docs.dokploy.com/docs/core/cluster"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "Nothing absorbs a company-wide traffic spike automatically; capacity is whatever the platform team has provisioned and load-tested for that app. Internal tools are rarely sized for 20,000 concurrent users, so a burst like this is an incident rather than a non-event.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "does the internal apps that are not used cost zero in traffic?",
+      "priority": null,
+      "segment": "Deploy",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Pricing is usage-based and compute scales to zero: an internal app nobody visits generates no traffic or compute cost.",
+          "sources": [
+            "https://vercel.com/docs/fluid-compute",
+            "https://vercel.com/pricing"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "Hosting charges are usage-based for build minutes, data transfer, SSR requests and duration, and storage. With no traffic there are no transfer or SSR-request charges, although stored artifacts and any provisioned backend services can still cost.",
+          "sources": [
+            "https://aws.amazon.com/amplify/pricing/"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "With no requests, bandwidth, or Function runtime, an idle app consumes no traffic-meter credits; subscription, production-deploy, database, or other non-traffic charges can still apply.",
+          "sources": [
+            "https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/how-credits-work/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "Workers Standard usage is metered by requests and CPU time, so an app with no requests incurs no request or CPU usage charge. Fixed plan fees and separately stored data or other provisioned products may still cost money.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/platform/pricing/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Applications run as containers on provisioned servers and Dokploy Cloud is priced per connected server. Stopping or leaving an app unused does not remove the underlying server capacity or its fixed cost; no scale-to-zero model is documented.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/deployment-options",
+            "https://docs.dokploy.com/docs/core/differences"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "On self-run infrastructure an idle app still occupies its compute around the clock. Scale-to-zero is achievable, but it is a deliberate engineering effort per runtime, not the default behavior.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "is uptime the vendor's contractual problem, not the builder's or the platform team's?",
+      "priority": null,
+      "segment": "Deploy",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Enterprise agreements carry a 99.99% uptime SLA; Vercel operates the entire serving path, so neither builders nor an internal platform team carry pager duty for hosting.",
+          "sources": [
+            "https://vercel.com/enterprise"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Amplify Hosting has a 99.95% SLA with service credits, but it covers the Amplify Console service and excludes failures caused by customer software or other services. It does not make AWS contractually responsible for uptime of the whole assembled application.",
+          "sources": [
+            "https://aws.amazon.com/amplify/sla/"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Netlify advertises a 99.99% uptime SLA for Enterprise; the executed contract defines its scope and exclusions.",
+          "sources": [
+            "https://www.netlify.com/platform/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Cloudflare's Enterprise SLA makes availability of the covered Cloudflare service a contractual commitment backed by service credits. It does not transfer responsibility for application code, customer configuration, or upstream dependencies to Cloudflare.",
+          "sources": [
+            "https://www.cloudflare.com/enterprise-support-sla/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Even Dokploy Cloud manages the control plane while applications continue to run on customer-operated servers. Enterprise Cloud can include an SLA for the managed control plane and support, but application, server, and dependency uptime remains the company's responsibility.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/differences",
+            "https://docs.dokploy.com/docs/core/enterprise"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "With an internally operated platform, accountability for uptime ends at DH: component vendors back their own pieces, but nobody contractually owns the assembled platform. On-call, incident response, and postmortems sit with the internal team.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "do the frontend, APIs, backends and background workers ship together — one draft, one release, one rollback?",
+      "priority": null,
+      "segment": "Deploy",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "One deployment ships everything together: with Vercel Services, the frontend, backend services (any runtime, including containers), APIs, crons and background workers are defined in code and deploy as a single atomic, immutable version — every preview contains all of them, and Instant Rollback reverts them as one unit (with Skew Protection during transitions).",
+          "sources": [
+            "https://vercel.com/docs/services",
+            "https://vercel.com/docs/instant-rollback",
+            "https://vercel.com/docs/skew-protection"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Amplify Gen 2 can deploy frontend and backend from one branch and commit, but the build specification has separate backend and frontend phases. AWS documents no single atomic release and rollback spanning APIs, data resources, and workers.",
+          "sources": [
+            "https://docs.amplify.aws/react/deploy-and-host/fullstack-branching/branch-deployments/",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/yml-specification-syntax.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "An atomic deploy versions site assets, Functions, and Edge Functions and can roll those artifacts back together. Rollback does not undo database state or already-running async work, so the full application state is not one release transaction.",
+          "sources": [
+            "https://docs.netlify.com/deploy/deploy-overview/",
+            "https://docs.netlify.com/deploy/manage-deploys/manage-deploys-overview/",
+            "https://docs.netlify.com/build/async-workloads/overview/",
+            "https://docs.netlify.com/build/data-and-storage/netlify-database/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "One Worker version captures bundled code, static assets, bindings, and compatibility settings, so those components release and roll back together. Storage state is not versioned, and separate Workers deploy independently with documented cross-Worker version-skew risk.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/versions-and-deployments/",
+            "https://developers.cloudflare.com/workers/versions-and-deployments/gradual-deployments/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Docker Compose can deploy a frontend, API, worker, and dependencies as one stack. Dokploy records services independently, and its documented manual rollback is for individual Applications rather than an atomic release spanning every service in a project.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/docker-compose",
+            "https://docs.dokploy.com/docs/core/applications/rollbacks",
+            "https://docs.dokploy.com/docs/core/multi-tenancy"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "The middleware syncs code; it has no notion of a release that spans frontend, APIs, and background workers. Coordinated releases and unified rollback would be built per app or as new platform machinery.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can a bad release be undone in seconds, by the builder, without engineering help?",
+      "priority": null,
+      "segment": "Deploy",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Instant Rollback is one click in the dashboard (or one CLI/agent command), needs no rebuild, and restores the previous deployment in seconds.",
+          "sources": [
+            "https://vercel.com/docs/instant-rollback"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Amplify offers `Redeploy this version` and an API to retry an existing job, but both start deployment work rather than an instantaneous atomic rollback. AWS does not document that this restores backend resource state with the frontend.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/build-backend-Gen1.html",
+            "https://docs.aws.amazon.com/amplify/latest/APIReference/API_StartJob.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "A builder with publish permission can publish a previous successful atomic deploy instantly, without triggering a new build.",
+          "sources": [
+            "https://docs.netlify.com/deploy/manage-deploys/manage-deploys-overview/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "An authorized builder can roll a Worker back in the dashboard or with Wrangler, and the selected version immediately becomes active on all routes and domains. Rollback can be blocked by incompatible binding or resource changes, and it does not roll back storage data.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/versions-and-deployments/rollbacks/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "A permitted user can click a rollback for a previously stored Application image, and Swarm can automatically revert a failed health check. Manual version rollback must be enabled in advance with a registry and image history; it is not an atomic project-wide rollback.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/applications/rollbacks",
+            "https://docs.dokploy.com/docs/core/enterprise/custom-roles"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "Recovery today is an engineer reverting commits on main and redeploying. Builders have no version history or rollback control of their own, so seconds-level, self-service rollback is out of reach without new release tooling. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can long-running background work (minutes to hours) run without anyone managing servers or queues?",
+      "priority": null,
+      "segment": "Deploy",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Vercel Workflows (GA, 99.99% SLA) provide durable, resumable executions that can run and wait for days or months, with retries and full history — defined in code, no servers or queues to operate; Cron Jobs and Queues complement it.",
+          "sources": [
+            "https://vercel.com/docs/workflows",
+            "https://vercel.com/docs/cron-jobs"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "Lambda durable functions can coordinate checkpointed work, waits, callbacks, and retries for up to one year without the user operating servers or queues. Each active Lambda invocation is still limited to 15 minutes, so long continuous compute must be split into steps or use another managed compute option.",
+          "sources": [
+            "https://docs.aws.amazon.com/lambda/latest/dg/durable-basic-concepts.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Async Workloads provides durable, retryable multi-step work and sleeps spanning days without managing queues or compute provisioning; its underlying serverless Function and Blob usage is still billed.",
+          "sources": [
+            "https://docs.netlify.com/build/async-workloads/overview/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "Cloudflare Workflows provides managed durable steps, retries, and sleeps. A step can wait without a wall-time limit and a sleep can last up to 365 days, subject to documented CPU, step, and concurrency limits.",
+          "sources": [
+            "https://developers.cloudflare.com/workflows/reference/limits/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Long-running worker containers and scheduled commands can run without a short function timeout, but the company still operates the servers and any queue or durable-work system used by the application. Dokploy does not remove those operational responsibilities.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/schedule-jobs",
+            "https://docs.dokploy.com/docs/core/deployment-options"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "There is no builder-facing primitive for background jobs; anything long-running means the platform team standing up and operating queues or workflow infrastructure for that app. Managed services can shortcut parts of it, but selection, wiring, and operations stay in-house.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "for AI apps and agents: is there zero infrastructure cost while the app is just waiting on a model's answer?",
+      "priority": null,
+      "segment": "Deploy",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Fluid compute bills Active CPU: while a function waits on a model's response (I/O), CPU billing pauses — purpose-built for AI workloads that spend most of their time waiting.",
+          "sources": [
+            "https://vercel.com/docs/fluid-compute"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Ordinary Amplify SSR or Lambda execution is duration-billed while waiting. A Lambda durable wait suspends and avoids duration charges, but durable operations, data written, and retained state remain billable; the result is not universally zero infrastructure cost.",
+          "sources": [
+            "https://aws.amazon.com/amplify/pricing/",
+            "https://aws.amazon.com/lambda/pricing/"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "No",
+          "justification": "Function compute is billed by allocated memory and execution duration, so waiting for an LLM response inside a running Function consumes compute until that invocation ends.",
+          "sources": [
+            "https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/how-credits-work/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "Workers Standard does not charge for wall-clock duration, so time awaiting a model or network response does not add a duration charge. Request, active CPU, model or provider tokens, and any other used services can still be billed.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/platform/pricing/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Dokploy workloads wait inside containers on provisioned customer servers. Server and Dokploy Cloud per-server costs continue while an AI request is waiting; no request-level scale-to-zero execution model is documented.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/deployment-options",
+            "https://docs.dokploy.com/docs/core/differences"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "Whether idle-while-waiting costs anything depends entirely on the compute model DH chooses: pay-per-use backends make it possible, always-on services make it impossible. Today no platform layer optimizes for this, so it is decided app by app.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "does every app get a company-domain address automatically?",
+      "priority": null,
+      "segment": "Deploy",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "With the company domain on the team, every project can automatically receive a subdomain under it, with programmatically defined prefixes for both production and previews.",
+          "sources": [
+            "https://vercel.com/docs/domains",
+            "https://vercel.com/docs/deployments/generated-urls"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Every app gets an `amplifyapp.com` address. A company custom domain is supported, but it must first be owned, configured, and associated with the app, so it is not automatic for every app.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/custom-domains.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Every project gets a netlify.app URL automatically; a company custom-domain address requires domain and DNS configuration.",
+          "sources": [
+            "https://docs.netlify.com/manage/domains/get-started-with-domains/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "A Worker can receive a workers.dev hostname automatically. A company-domain hostname requires an active Cloudflare zone and an administrator or deployer to attach a Custom Domain or route; Cloudflare then manages DNS and certificates.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/configuration/routing/custom-domains/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Dokploy can generate a free Traefik.me hostname and can create Cloudflare or Route53 DNS records after a company domain is entered. A company-domain name is not assigned automatically to every new app; the domain and routing configuration still have to be selected.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/domains/generated",
+            "https://github.com/Dokploy/dokploy/releases"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "DNS and routing automation is well within reach of an internal platform, but today assigning a company-domain address is a manual step, with certificates and routing owned by the platform team. Whether any automation already exists is to be confirmed with DH.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "does every draft of an app get a predictable company-domain address automatically?",
+      "priority": null,
+      "segment": "Deploy",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "The preview deployment suffix gives every preview a predictable URL under the company domain, per branch and per project, automatically.",
+          "sources": [
+            "https://vercel.com/docs/deployments/generated-urls"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Automatic branch and pull-request subdomains are available only after a Route 53 custom domain is connected and automatic subdomains are enabled. They are predictable once configured, not automatic by default for every draft.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/to-set-up-automatic-subdomains-for-a-Route-53-custom-domain.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/pr-previews.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Predictable Netlify preview URLs are automatic. Branded company-domain preview subdomains become automatic only after the custom domain uses Netlify DNS and Automatic Deploy Subdomains is configured.",
+          "sources": [
+            "https://docs.netlify.com/deploy/deploy-types/deploy-previews/",
+            "https://docs.netlify.com/manage/domains/manage-domains/automatic-deploy-subdomains/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Workers preview URLs and aliases are predictable but use Cloudflare's preview domain, not the company domain. Pages can map a custom hostname to a branch alias, but that requires a custom domain and a manual DNS mapping rather than happening for every draft automatically.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/versions-and-deployments/preview-urls/",
+            "https://developers.cloudflare.com/pages/how-to/custom-branch-aliases/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Enabled GitHub previews automatically receive a URL and can use a company wildcard domain. The hostname includes a generated unique identifier, and preview deployment must be enabled and configured first, so it is stable for a preview but not fully predictable in advance.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/applications/preview-deployments"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "This compounds two gaps: there are no draft deployments to address (trunk-only, no previews), and no per-app domain automation to extend to them. Both layers would need to exist first. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can the platform be locked so ONLY code from the company GitHub organization can ever go live?",
+      "priority": null,
+      "segment": "Deploy",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Trusted deployment sources let admins require that every deployment come from repositories in the company GitHub organization, blocking CLI, API, and drag-and-drop paths; Vercel runs its own organization under this policy. (Currently in beta.)",
+          "sources": [
+            "https://vercel.com/docs/deployment-protection"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Amplify IAM controls who can create or update apps, but its service-authorization table exposes no repository-owner or organization condition key, and Amplify also supports manual artifacts. An organization-only guarantee requires denying direct deployment paths and brokering releases through a company-controlled pipeline.",
+          "sources": [
+            "https://docs.aws.amazon.com/service-authorization/latest/reference/list_amplify.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/manual-deploys.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "The Deploy Request Policy restricts unrecognized authors for private Git repositories, but build hooks are trusted and exempt. Public docs do not document an organization-wide allowlist limiting every production deploy to one GitHub organization.",
+          "sources": [
+            "https://docs.netlify.com/deploy/deploy-overview/"
+          ],
+          "needs_review": true
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "RBAC and scoped credentials can limit who may upload or deploy, and Workers Builds can make the company repository's production branch the normal path. The documented deployment APIs do not provide a repository-origin allowlist or provenance check that rejects every privileged direct upload.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/ci-cd/builds/configuration/",
+            "https://developers.cloudflare.com/workers/versions-and-deployments/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Dokploy supports GitHub, other Git providers, arbitrary Git URLs, Docker images, ZIP uploads, and raw Compose. Roles can restrict who manages providers or deploys, but no documented provenance policy constrains every deployable artifact to one GitHub organization.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/providers",
+            "https://docs.dokploy.com/docs/core/enterprise/custom-roles"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "GitHub-only deployment is DH's stated design goal, and the middleware makes GitHub the sole write path for the code it manages. Not yet in place is enforcement at the deployment layer — a control that rejects anything not originating from the DH GitHub organization. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "is every app protected by company sign-on by default, with zero configuration by the builder?",
+      "priority": null,
+      "segment": "Authenticate",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "A team-level default Passport means every new project is created already protected behind the company IdP (Okta); the builder configures nothing, and only team Owners can change it.",
+          "sources": [
+            "https://vercel.com/docs/passport"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "No",
+          "justification": "Amplify Hosting publishes the app without company SSO by default. Its native Hosting gate is optional shared basic authentication; company SAML or OIDC requires Cognito or another explicitly configured identity layer.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/access-control.html",
+            "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Owners can centrally default all sites to team-login protection on Enterprise, and credit-based teams can default projects to private. Most defaults can be overridden per project, and access is limited to provisioned Netlify team members, so this is configurable rather than an unconditional default.",
+          "sources": [
+            "https://docs.netlify.com/manage/security/secure-access-to-sites/password-protection/",
+            "https://docs.netlify.com/manage/security/secure-access-to-sites/project-visibility/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "An administrator can enable Access for all existing and future Workers, protecting associated domains and preview URLs without per-app builder configuration. This is a one-time account policy, not Cloudflare's unconfigured default.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/configuration/cloudflare-access/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Enterprise Application Authentication is opt-in for each Application domain, requires an OIDC provider and auth-domain setup, and does not cover Docker Compose service domains. It is not enabled automatically for every app.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/enterprise/sso/application-authentication"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "Okta is available to every DH app, but SSO is opt-in work per app, not a default the platform applies. A shared gateway that protects every deployment automatically would be a new build; until then, coverage depends on each builder doing the wiring.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "is it impossible for a builder to accidentally ship an app open to the public internet?",
+      "priority": null,
+      "segment": "Authenticate",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "With team-wide protection defaults and default Passport, protection is applied by policy at creation and builders (non-Owners) do not have the permission to remove it — accidental public exposure is structurally prevented.",
+          "sources": [
+            "https://vercel.com/docs/deployment-protection",
+            "https://vercel.com/docs/passport"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "No",
+          "justification": "An Amplify deployment receives a reachable default domain, while Hosting password protection and WAF are opt-in. A builder can therefore deploy an unprotected public endpoint.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/getting-started-next.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/access-control.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/amplify-waf-configuration.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Credit-based teams can set Private for all projects, locking existing and new projects to team login so individual projects cannot be made public. Enterprise and other non-credit plans lack this visibility setting and instead use configurable access controls, so the guarantee is plan-dependent.",
+          "sources": [
+            "https://docs.netlify.com/manage/security/secure-access-to-sites/project-visibility/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Administrators can disable workers.dev and require Access for all existing and future Workers, greatly reducing accidental exposure. The control is opt-in and privileged users can change policies, so the platform does not make public exposure literally impossible.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/configuration/routing/workers-dev/",
+            "https://developers.cloudflare.com/workers/configuration/cloudflare-access/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "A builder can add a public domain or publish a container port, and default preview URLs are browser-accessible. SSO protection is an opt-in domain toggle, so Dokploy does not make accidental public exposure impossible.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/domains",
+            "https://docs.dokploy.com/docs/core/applications/preview-deployments",
+            "https://docs.dokploy.com/docs/core/enterprise/sso/application-authentication"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "Internal network defaults make accidental public exposure unlikely, but \"impossible\" requires an enforced deployment policy that does not exist. One misconfigured route or load balancer is enough, and nothing in the platform catches it.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "Offboarding: when someone is removed from the IdP, do they instantly lose access to every internal app?",
+      "priority": null,
+      "segment": "Authenticate",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "App access is evaluated against the IdP app assignment (Passport), so removing a user in Okta removes access to every protected app; Directory Sync simultaneously removes their platform access.",
+          "sources": [
+            "https://vercel.com/docs/passport",
+            "https://vercel.com/docs/directory-sync"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Removing a user from the external IdP blocks future federated sign-ins, but existing JWT handling is application-dependent. Cognito can revoke tokens, yet generic JWT validation can continue accepting a revoked token until it expires unless the app checks revocation-aware state.",
+          "sources": [
+            "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html",
+            "https://docs.aws.amazon.com/cognito/latest/developerguide/token-revocation.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "SCIM Directory Sync automatically deprovisions directory users, but an existing SSO authorization to a protected site can remain valid for up to one hour.",
+          "sources": [
+            "https://docs.netlify.com/manage/security/secure-netlify-access/directory-sync/",
+            "https://docs.netlify.com/manage/security/secure-access-to-sites/password-protection/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "With identity-provider user deprovisioning enabled, removing a user can invalidate active Access sessions. Cloudflare does not publish an instantaneous end-to-end IdP propagation guarantee, and session revocation itself has short documented propagation windows.",
+          "sources": [
+            "https://developers.cloudflare.com/cloudflare-one/integrations/identity-providers/generic-oidc/",
+            "https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/session-management/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "SCIM deactivation immediately marks the Dokploy dashboard user inactive and revokes that user's Dokploy sessions. Deployed-app authentication uses a separate oauth2-proxy cookie, unprotected apps are unaffected, and the docs do not specify immediate revocation of every existing application session.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/enterprise/scim",
+            "https://docs.dokploy.com/docs/core/enterprise/sso/application-authentication"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "Removing someone from Okta stops new sign-ins everywhere. Whether existing sessions and tokens die instantly depends on each app's session length and revocation handling — per-app discipline, with no central enforcement point.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "do apps and agents query company data with the requesting user's OWN permissions — never a shared service account?",
+      "priority": null,
+      "segment": "Authenticate",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Vercel Connect user-subject grants make the app or agent act with the intersection of the requesting user's own permissions in the target system (demonstrated with Okta-federated BigQuery identity propagation during the DH PoC); Passport identity selects the user's grant. A one-time per-user OAuth consent is required by the OIDC standard; fully silent passthrough is in closed beta.",
+          "sources": [
+            "https://vercel.com/docs/connect",
+            "https://vercel.com/docs/passport"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "AgentCore Identity supports user-delegated OAuth and on-behalf-of token exchange carrying both caller and agent identity. Amplify SSR commonly uses an app-level IAM compute role, and each downstream system must support and be configured for delegation, so per-user permissions are not guaranteed end to end.",
+          "sources": [
+            "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/on-behalf-of-token-exchange.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "No",
+          "justification": "Netlify Identity can expose an authenticated user's ID, email, and roles to Function code, but public docs do not describe a native exchange into downstream data credentials using that user's own permissions. This requires application- and provider-specific authorization design.",
+          "sources": [
+            "https://docs.netlify.com/manage/security/secure-access-to-sites/identity/use-identity-in-functions/"
+          ],
+          "needs_review": true
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Access includes a signed user identity token on authenticated requests, so an app or interactive agent can identify the requester. Using that person's permissions in each downstream data system still requires a compatible per-user authorization flow; service-token agents identify the service, not a human.",
+          "sources": [
+            "https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/application-token/",
+            "https://developers.cloudflare.com/cloudflare-one/access-controls/authenticate-agents/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Forward Auth can establish the requesting user's OIDC login before traffic reaches an app, but Dokploy's documentation does not establish an end-to-end user-token exchange for downstream company data. Applications can implement their own delegated authorization; a shared service account is not an unavoidable consequence of Dokploy.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/enterprise/sso/application-authentication"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "There is no delegated-authorization layer; apps and agents that reach BigQuery, Jira, or Slack typically do so through service accounts with standing permissions. Per-user delegation would have to be engineered into every integration.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "does a builder ever see or handle a credential, API key, or token? (target: never)",
+      "priority": null,
+      "segment": "Authenticate",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Connect issues short-lived scoped tokens with no long-lived secrets to copy; Marketplace databases inject credentials automatically; OIDC federation replaces static cloud keys; sandbox egress uses credential brokering — the builder never handles a secret.",
+          "sources": [
+            "https://vercel.com/docs/connect",
+            "https://vercel.com/docs/oidc"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Amplify SSR compute roles provide temporary AWS credentials without hardcoding long-lived keys, and AgentCore Identity can vault OAuth credentials and API keys. Local Amplify development still requires an AWS profile or SSO setup, and unsupported external systems can require separate credential configuration.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html",
+            "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/identity-outbound-credential-provider.html",
+            "https://docs.amplify.aws/react/start/account-setup/"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "AI Gateway provides model access without provider keys, and Secrets Controller makes flagged secrets write-only and masked. Other integrations still require an authorized person or system to set secret values, and runtime code receives those values.",
+          "sources": [
+            "https://docs.netlify.com/build/ai-gateway/overview/",
+            "https://docs.netlify.com/build/environment-variables/secrets-controller/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Native bindings do not expose underlying Cloudflare credentials, and Secrets Store separates secret administration from a Deployer role that can bind a secret without seeing its value. The guarantee is not universal across every external integration or initial secret onboarding, and Secrets Store remains in open beta.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/runtime-apis/bindings/",
+            "https://developers.cloudflare.com/secrets-store/access-control/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "External secret providers let builders reference secrets without seeing their values; values are fetched at deploy time, never stored in Dokploy, and access can be scoped by project and environment. Administrators still configure provider credentials, and builders can use ordinary environment variables where permitted.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/secrets-providers"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "Git credentials are genuinely invisible (the GitHub App holds them), but that is where brokering ends: database URLs, API keys, and model keys are still handled by builders as environment variables and secrets. A general credential broker is not in place. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can app-access assignments in the IdP be created and changed programmatically?",
+      "priority": null,
+      "segment": "Authenticate",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Both halves are API-driven: Okta apps and assignments via Okta's APIs, and Passport/connector assignment to a project via the Vercel REST API — enabling fully self-service access workflows (demonstrated with a working provisioning script).",
+          "sources": [
+            "https://vercel.com/docs/rest-api",
+            "https://github.com/quuu/deploy-with-passport"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "IAM Identity Center exposes APIs to create and delete application assignments for a USER or GROUP. This directly supports programmatic app-access assignment, assuming the application is integrated with Identity Center.",
+          "sources": [
+            "https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html",
+            "https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_DeleteApplicationAssignment.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Enterprise SCIM Directory Sync syncs IdP groups and automatically provisions members; group mappings can assign access to specific sites, and subsequent group membership changes are applied through the IdP sync.",
+          "sources": [
+            "https://docs.netlify.com/manage/security/secure-netlify-access/directory-sync/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Cloudflare Access applications and policies are programmable through its API and Terraform, and Cloudflare can consume IdP groups synchronized by SCIM. Creating or changing the upstream IdP application's user assignment is an IdP-side operation, not a Cloudflare capability documented by these APIs.",
+          "sources": [
+            "https://developers.cloudflare.com/api/resources/zero_trust/",
+            "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Dokploy exposes SCIM for programmatic dashboard-user provisioning, while Application Authentication delegates the deployed-app allow-list to the upstream IdP. Programmatic IdP application assignments may be possible through that IdP's own API, but Dokploy provides no cross-IdP assignment API.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/enterprise/scim",
+            "https://docs.dokploy.com/docs/core/enterprise/sso/application-authentication"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "Okta and SailPoint both expose assignment APIs, so the capability exists at the IdP level. The missing piece is the glue: nothing connects app creation on the platform to access assignment in the IdP, so it remains a manual or scripted task.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "Auditablity: does every request, human or agent, carry the individual's identity end to end?",
+      "priority": null,
+      "segment": "Authenticate",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Passport injects a Vercel-signed identity JWT on every request (client-supplied headers are stripped to prevent spoofing), apps verify it with getIdentity()/verifyIdentity(), successful accesses are recorded as audit events, and Connect operations are tied to the individual user's grant.",
+          "sources": [
+            "https://vercel.com/docs/passport",
+            "https://vercel.com/docs/audit-log"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "CloudTrail records the AWS principal for API and control-plane calls, and AgentCore can propagate caller identity through on-behalf-of token exchange. End-user browser requests and every downstream hop carry that identity only when each app and target system is explicitly instrumented for it.",
+          "sources": [
+            "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html",
+            "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/on-behalf-of-token-exchange.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "No",
+          "justification": "Identity-aware Function code can verify a user's ID and email, but Netlify traffic and Function log schemas do not automatically attach an authenticated individual's identity to every request; Agent Runner logs are separate.",
+          "sources": [
+            "https://docs.netlify.com/manage/security/secure-access-to-sites/identity/use-identity-in-functions/",
+            "https://docs.netlify.com/manage/monitoring/log-drains/",
+            "https://docs.netlify.com/build/build-with-ai/agent-runners/overview/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Access checks each protected HTTP request and forwards a signed user token; Enterprise per-request logs can include that identity. Headless agents may use service tokens, purely client-side actions are not requests, and downstream systems do not automatically preserve or enforce the human's identity.",
+          "sources": [
+            "https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/",
+            "https://developers.cloudflare.com/cloudflare-one/insights/logs/dashboard-logs/access-authentication-logs/",
+            "https://developers.cloudflare.com/cloudflare-one/access-controls/authenticate-agents/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Protected requests are authenticated by OIDC before Traefik forwards them, but Dokploy does not document a mandatory individual-identity header or token carried through the application and every downstream data call. Applications can add that behavior, so anonymous traffic is not inevitable either.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/enterprise/sso/application-authentication"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "End-to-end identity propagation with anti-spoofing (a signed identity on every hop, human or agent) is not something the current stack provides; where identity is forwarded at all, it is app-specific headers. Building this properly is a significant security engineering effort.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "Alerts: can accidental-spend alerts be set?",
+      "priority": null,
+      "segment": "Govern",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Spend Management provides budgets with notification thresholds and can automatically pause projects when the budget is hit; usage alerts and anomaly alerts complement it.",
+          "sources": [
+            "https://vercel.com/docs/spend-management"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "AWS Budgets can alert against configured cost or usage thresholds, and Cost Anomaly Detection can alert on detected anomalies. Anomaly data can lag and some Marketplace charges require Budgets rather than anomaly monitoring.",
+          "sources": [
+            "https://docs.aws.amazon.com/cost-management/latest/userguide/create-cost-budget.html",
+            "https://docs.aws.amazon.com/cost-management/latest/userguide/manage-ad.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Netlify automatically sends email and in-app usage notifications at 50%, 75%, and 100% of the monthly credit allotment; Pro can add Slack notifications, and auto-recharge is off by default.",
+          "sources": [
+            "https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/monitor-usage-for-credit-based-plans/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Pay-as-you-go accounts can create email alerts when cumulative usage-based spend crosses a dollar threshold. The alerts are informational rather than caps, are not projected or default-on, and Cloudflare says Enterprise contract accounts are not supported; per-Worker CPU limits bound an invocation, not total spend.",
+          "sources": [
+            "https://developers.cloudflare.com/billing/manage/budget-alerts/",
+            "https://developers.cloudflare.com/workers/platform/limits/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Dokploy monitoring can alert on server CPU and memory thresholds, not cost. An operator can configure AWS or another infrastructure provider's budget alerts separately, but Dokploy has no documented built-in spend meter or cost alert.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/monitoring",
+            "https://docs.dokploy.com/docs/core/differences"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "Cloud-account budget alerts exist at the account and service level. Catching a runaway individual app requires per-app cost attribution (consistent tagging or isolation) that the platform does not impose today.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "Spend limits: can AI token spend be capped? and accidental-spend alerts set on everything el",
+      "priority": null,
+      "segment": "Govern",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "AI Gateway spend budgets (GA) cap and alert by team, project, and API key — including per-user budgets and hard enforcement; Spend Management covers alerting and auto-pause on the rest of the platform. Note: a hard cap per individual project on non-AI infra spend is a filed feature request.",
+          "sources": [
+            "https://vercel.com/docs/ai-gateway",
+            "https://vercel.com/docs/spend-management"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Bedrock service quotas limit request or token rates, not cumulative spend. Budgets can alert and invoke actions after thresholds, but billing data is delayed and AWS documents no exact hard per-app token or dollar cap that atomically stops inference.",
+          "sources": [
+            "https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html",
+            "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-controls.html",
+            "https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/Welcome.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "A configurable AI credit limit stops and blocks Agent Runners, while overall credit alerts cover other meters. Current docs say AI Gateway is not stopped (including on Enterprise), but the March 2026 changelog says Gateway usage pauses; the official sources conflict.",
+          "sources": [
+            "https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/monitor-usage-for-credit-based-plans/",
+            "https://www.netlify.com/changelog/2026-03-06-limit-ai-feature-usage/"
+          ],
+          "needs_review": true
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "AI Gateway spend-limit rules can return 429 after a configured budget is reached and can scope by provider, model, or custom metadata. The feature is beta and eventually consistent, so bursts can exceed a limit; coverage depends on supported traffic through the gateway, while general budget alerts remain informational and pay-as-you-go only.",
+          "sources": [
+            "https://developers.cloudflare.com/ai-gateway/features/spend-limits/",
+            "https://developers.cloudflare.com/billing/manage/budget-alerts/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Dokploy's AI configuration records an external provider, API URL, key, and model; it does not document token metering, budgets, or hard spend caps. Limits and billing alerts can instead be configured at a chosen AI provider or gateway where supported.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/ai"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "Capping token spend requires all model calls to pass through a metered gateway with enforcement, and no such internal gateway exists. Until one is built, AI spend is only visible after the fact on provider invoices.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "is there one audit trail where every access and every change traces to a named person?",
+      "priority": null,
+      "segment": "Govern",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Enterprise Audit Logs record 60+ action types with the acting user and before/after detail, and every successful Passport authentication generates an access event with the visitor's identity — configuration changes and app accesses in one exportable trail.",
+          "sources": [
+            "https://vercel.com/docs/audit-log",
+            "https://vercel.com/docs/passport"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "CloudTrail centrally records AWS API and control-plane activity with principal, action, resource, and time. End-user application accesses are not CloudTrail events unless the app or service emits them, so a complete named-person trail still spans configured application and service logs.",
+          "sources": [
+            "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/access-logs.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Team and project audit logs name who changed configuration and when, while Netlify Identity has a separate user login audit log. These are separate trails and do not make every application request part of one named audit record.",
+          "sources": [
+            "https://docs.netlify.com/manage/accounts-and-billing/team-management/team-audit-log/",
+            "https://docs.netlify.com/manage/security/secure-access-to-sites/identity/audit-log/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Audit Logs v2 attributes many dashboard and API configuration actions to a user or token, while Access logs cover authentication and protected HTTP requests. They are separate datasets, audit coverage has documented gaps such as most GET actions, and account and organization audit logs are separate.",
+          "sources": [
+            "https://developers.cloudflare.com/fundamentals/account/account-security/audit-logs/",
+            "https://developers.cloudflare.com/cloudflare-one/insights/logs/dashboard-logs/access-authentication-logs/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Enterprise Audit Logs attribute dashboard authentication, deployments, configuration, and resource changes to a user's email and role. They do not document every HTTP request to deployed applications, so this is a control-plane change trail rather than one universal access-and-change trail.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/enterprise/audit-logs"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "Audit evidence is scattered: GitHub has commit history, the cloud has account logs, and each app logs (or does not) on its own. There is no single trail where every access and change resolves to a named person.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can audit and security logs stream into the company's own SIEM?",
+      "priority": null,
+      "segment": "Govern",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Audit Log Drains stream to S3, Splunk, Datadog, Microsoft Sentinel, Snowflake, GCS, or any HTTPS endpoint; runtime logs and traces have their own drains.",
+          "sources": [
+            "https://vercel.com/docs/drains",
+            "https://vercel.com/docs/audit-log"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "CloudTrail trails can deliver events to S3 or CloudWatch Logs, and CloudWatch Logs subscription filters can stream matching records to Kinesis, Firehose, Lambda, or OpenSearch for SIEM ingestion. Each source and destination still must be configured.",
+          "sources": [
+            "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html",
+            "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Enterprise Log Drains send traffic, Function, Edge Function, deploy, and WAF logs to SIEM-compatible endpoints in near real time. Team, project, and Identity audit events are not listed as drainable types; team audit events can instead be retrieved through the Open API.",
+          "sources": [
+            "https://docs.netlify.com/manage/monitoring/log-drains/",
+            "https://open-api.netlify.com/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "Enterprise Logpush can export Zero Trust datasets, including Access requests and authentication events, to supported SIEM or storage destinations. Audit Logs v2 also supports Logpush; separate jobs and datasets must be configured.",
+          "sources": [
+            "https://developers.cloudflare.com/cloudflare-one/insights/logs/logpush/",
+            "https://developers.cloudflare.com/fundamentals/account/account-security/audit-logs/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "The API and official MCP surface expose audit-log retrieval, so a company can poll and forward control-plane events. The product docs do not document a native continuous SIEM stream and direct readers to contact Dokploy about external logging integrations; container log shipping remains operator-configured.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/enterprise/audit-logs",
+            "https://github.com/Dokploy/mcp/blob/main/TOOLS.md"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "Log shipping into DH's SIEM is standard engineering, and parts of the stack likely already stream. The gap is completeness: platform events, app access, and agent activity each need their own pipelines and schemas. Current coverage to be confirmed with the security team.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can all governance data (usage, spend, audit, members) be pulled via API into the company's own tools — no dashboard dependency?",
+      "priority": null,
+      "segment": "Govern",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "The platform is fully headless: REST APIs cover projects, members, audit logs, and billing charges (FOCUS format), with usage metrics APIs available — governance dashboards can be built entirely in DH's own tools.",
+          "sources": [
+            "https://vercel.com/docs/rest-api"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "AWS exposes APIs for cost and usage, budgets, CloudTrail audit events, Organizations, and Identity Store membership. Governance data can therefore be pulled programmatically, although it spans multiple APIs rather than one schema.",
+          "sources": [
+            "https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/Welcome.html",
+            "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/Welcome.html",
+            "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "The public Open API documents accounts, members, projects, and audit events, but the reviewed reference does not expose complete credit-usage and spend data, so a full governance export without dashboard dependency is not verified.",
+          "sources": [
+            "https://open-api.netlify.com/",
+            "https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/monitor-usage-for-credit-based-plans/"
+          ],
+          "needs_review": true
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Cloudflare exposes APIs for analytics, audit events, and account members. Its Billing Usage API v2 is alpha and restricted, and the documentation warns that cost and pricing fields may be absent until each product is integrated, so a complete dashboard-independent spend feed is not generally guaranteed.",
+          "sources": [
+            "https://developers.cloudflare.com/analytics/graphql-api/",
+            "https://developers.cloudflare.com/fundamentals/account/account-security/audit-logs/",
+            "https://developers.cloudflare.com/api/resources/billing/subresources/usage/methods/get/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Dokploy's REST API and official MCP cover projects, services, deployments, users, monitoring data, and Enterprise audit logs. Infrastructure and AI-provider spend is incurred outside Dokploy and is not exposed as a Dokploy governance dataset.",
+          "sources": [
+            "https://docs.dokploy.com/docs/api",
+            "https://github.com/Dokploy/mcp/blob/main/TOOLS.md"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "The underlying providers (GitHub, cloud, Okta) all have APIs, so the raw data is reachable. What is missing is one platform API over usage, spend, audit, and membership — assembling that view is engineering work each time it is needed.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can AI-token costs be tagged and attributed to the relevant app, team, or cost center?",
+      "priority": null,
+      "segment": "Govern",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "AI Gateway supports per-request user and tag metadata with a Custom Reporting API that breaks down cost by user, tag, and model; combined with Passport identity claims (e.g. an Okta cost-center attribute), token spend can be attributed automatically to the app, team, or cost center.",
+          "sources": [
+            "https://vercel.com/docs/ai-gateway",
+            "https://vercel.com/docs/passport"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "Bedrock application inference profiles accept cost-allocation tags that surface in Cost Explorer and Cost and Usage Reports. Bedrock invocation logging also records token counts and optional per-request metadata, enabling governed app, team, or cost-center attribution.",
+          "sources": [
+            "https://docs.aws.amazon.com/bedrock/latest/userguide/cost-mgmt-application-inference-profiles.html",
+            "https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Agent run detail shows AI-inference credits for that project and the team dashboard aggregates AI inference. The docs do not provide cost-center tags or equivalent allocation for all AI Gateway and Agent Runner usage.",
+          "sources": [
+            "https://docs.netlify.com/build/build-with-ai/agent-runners/overview/",
+            "https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/monitor-usage-for-credit-based-plans/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "AI Gateway accepts up to five custom metadata fields on a request and supports filtering and spend analytics by those values, so an app can attach app, team, or cost-center tags. The application must supply the tags; Access automatically adds only its verified user identifier.",
+          "sources": [
+            "https://developers.cloudflare.com/ai-gateway/observability/custom-metadata/",
+            "https://developers.cloudflare.com/ai-gateway/observability/ai-spend/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Dokploy delegates AI execution and billing to an external provider and does not document token usage accounting or cost-allocation tags. A company can add attribution through its chosen AI gateway or application telemetry, but that is outside Dokploy.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/ai"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "Attribution needs every model call metered and tagged with its app and team at the moment it happens; nothing in the current stack does this. Provider invoices arrive as one undifferentiated number.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can roles and permissions be managed at company scale with groups from the IdP, mirroring the real org structure?",
+      "priority": null,
+      "segment": "Govern",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "SAML SSO with Directory Sync maps IdP groups to roles with automatic provisioning and removal; Organizations with child teams mirror the real org topology, each with its own defaults (child-team Passport support is on the near-term roadmap).",
+          "sources": [
+            "https://vercel.com/docs/directory-sync",
+            "https://vercel.com/docs/rbac/access-roles"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "IAM Identity Center connects to external identity providers, synchronizes users and groups, and uses permission sets and application assignments across AWS accounts and applications. App-internal authorization must still consume the assigned identity.",
+          "sources": [
+            "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html",
+            "https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Enterprise Directory Sync maps IdP groups to teams, roles, and all or specific site access with automatic provisioning and deprovisioning; multiple roles resolve to the highest access level in a team.",
+          "sources": [
+            "https://docs.netlify.com/manage/security/secure-netlify-access/directory-sync/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "Cloudflare dashboard SCIM can synchronize users and IdP groups into User Groups, and administrators attach scoped permission policies to those groups. This supports group-based company-scale RBAC, although each account needs its own SCIM application and Cloudflare-side policy mapping.",
+          "sources": [
+            "https://developers.cloudflare.com/fundamentals/manage-members/user-groups/",
+            "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "SCIM implements only the User resource: every provisioned user joins as Member, Groups is unsupported, and role changes are manual. Enterprise custom roles are granular but cannot be mapped automatically from IdP groups.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/enterprise/scim",
+            "https://docs.dokploy.com/docs/core/enterprise/custom-roles"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "Okta and SailPoint hold the org structure, so the source of truth exists. The platform-side model that maps those groups onto app roles at scale — and keeps it in sync for 2,500 builders — would have to be designed and built.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can every app and agent in the company be inventoried centrally: who built it, what data it touches, what it costs?",
+      "priority": null,
+      "segment": "Govern",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "One dashboard (and the same data via API) lists every project and agent with its creator, per-project usage and cost, and — via Connect grants — exactly which company systems each app or agent can reach; audit logs record who created what.",
+          "sources": [
+            "https://vercel.com/docs/rest-api",
+            "https://vercel.com/docs/connect",
+            "https://vercel.com/docs/audit-log"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Resource Explorer provides cross-Region and multi-account resource inventory, AppRegistry groups resources as applications with attributes and tags, and DevOps Agent builds application topologies. Owner, data-sensitivity, and cost metadata are not automatically complete for every app or agent and require registration, tagging, or integration.",
+          "sources": [
+            "https://docs.aws.amazon.com/resource-explorer/latest/userguide/welcome.html",
+            "https://docs.aws.amazon.com/servicecatalog/latest/arguide/overview-appreg.html",
+            "https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-what-is-a-devops-agent-topology.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "The Enterprise organization view centralizes teams, metered usage, billing, and audit access, while team pages list projects and usage. The docs do not describe mandatory owner or data-lineage metadata, or a unified inventory of external agents.",
+          "sources": [
+            "https://docs.netlify.com/manage/accounts-and-billing/organization-management/"
+          ],
+          "needs_review": true
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "The Workers API can enumerate scripts and expose script tags, versions, and bindings, while billing reports product-level usage. A company-wide catalog that joins every app and agent to owner, data classification, and per-app cost would need to be assembled and governed by the customer.",
+          "sources": [
+            "https://developers.cloudflare.com/api/resources/workers/subresources/scripts/methods/list/",
+            "https://developers.cloudflare.com/api/resources/workers/subresources/scripts/",
+            "https://developers.cloudflare.com/billing/manage/billable-usage/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Dokploy can list projects, environments, services, deployments, tags, members, and control-plane changes through its API and audit logs. Its documented data model does not include each app's data access, external infrastructure cost, or AI cost.",
+          "sources": [
+            "https://docs.dokploy.com/docs/api",
+            "https://docs.dokploy.com/docs/core/enterprise/audit-logs",
+            "https://github.com/Dokploy/mcp/blob/main/TOOLS.md"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "The Catalog is a genuine head start: it tracks each app with its owner and contributors, which is more than most internal platforms manage. Data touched and cost per app are outside its scope today. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": false
+        }
+      }
+    },
+    {
+      "question": "for agents specifically: is every run logged with its trigger, its cost, and the human approvals it required?",
+      "priority": null,
+      "segment": "Govern",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Agent Runs shows every run with its trigger, per-turn detail, model and tool calls, token usage and cost per run (including subagents); approval gates are recorded in the durable workflow history alongside the run.",
+          "sources": [
+            "https://eve.dev",
+            "https://vercel.com/docs/observability"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "AgentCore can log invocations, sessions, request IDs, payloads, and resource usage when observability is enabled, while DevOps Agent custom invocations record a trajectory and trigger type. AWS documents no single record that always combines trigger, billed cost, and every human approval.",
+          "sources": [
+            "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/observability-runtime-metrics.html",
+            "https://docs.aws.amazon.com/devopsagent/latest/userguide/working-with-devops-agent-custom-agents-index.html",
+            "https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Agent Runs retain prompt context, logs, status, changed files, and per-run credits; shipping occurs through a pull-request merge or a permitted user's Publish action. Required human approvals are not modeled as structured run metadata, and coverage is limited to coding Agent Runners.",
+          "sources": [
+            "https://docs.netlify.com/build/build-with-ai/agent-runners/overview/",
+            "https://docs.netlify.com/build/build-with-ai/agent-runners/make-changes-with-agent-runners/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "When enabled, Agents tracing records turns, model calls, tool runs, token usage, and approval requests; Worker spans identify trigger type, and AI Gateway logs request cost. These are separate, configurable telemetry surfaces, and Cloudflare recommends custom durable records for complete approval audit trails.",
+          "sources": [
+            "https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/",
+            "https://developers.cloudflare.com/workers/observability/traces/spans-and-attributes/",
+            "https://developers.cloudflare.com/ai-gateway/observability/logging/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Dokploy records deployments, scheduled-job executions, audit events, and container logs, but it has no documented agent-run entity containing trigger, model cost, tool calls, and human approvals. An agent application can emit its own run telemetry.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/applications",
+            "https://docs.dokploy.com/docs/core/schedule-jobs",
+            "https://docs.dokploy.com/docs/core/enterprise/audit-logs"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "With no shared agent runtime, there is no shared run log; whatever an agent records is up to its author. Triggers, cost, and approval history would each need dedicated instrumentation.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "do all apps come with monitoring with zero setup by the builder?",
+      "priority": null,
+      "segment": "Maintain",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Every deployment automatically gets request-level logs, tracing, Web Analytics, Speed Insights, and anomaly alerts — no agent installation or configuration by the builder.",
+          "sources": [
+            "https://vercel.com/docs/observability"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Amplify automatically emits free CloudWatch Hosting metrics for traffic, errors, transfer, and latency, and sends SSR runtime information to CloudWatch Logs. Alarms are created explicitly and backend services have their own telemetry, so complete app monitoring is not zero setup.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/monitoring-with-cloudwatch.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Observability is enabled by default for credit-based and Enterprise projects and includes near-real-time request and Function data. Web Analytics and Real User Monitoring are opt-in, so base monitoring is zero-setup but richer user monitoring is not.",
+          "sources": [
+            "https://docs.netlify.com/manage/monitoring/observability/overview/",
+            "https://docs.netlify.com/manage/monitoring/web-analytics/overview/",
+            "https://docs.netlify.com/manage/monitoring/real-user-monitoring/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Every Worker has built-in request and error metrics, and logs are enabled by default for newly created Workers. Existing Workers may require observability configuration, traces require separate enablement, and Pages Web Analytics is opt-in, so zero-setup monitoring is not universal across all apps.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/observability/metrics-and-analytics/",
+            "https://developers.cloudflare.com/workers/observability/logs/workers-logs/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Applications and databases expose basic CPU, memory, disk, network, and logs views. Advanced server and container monitoring is Cloud-only, requires setup and service selection, and threshold notifications apply to the server rather than each individual app.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/databases",
+            "https://docs.dokploy.com/docs/core/monitoring",
+            "https://docs.dokploy.com/docs/core/differences"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "Observability is bring-your-own: each app gets monitoring only if its builder or the platform team adds it. Zero-setup coverage means building a default instrumentation and dashboard layer for every app.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "Can the logs for an app be easily accessed by coding agents",
+      "priority": null,
+      "segment": "Maintain",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Coding agents read logs, metrics, usage, alerts and activity through the Vercel MCP server, the CLI (vercel logs), and the REST API — the same surfaces used by Vercel's own agent.",
+          "sources": [
+            "https://vercel.com/docs/mcp/vercel-mcp",
+            "https://vercel.com/docs/cli/logs"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "Amplify SSR logs land in CloudWatch Logs. AWS DevOps Agent exposes MCP for IDE and CLI coding agents and supports a `query_cloudwatch_logs` tool, so an authorized coding agent can access them after Agent Space and IAM setup.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/monitoring-with-cloudwatch.html",
+            "https://docs.aws.amazon.com/devopsagent/latest/userguide/accessing-devops-agent-connect-to-devops-agent-remote-servers.html",
+            "https://docs.aws.amazon.com/devopsagent/latest/userguide/custom-agents-creating-a-custom-agent.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "The Netlify CLI logs command returns deploy, Function, and Edge Function logs, including structured JSON output; Netlify's MCP setup equips authorized coding agents with the Netlify CLI.",
+          "sources": [
+            "https://cli.netlify.com/commands/logs/",
+            "https://docs.netlify.com/build/build-with-ai/agent-setup-guides/agent-setup-overview/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Yes",
+          "justification": "Cloudflare provides an official Workers Observability MCP server for authorized coding agents, alongside Wrangler real-time logs and observability APIs. An administrator or user must still authorize the agent and grant appropriate read permissions.",
+          "sources": [
+            "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Yes",
+          "justification": "Dokploy exposes an authenticated application.readLogs API with tail, time, and search parameters, and the official MCP server publishes it directly to compatible coding agents. Access still requires a Dokploy URL, API key, and appropriate permissions.",
+          "sources": [
+            "https://docs.dokploy.com/docs/api/application",
+            "https://github.com/Dokploy/mcp/blob/main/TOOLS.md"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "The platform's MCP surface covers pushing code, not reading logs. An agent debugging an app has no sanctioned path to its production logs until a log API or MCP tool is built. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "when something breaks, can a non-technical builder just say \"it doesn't work\" and have an agent read the logs, find the cause, and propose the fix?",
+      "priority": null,
+      "segment": "Maintain",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Two paths exist today: the builder's own coding agent (Claude Code + Vercel MCP) reads deployment and runtime logs and proposes the fix, and Vercel Agent (public beta) runs deployment investigations and code fixes directly from the dashboard, Slack, or alerts.",
+          "sources": [
+            "https://vercel.com/docs/agent",
+            "https://vercel.com/docs/mcp/vercel-mcp"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "AWS DevOps Agent offers a natural-language web app and can correlate telemetry, code, and deployments to investigate incidents and propose mitigation plans. An administrator must first create an Agent Space and connect integrations, and documented fixes are plans or agent-ready instructions rather than guaranteed automatic code repair.",
+          "sources": [
+            "https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent.html",
+            "https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-what-is-a-devops-agent-web-app.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "A failed deploy can receive an AI diagnosis and suggested solution, then launch an Agent Runner to fix it. This packaged flow covers build and deploy failures; a general runtime issue still needs an appropriately configured agent and explicit diagnosis.",
+          "sources": [
+            "https://docs.netlify.com/deploy/manage-deploys/manage-deploys-overview/",
+            "https://docs.netlify.com/build/build-with-ai/agent-runners/overview/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "A configured coding agent can use Cloudflare's Observability and Builds MCP servers to retrieve logs, analytics, and build information. Diagnosis and a correct fix still depend on the external agent, its permissions, and the application context rather than a guaranteed non-technical support workflow.",
+          "sources": [
+            "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Since v0.29.0, a user can trigger built-in AI analysis of container logs or build errors and receive a summary of the likely cause and how to fix it. This requires a configured external model and is an analysis aid, not an autonomous diagnosis-and-repair guarantee.",
+          "sources": [
+            "https://github.com/Dokploy/dokploy/releases",
+            "https://docs.dokploy.com/docs/core/ai"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "This flow needs agent-readable logs, deploy context, and a diagnosis loop, none of which exist internally. Today \"it doesn't work\" becomes a ticket for an engineer.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can a builder see whether their app is actually used — visits, users, trends — without adding any tooling?",
+      "priority": null,
+      "segment": "Maintain",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Web Analytics is built into every project: visitors, page views, referrers, and custom events, with no script setup or third-party tooling.",
+          "sources": [
+            "https://vercel.com/docs/analytics"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Amplify automatically shows aggregate requests, errors, transfer, and latency, but not unique users or user journeys. Session and page-view trends require adding CloudWatch RUM app monitoring and client telemetry, so only traffic-level usage is zero setup.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/monitoring-with-cloudwatch.html",
+            "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Web Analytics uses server-side collection and needs no added client code or configuration after a builder enables it in the dashboard; it reports pageviews, unique visitors, sources, and trends. It is not enabled automatically.",
+          "sources": [
+            "https://docs.netlify.com/manage/monitoring/web-analytics/overview/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Workers exposes per-Worker request, error, and performance metrics without application instrumentation. Visitor and page-view analytics require enabling Web Analytics, and user-level or business adoption trends require identity or custom analytics.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/observability/metrics-and-analytics/",
+            "https://developers.cloudflare.com/pages/how-to/web-analytics/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "Built-in monitoring covers resource consumption and container health, not visitor, user, or product-usage analytics. Dokploy offers one-click templates for separate analytics products such as Umami and Plausible, but the builder must deploy and integrate them.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/monitoring",
+            "https://docs.dokploy.com/docs/templates"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "There is no built-in analytics layer; a builder who wants visit counts adds a tracking tool themselves. Usage of most internal apps is effectively invisible.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "can every one of the 2,500 builders open a support case directly with the vendor, instead of queueing on the internal platform team?",
+      "priority": null,
+      "segment": "Maintain",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Every member of the Vercel team can open support cases directly from the dashboard, with Enterprise response-time SLAs — 2,500 builders get vendor support on demand instead of queueing on an internal platform team.",
+          "sources": [
+            "https://vercel.com/docs/support",
+            "https://vercel.com/enterprise"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Yes",
+          "justification": "Business Support+, Enterprise Support, and Unified Operations include unlimited cases and contacts. Any of 2,500 builders can be granted Support Center permissions through IAM or Identity Center, although authorized users can see the account's cases and the paid plan cost remains.",
+          "sources": [
+            "https://aws.amazon.com/premiumsupport/plans/",
+            "https://docs.aws.amazon.com/awssupport/latest/user/accessing-support.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "The official support scope says all plans have private email support and Enterprise can buy guaranteed response-time packages; it does not define whether every one of 2,500 employees is an authorized direct requester under an Enterprise contract.",
+          "sources": [
+            "https://www.netlify.com/support-scope/"
+          ],
+          "needs_review": true
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Members of a paid-plan account can submit support cases from the Cloudflare dashboard, and Enterprise includes case, chat, and emergency-phone channels. Public documentation does not establish that all 2,500 builders can be provisioned as direct support contacts or whether commercial contact limits apply.",
+          "sources": [
+            "https://developers.cloudflare.com/support/contacting-cloudflare-support/"
+          ],
+          "needs_review": true
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Startup and Enterprise Cloud list unlimited users plus email/chat or priority support, and Enterprise can include an SLA. The published terms do not say that every one of 2,500 dashboard users may independently open vendor cases, and support does not transfer ownership of customer application servers.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/differences",
+            "https://dokploy.com/pricing"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "Support for a self-built platform is the internal platform team: 2,500 builders queue on them (and on component vendors for their respective slices). No single vendor is contractually on the hook for the whole experience.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "does the platform absorb MORE operations over time (automated code review, incident investigation, dependency updates) rather than adding headcount? - TODO reformulate Futureproof",
+      "priority": null,
+      "segment": "Maintain",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "The platform ships ~10 improvements a week and is progressively automating operations itself: Vercel Agent (public beta) performs code reviews, deployment investigations, and package installations, and anomaly alerts plus agent investigations reduce human ops — capabilities customers inherit without building anything.",
+          "sources": [
+            "https://vercel.com/docs/agent",
+            "https://vercel.com/changelog"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "AWS DevOps Agent provides release-readiness reviews, automated tests, incident investigation, mitigation plans, and preventive recommendations across connected environments. It is a separately configured Agent Space, release management is in preview, and generalized dependency-update automation is not documented as a universal managed capability.",
+          "sources": [
+            "https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent.html",
+            "https://docs.aws.amazon.com/devopsagent/latest/userguide/working-with-devops-agent.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Agent Runners can handle prompted maintenance tasks and deploy-failure fixes. The docs do not describe autonomous incident investigation or dependency-update operations, so reduced operations headcount cannot be verified from product documentation.",
+          "sources": [
+            "https://docs.netlify.com/build/build-with-ai/agent-runners/overview/",
+            "https://docs.netlify.com/deploy/manage-deploys/manage-deploys-overview/"
+          ],
+          "needs_review": true
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Cloudflare manages runtime infrastructure and offers build and observability tooling that external agents can use for investigation. The current official product documentation does not establish an integrated service that automatically performs code review, dependency updates, and incident remediation; the future-looking criterion also lacks a fixed test.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/ci-cd/builds/",
+            "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/"
+          ],
+          "needs_review": true
+        },
+        "Dokploy": {
+          "answer": "Partial",
+          "justification": "Recent releases added AI log/build analysis, read-only health diagnostics, DNS and secret-manager integrations, and Dokploy Cloud automates control-plane updates. Customer application servers and dependencies remain operator-owned, and future operational coverage cannot be guaranteed from current documentation.",
+          "sources": [
+            "https://github.com/Dokploy/dokploy/releases",
+            "https://docs.dokploy.com/docs/core/differences"
+          ],
+          "needs_review": true
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "An internal platform only gains the automation its team builds and maintains; by default, operations grow with the app count. The build-vs-buy model prices this at roughly one DevOps engineer per 20 builders, scaling linearly.",
+          "sources": [
+            "https://eaa-buildbuy-v2.playground-vercel.tools/"
+          ],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "if the company ever leaves the platform, do the apps still run elsewhere (open framework, open standards, no proprietary runtime)? - Platform lockin",
+      "priority": null,
+      "segment": "Maintain",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Apps are standard Next.js (open source) running on standard Node.js, and agents are built on the open-source, self-hostable Eve framework — both run on any Node host; there is no proprietary runtime or custom language target.",
+          "sources": [
+            "https://nextjs.org",
+            "https://eve.dev"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Amplify hosts standard frameworks and supports open-source SSR adapters, so frontend source can usually be rehosted. Gen 2 backends are defined with Amplify libraries and provision AWS services such as AppSync, DynamoDB, and Cognito; leaving AWS requires replacing those service integrations rather than running unchanged elsewhere.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/using-framework-adapter.html",
+            "https://docs.amplify.aws/react/how-amplify-works/concepts/"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Partial",
+          "justification": "Framework code is generally portable, but Netlify recommends moving from legacy Lambda-handler compatibility to its modern Functions API; Database, Blobs, Async Workloads, and AI Gateway integrations require migration or replacement.",
+          "sources": [
+            "https://docs.netlify.com/build/functions/lambda-compatibility/",
+            "https://docs.netlify.com/build/async-workloads/overview/",
+            "https://docs.netlify.com/build/data-and-storage/netlify-database/",
+            "https://docs.netlify.com/build/data-and-storage/netlify-blobs/",
+            "https://docs.netlify.com/build/ai-gateway/overview/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Workers uses many standard Web APIs and supports a broad, but not complete, subset of Node.js APIs, so ordinary JavaScript or TypeScript logic can often move. Cloudflare-specific entrypoints, bindings, Durable Objects, D1, KV, and related data services require replacement or adaptation on another runtime.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/runtime-apis/web-standards/",
+            "https://developers.cloudflare.com/workers/runtime-apis/nodejs/",
+            "https://developers.cloudflare.com/workers/runtime-apis/bindings/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "Yes",
+          "justification": "Workloads run as standard Docker images or Docker Compose/Swarm services behind Traefik, with no Dokploy-specific application runtime. The containers can run elsewhere, although Dokploy-managed domains, secrets references, backups, and deployment metadata may need to be recreated.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/architecture",
+            "https://docs.dokploy.com/docs/core/deployment-options",
+            "https://docs.dokploy.com/docs/core/providers"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "Partial",
+          "justification": "DH owns all the source code, which is real portability. But apps are written against the middleware's conventions and internal services, so leaving still means re-wiring auth, deployment, and integrations app by app.",
+          "sources": [],
+          "needs_review": true
+        }
+      }
+    },
+    {
+      "question": "Maintainance: is zero capacity planning, patching, or server maintenance required per app, regardless of how many apps exist or will come to exist?",
+      "priority": null,
+      "segment": "Maintain",
+      "vendors": {
+        "Vercel": {
+          "answer": "Yes",
+          "justification": "Fully managed serverless platform: no servers, capacity planning, OS patching, or per-app infrastructure work — the operational cost of app number 1,000 is the same as app number 1.",
+          "sources": [
+            "https://vercel.com/docs/fluid-compute"
+          ],
+          "needs_review": true
+        },
+        "AWS": {
+          "answer": "Partial",
+          "justification": "Amplify Hosting is fully managed and deploys through a global CDN, so builders do not patch hosting servers. Fleet-wide quotas for apps, branches, concurrent jobs, and request tokens still apply, so zero capacity planning regardless of scale is not met.",
+          "sources": [
+            "https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html",
+            "https://docs.aws.amazon.com/amplify/latest/userguide/quotas-chapter.html"
+          ],
+          "needs_review": false
+        },
+        "Netlify": {
+          "answer": "Yes",
+          "justification": "Netlify manages edge delivery, autoscaling, and serverless runtime capacity, so builders do not size or patch those resources per app. External services and application dependencies remain the customer's responsibility.",
+          "sources": [
+            "https://www.netlify.com/platform/"
+          ],
+          "needs_review": false
+        },
+        "Cloudflare": {
+          "answer": "Partial",
+          "justification": "Cloudflare operates and automatically scales the Workers runtime, so builders do not manage servers, regions, operating-system patches, or per-app capacity. The standard paid account is limited to 500 Worker scripts before a limit increase or Workers for Platforms is needed, and customers still maintain application code, dependencies, configuration, and data.",
+          "sources": [
+            "https://developers.cloudflare.com/workers/reference/how-workers-works/",
+            "https://developers.cloudflare.com/workers/platform/limits/",
+            "https://developers.cloudflare.com/cloudflare-for-platforms/workers-for-platforms/reference/limits/"
+          ],
+          "needs_review": false
+        },
+        "Dokploy": {
+          "answer": "No",
+          "justification": "All editions deploy applications to customer servers; operators provision capacity, maintain operating systems and firewalls, and scale vertically or add Swarm nodes. Dokploy Cloud can manage the control plane, but it does not remove per-app-server capacity planning and maintenance.",
+          "sources": [
+            "https://docs.dokploy.com/docs/core/differences",
+            "https://docs.dokploy.com/docs/core/deployment-options",
+            "https://docs.dokploy.com/docs/core/remote-servers/security"
+          ],
+          "needs_review": false
+        },
+        "Internally built": {
+          "answer": "No",
+          "justification": "Capacity, patching, and upkeep are precisely what running your own platform means, and the effort scales with the number of apps. The build-vs-buy model estimates this at roughly one DevOps engineer per 20 builders over time.",
+          "sources": [
+            "https://eaa-buildbuy-v2.playground-vercel.tools/"
+          ],
+          "needs_review": true
+        }
+      }
+    }
+  ]
+}

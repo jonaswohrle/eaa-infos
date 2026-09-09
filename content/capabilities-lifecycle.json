@@ -1,0 +1,221 @@
+{
+  "intro": {
+    "eyebrow": "Platform capabilities",
+    "title": "One platform for the entire life of an internal AI app.",
+    "lead": "From a prompt on a laptop to a governed, observable production service, every stage a builder or an IT leader worries about already has a first-class answer on Vercel. Here is what the platform does at each step of the lifecycle."
+  },
+  "stages": [
+    {
+      "id": "build",
+      "label": "Build",
+      "headline": "Anyone builds, on the foundation you already trust.",
+      "summary": "Builders start from a prompt and ship a real, production-grade app on the same framework the world runs on. They can wire up production systems from their laptop without a single secret ever touching disk, and coding agents can do the work on their behalf inside safe, isolated environments.",
+      "capabilities": [
+        {
+          "value": "Every app starts from the same approved shape",
+          "product": "Standardized app design",
+          "detail": "Teams build from shared, company-approved starting points, so every internal app inherits the same structure, guardrails, and design instead of each builder reinventing the setup.",
+          "href": "https://vercel.com/docs/project-configuration",
+          "linkLabel": "vercel.com/docs"
+        },
+        {
+          "value": "Build on the source, not a wrapper",
+          "product": "Next.js",
+          "detail": "Vercel builds and maintains Next.js, the framework these apps run on. You build on the primary source of the ecosystem, not a third-party layer on top of it.",
+          "href": "https://nextjs.org",
+          "linkLabel": "nextjs.org"
+        },
+        {
+          "value": "One standard way to ship agents",
+          "product": "eve",
+          "detail": "An open-source, filesystem-first framework for durable production agents \u2014 Next.js for agents. Every team builds on one shape instead of rebuilding the setup for each new agent.",
+          "href": "https://vercel.com/blog/introducing-eve",
+          "linkLabel": "vercel.com/blog"
+        },
+        {
+          "value": "Connect to production locally, with no secrets on disk",
+          "product": "Vercel Connect",
+          "detail": "Builders reach real backend systems from their local environment through short-lived, scoped access \u2014 credentials are never written to a laptop or an .env file.",
+          "href": "https://vercel.com/docs/connect",
+          "linkLabel": "vercel.com/docs"
+        },
+        {
+          "value": "One command from local to deployed",
+          "product": "Vercel CLI",
+          "detail": "A single tool runs the app locally, pulls scoped environment access, and ships it \u2014 and it is what coding agents drive to build and deploy on a builder's behalf.",
+          "href": "https://vercel.com/docs/cli",
+          "linkLabel": "vercel.com/docs"
+        }
+      ]
+    },
+    {
+      "id": "share",
+      "label": "Share",
+      "headline": "Every change is a private, shareable URL.",
+      "summary": "Every push produces its own live deployment behind your identity, so stakeholders review the real thing instead of a screenshot. Feedback is left directly on the page and flows into the tools your teams already use \u2014 sharing never means making something public.",
+      "capabilities": [
+        {
+          "value": "A live URL for every change",
+          "product": "Preview Deployments",
+          "detail": "Every commit and pull request gets its own fully-running deployment, so reviewers experience the actual app before it reaches production.",
+          "href": "https://vercel.com/docs/deployments/environments#preview-environment-pre-production",
+          "linkLabel": "vercel.com/docs"
+        },
+        {
+          "value": "Feedback on the page, synced to your tools",
+          "product": "Comments",
+          "detail": "Reviewers comment directly on any preview, and threads sync to Slack, Jira, Linear, and GitHub \u2014 no separate feedback doc to chase.",
+          "href": "https://vercel.com/docs/comments",
+          "linkLabel": "vercel.com/docs"
+        },
+        {
+          "value": "Shared, never public",
+          "product": "Deployment Protection",
+          "detail": "Previews inherit the same identity protection as production, so a shared link only opens for the right people inside your organization.",
+          "href": "https://vercel.com/docs/deployment-protection",
+          "linkLabel": "vercel.com/docs"
+        }
+      ]
+    },
+    {
+      "id": "deploy",
+      "label": "Deploy",
+      "headline": "The framework defines the infrastructure; you manage nothing.",
+      "summary": "Vercel reads your code at build time and provisions the compute, routing, and caching it needs \u2014 there are no servers to size or clusters to run. Frontends, backend APIs, containers, agents, and background workflows all run on this same platform, and the runtime layer underneath only bills while your code is actually working, so idle apps cost nothing to keep live.",
+      "capabilities": [
+        {
+          "value": "Infrastructure provisioned from your code",
+          "product": "Framework-defined Infrastructure",
+          "detail": "Vercel parses your application at build time and automatically configures the compute, routing, and caching it requires \u2014 no manual infrastructure to define or maintain.",
+          "href": "https://vercel.com/blog/framework-defined-infrastructure",
+          "linkLabel": "vercel.com/blog"
+        },
+        {
+          "value": "Run any kind of code, not just websites",
+          "product": "Vercel Functions & Containers",
+          "detail": "The same platform runs frontends, backend APIs, container images, long-running agents, and durable background workflows \u2014 a workload that outgrows a function ships as a container on the same deploy flow, with no separate infrastructure track.",
+          "href": "https://vercel.com/docs/functions/container-images",
+          "linkLabel": "vercel.com/docs"
+        },
+        {
+          "value": "Pay only while code runs",
+          "product": "Fluid Compute",
+          "detail": "The efficient runtime layer: functions share resources and billing pauses during idle I/O waits, so hundreds of low-traffic internal apps stay affordable.",
+          "href": "https://vercel.com/fluid",
+          "linkLabel": "vercel.com/fluid"
+        },
+        {
+          "value": "Every deploy is safe to undo",
+          "product": "Immutable Deployments",
+          "detail": "Each deployment is preserved and addressable, so rolling back a bad release is an instant routing change rather than a rebuild.",
+          "href": "https://vercel.com/docs/deployments",
+          "linkLabel": "vercel.com/docs"
+        }
+      ]
+    },
+    {
+      "id": "authenticate",
+      "label": "Authenticate",
+      "headline": "Private by default, behind your identity.",
+      "summary": "An app is protected the moment it exists \u2014 access runs through your own identity provider, not a login each builder invents. When an app needs to reach a backend system, it uses short-lived, scoped credentials instead of long-lived keys copied between projects.",
+      "capabilities": [
+        {
+          "value": "Behind your identity provider from day one",
+          "product": "Vercel Passport",
+          "detail": "Every app sits behind your company identity \u2014 Okta, Entra, or any OIDC provider \u2014 so only the right employees reach it and that identity carries through to backend systems.",
+          "href": "https://vercel.com/docs/deployment-protection/methods-to-protect-deployments/vercel-authentication",
+          "linkLabel": "vercel.com/docs"
+        },
+        {
+          "value": "Scoped, short-lived access to systems",
+          "product": "Vercel Connect",
+          "detail": "Apps and agents reach Slack, GitHub, Snowflake, or Salesforce through per-task credentials that are scoped, expiring, and fully traceable \u2014 no stored master keys.",
+          "href": "https://vercel.com/docs/connect",
+          "linkLabel": "vercel.com/docs"
+        }
+      ]
+    },
+    {
+      "id": "govern",
+      "label": "Govern",
+      "headline": "Own thousands of builders and apps from one place.",
+      "summary": "Central technology teams govern the people doing the building, not just the apps they ship. Every Vercel account is provisioned and removed through your identity system, and organization-wide policy, spend controls, and a single audit trail keep autonomy inside the lines as usage scales.",
+      "capabilities": [
+        {
+          "value": "Every builder is a managed user",
+          "product": "Enterprise Managed Users",
+          "detail": "Accounts are provisioned, governed, and deprovisioned through your IdP via SAML SSO and Directory Sync (SCIM), so offboarding an employee removes their Vercel access automatically.",
+          "href": "https://vercel.com/docs/rbac/enterprise-managed-users",
+          "linkLabel": "vercel.com/docs"
+        },
+        {
+          "value": "One set of rules across the organization",
+          "product": "Roles & Access Controls",
+          "detail": "Role-based access control and organization-wide deployment protection apply one consistent policy to every project and team from a single place.",
+          "href": "https://vercel.com/docs/rbac/access-roles",
+          "linkLabel": "vercel.com/docs"
+        },
+        {
+          "value": "Layered controls reduce excessive-billing risk",
+          "product": "Spend Management + AI Gateway",
+          "detail": "Centralized usage visibility, spend alerts, automated responses, and attributable AI reporting help teams identify abnormal consumption and act before it becomes an uncontrolled bill.",
+          "href": "https://vercel.com/docs/spend-management",
+          "linkLabel": "vercel.com/docs"
+        },
+        {
+          "value": "Traffic cannot become an open-ended bill",
+          "product": "Vercel Firewall + Sandbox Firewall",
+          "detail": "WAF rules and rate limits constrain abusive or accidental inbound traffic before it reaches application resources. For untrusted code and agents, Sandbox policies can deny all egress or allowlist only approved domains and networks.",
+          "href": "https://vercel.com/docs/vercel-firewall/vercel-waf/rate-limiting",
+          "linkLabel": "vercel.com/docs"
+        }
+      ]
+    },
+    {
+      "id": "maintain",
+      "label": "Maintain",
+      "headline": "Operate it like production, because it is.",
+      "summary": "Once an app is live, you own running it \u2014 with full visibility into logs, traces, and cost, instant rollback when something breaks, and a complete audit record for compliance. An AI agent can investigate issues and propose fixes, with a human always approving the action.",
+      "capabilities": [
+        {
+          "value": "See everything the app is doing",
+          "product": "Observability",
+          "detail": "Logs, traces, and metrics for every deployment in one place, so teams diagnose issues without wiring up a separate monitoring stack.",
+          "href": "https://vercel.com/docs/observability",
+          "linkLabel": "vercel.com/docs"
+        },
+        {
+          "value": "Undo a bad release instantly",
+          "product": "Instant Rollback",
+          "detail": "Because every deployment is preserved, restoring a known-good version is an immediate routing change rather than an emergency redeploy.",
+          "href": "https://vercel.com/docs/deployments/instant-rollback",
+          "linkLabel": "vercel.com/docs"
+        },
+        {
+          "value": "A complete record for compliance",
+          "product": "Audit Logs",
+          "detail": "Every action across the organization is captured in an exportable audit trail, giving security and compliance teams the evidence they need.",
+          "href": "https://vercel.com/docs/observability/audit-log",
+          "linkLabel": "vercel.com/docs"
+        },
+        {
+          "value": "An agent that helps you operate",
+          "product": "Vercel Agent",
+          "detail": "Vercel Agent investigates anomalies, analyzes logs, and can propose or trigger a rollback \u2014 always on your approval, never on its own.",
+          "href": "https://vercel.com/docs/agent",
+          "linkLabel": "vercel.com/docs"
+        }
+      ]
+    }
+  ],
+  "flow": {
+    "eyebrow": "How it all connects",
+    "title": "Every stage is one platform, not six products bolted together.",
+    "lead": "Identity, source, previews, production, and system connectivity are the same governed surface. That is why the whole lifecycle holds together instead of leaking work back to your teams at every hand-off."
+  },
+  "closing": {
+    "text": "This maps directly to the criteria the team scored.",
+    "href": "/",
+    "linkLabel": "Back to the executive summary"
+  }
+}

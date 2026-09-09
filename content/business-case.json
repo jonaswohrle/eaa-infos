@@ -1,0 +1,491 @@
+{
+  "updated_at": "2026-09-09",
+  "hero": {
+    "eyebrow": "Business case",
+    "title": "The argument, phase by phase.",
+    "lead": "Twenty-five arguments for giving AI-built applications a governed home, organised across the six lifecycle stages. Each one follows the same chain: what happens today, why it breaks, where it ends, and how it plays out on Vercel. The quantification column tells you what to measure in your own organisation rather than asserting a number for it."
+  },
+  "howToUse": {
+    "title": "How to use this",
+    "body": "This is a template, not a filled-in case. The arguments are drawn from a real enterprise evaluation — a global business with roughly 2,500 employees already building applications with AI coding tools — and generalised. Take the phases that match your exposure, apply your own population and rates to the basis given, and drop the rest."
+  },
+  "sizing": {
+    "title": "Sizing it for your organisation",
+    "lead": "Three inputs drive most of the model. Everything else is derived from them.",
+    "inputs": [
+      {
+        "label": "Builder population",
+        "detail": "People already creating applications with AI tooling — usually far more than your engineering headcount, and mostly outside it."
+      },
+      {
+        "label": "Applications per builder per year",
+        "detail": "How often an idea becomes something that needs to run somewhere. This is the multiplier on every review, credential and support cost below."
+      },
+      {
+        "label": "Loaded specialist rate",
+        "detail": "Fully loaded hourly cost of the engineering, security and platform time currently absorbed per application."
+      }
+    ],
+    "note": "The reference deployment sized the seat-licence line alone into six figures annually before any productivity or risk value was counted."
+  },
+  "lenses": [
+    {
+      "key": "risk",
+      "label": "Risk",
+      "long": "Risk & Control"
+    },
+    {
+      "key": "cost",
+      "label": "Cost",
+      "long": "Cost Reduction"
+    },
+    {
+      "key": "value",
+      "label": "Value",
+      "long": "Value Creation"
+    },
+    {
+      "key": "ai",
+      "label": "AI",
+      "long": "AI Transformation"
+    }
+  ],
+  "statusLabels": {
+    "validated": "Proven in the reference deployment",
+    "discuss": "Varies by organisation",
+    "proposed": "Directional",
+    "rejected": "Not pursued"
+  },
+  "phases": [
+    {
+      "phase": "build",
+      "label": "Build",
+      "value": "10× faster delivery of applications and agents, with approved access to production systems and no setup or technical expertise required from builders.",
+      "riskMitigated": "Prevents inconsistent architectures, copied credentials, and unsupported code from turning rapid experimentation into security debt and costly rework.",
+      "items": [
+        {
+          "id": "build-1",
+          "title": "Approved foundations standardize architecture and controls",
+          "supportKind": "risk",
+          "today": "Builders choose their own frameworks, components, security controls, and project structures.",
+          "problem": "Without an approved foundation, every application requires separate architecture, security, accessibility, and maintainability review.",
+          "impact": "Review and remediation grow with application volume, while unfamiliar stacks become expensive to support when ownership changes.",
+          "withVercel": "A maintained application foundation gives every builder approved architecture, controls, and design patterns that improve centrally.",
+          "lenses": [
+            "risk",
+            "cost",
+            "value"
+          ],
+          "quantBasis": "Applications created × review and remediation hours avoided × loaded specialist rate.",
+          "status": "validated"
+        },
+        {
+          "id": "build-2",
+          "title": "Managed connections keep credentials out of builder workflows",
+          "supportKind": "risk",
+          "today": "Builders copy long lived API keys into local files or prompts to connect prototypes to production systems.",
+          "problem": "Once copied, credentials can enter chat history or source control and their use cannot be reliably governed.",
+          "impact": "A useful experiment can create credential rotation, investigation, legal review, service disruption, and lasting security debt.",
+          "withVercel": "Approved runtime connections provide scoped access to production systems without revealing the underlying credentials.",
+          "lenses": [
+            "risk",
+            "value"
+          ],
+          "quantBasis": "Credentials copied per application, incidents avoided, and response hours × loaded security and legal cost.",
+          "status": "discuss"
+        },
+        {
+          "id": "build-3",
+          "title": "Guided delivery removes Git and infrastructure expertise",
+          "supportKind": "value",
+          "today": "Production delivery requires builders to understand repositories, branches, reviews, and infrastructure workflows.",
+          "problem": "The controls intended to govern development become a barrier for people outside engineering.",
+          "impact": "Prototypes remain on laptops or require specialist help, so delivery scales only as fast as scarce engineering capacity.",
+          "withVercel": "Builders create source controlled, deployed applications through guided workflows without operating Git or infrastructure directly.",
+          "lenses": [
+            "cost",
+            "value"
+          ],
+          "quantBasis": "Builder releases × engineering assistance hours avoided × loaded engineering rate; compare completion rates before and after.",
+          "status": "validated"
+        },
+        {
+          "id": "build-4",
+          "title": "Managed integrations remove data and tooling handoffs",
+          "supportKind": "value",
+          "today": "A builder who needs a database, Jira, BigQuery, or Slack must request accounts, credentials, networking, and integration work from specialists.",
+          "problem": "The first backend or tooling dependency breaks self service before the application has proved value.",
+          "impact": "Small workflow ideas stop at demonstration stage or generate recurring work for platform, data, and integration teams.",
+          "withVercel": "Managed integrations connect approved databases and tools like Jira, BigQuery, and Slack through the application workflow — the builder never needs to understand the integration, the credentials, or where the data lives.",
+          "lenses": [
+            "cost",
+            "value",
+            "risk"
+          ],
+          "quantBasis": "Integration requests × elapsed days and specialist hours; compare time from prototype to a working connected application.",
+          "status": "proposed"
+        },
+        {
+          "id": "build-5",
+          "title": "Company-owned source preserves lineage without specialist seats",
+          "supportKind": "risk",
+          "today": "Company policy requires production code in company owned source control, while direct repository access requires paid specialist seats.",
+          "problem": "The company must either buy tools citizen builders do not need or exclude them from the governed source path.",
+          "impact": "Seat costs grow before value is proven, while excluded builders create code with weak ownership and deployment lineage.",
+          "withVercel": "A governed service identity creates company owned source with per user attribution, without requiring direct repository access for every builder.",
+          "lenses": [
+            "cost",
+            "risk"
+          ],
+          "quantBasis": "Builders who need source access × per-seat licence cost × 12 months. Substitute your own seat price and builder population — in the reference deployment this line alone accounted for a six-figure annual avoidance.",
+          "status": "validated"
+        }
+      ]
+    },
+    {
+      "phase": "share",
+      "label": "Share",
+      "value": "One governed platform where teams can securely share working applications, review changes, and give feedback directly in context.",
+      "riskMitigated": "Prevents employees from using personal accounts, public links, and disconnected tools that leave applications invisible, ungoverned, and impossible to revoke centrally.",
+      "items": [
+        {
+          "id": "share-1",
+          "title": "Governed sharing keeps applications private, visible, and revocable",
+          "supportKind": "risk",
+          "today": "Builders use personal accounts, public links, screenshots, and unrelated tools because governed sharing is fragmented.",
+          "problem": "Applications, audiences, and ownership cannot be seen or revoked from one place.",
+          "impact": "Sensitive work becomes invisible shadow IT, while fear of exposure prevents useful applications from reaching other teams.",
+          "withVercel": "One governed platform keeps working applications private, company owned, visible, and centrally revocable.",
+          "lenses": [
+            "risk",
+            "value"
+          ],
+          "quantBasis": "Applications shared outside managed accounts; time to identify an owner and revoke access; exposure incidents and remediation cost.",
+          "status": "validated"
+        },
+        {
+          "id": "share-2",
+          "title": "Protected working previews let stakeholders test every change",
+          "supportKind": "value",
+          "today": "Review happens through screenshots, presentations, or scheduled demonstrations instead of a runnable version of each change.",
+          "problem": "Decision makers cannot test workflows, permissions, responsive behavior, or edge cases themselves.",
+          "impact": "Wrong assumptions survive approval, increasing late rework and reducing trust in builder created software.",
+          "withVercel": "Every change produces a protected working version that approved reviewers can test before release.",
+          "lenses": [
+            "cost",
+            "value"
+          ],
+          "quantBasis": "Review cycles, first feedback latency, and defects found after approval × rework hours.",
+          "status": "proposed"
+        },
+        {
+          "id": "share-3",
+          "title": "Version-linked feedback removes clarification cycles",
+          "supportKind": "value",
+          "today": "Comments arrive in meetings, messages, and documents without a reliable link to the exact version under review.",
+          "problem": "Builders must interpret ambiguous feedback and reconstruct what the reviewer saw.",
+          "impact": "Clarification cycles delay decisions, reopen defects, and fragment the record of who approved what.",
+          "withVercel": "Reviewers comment directly on the working version, keeping feedback attached to the exact application state.",
+          "lenses": [
+            "cost",
+            "value"
+          ],
+          "quantBasis": "Comments requiring clarification × average delay; reopened issues; meeting hours replaced by contextual asynchronous review.",
+          "status": "proposed"
+        }
+      ]
+    },
+    {
+      "phase": "deploy",
+      "label": "Deploy",
+      "value": "Efficient, zero configuration infrastructure that runs applications and agents in production and scales automatically with demand.",
+      "riskMitigated": "Avoids the cost, specialist staffing, idle capacity, and operational burden of building and managing large Kubernetes environments.",
+      "items": [
+        {
+          "id": "deploy-1",
+          "title": "Managed production removes per-application Kubernetes setup",
+          "supportKind": "risk",
+          "today": "Central specialists configure and host each application through infrastructure designed for engineering owned services.",
+          "problem": "Platform tickets, cluster configuration, and per application setup make delivery capacity grow linearly with the estate.",
+          "impact": "At scale, the production queue becomes slower than ungoverned alternatives and valuable applications remain on laptops.",
+          "withVercel": "Infrastructure is derived from the application and company defaults, creating a zero configuration path to production.",
+          "lenses": [
+            "cost",
+            "value"
+          ],
+          "quantBasis": "Applications shipped × platform engineering hours per application, plus value lost during queue time.",
+          "status": "proposed"
+        },
+        {
+          "id": "deploy-2",
+          "title": "Automatic scaling removes idle capacity without limiting peaks",
+          "supportKind": "risk",
+          "today": "Internal applications require standing capacity even though most are rarely used and a few may suddenly reach the whole company.",
+          "problem": "Teams must predict demand before adoption and pay for the long tail of idle services.",
+          "impact": "Under sizing causes outages at the moment of adoption, while over sizing creates a fixed cost floor that grows with application count.",
+          "withVercel": "Automatic scaling adds capacity for bursts and removes traffic cost while applications are idle.",
+          "lenses": [
+            "risk",
+            "cost",
+            "value"
+          ],
+          "quantBasis": "Reserved capacity avoided, idle share, peak users served without intervention, and employee hours lost during burst failures.",
+          "status": "proposed"
+        },
+        {
+          "id": "deploy-3",
+          "title": "One runtime supports interfaces, APIs, background work, and agents",
+          "supportKind": "value",
+          "today": "Interactive interfaces, APIs, background jobs, queues, and long running agent workflows are built and operated as separate services.",
+          "problem": "Each runtime adds architecture, provisioning, monitoring, and specialist ownership before the workflow proves value.",
+          "impact": "Experimental automation creates a permanent worker and queue estate or is implemented unreliably in request handlers.",
+          "withVercel": "Interactive, API, background, and durable work run through one managed production model that charges for active execution.",
+          "lenses": [
+            "cost",
+            "value",
+            "ai"
+          ],
+          "quantBasis": "Runtime services eliminated, setup and maintenance hours avoided, and active compute as a share of total workflow duration.",
+          "status": "proposed"
+        },
+        {
+          "id": "deploy-4",
+          "title": "Immutable releases give every application one recovery point",
+          "supportKind": "value",
+          "today": "Frontends, APIs, and workers ship through separate pipelines with independent versions and recovery procedures.",
+          "problem": "A release can leave incompatible parts live, while rollback requires specialists to reconstruct a known good combination.",
+          "impact": "Partial recovery extends employee downtime, risks repeated work or data errors, and slows future releases.",
+          "withVercel": "The application ships as one immutable deployment with one consistent version and one recovery point.",
+          "lenses": [
+            "risk",
+            "cost"
+          ],
+          "quantBasis": "Release incidents caused by version mismatch × restoration time and affected employee hours; pipelines eliminated per application.",
+          "status": "validated"
+        }
+      ]
+    },
+    {
+      "phase": "authenticate",
+      "label": "Authenticate",
+      "value": "Internal applications remain internal, while users access production systems with their existing permissions and credentials stay hidden from builders.",
+      "riskMitigated": "Prevents public exposure, shared credentials, excessive permissions, and orphaned access from becoming security, legal, compliance, or operational incidents.",
+      "items": [
+        {
+          "id": "authenticate-1",
+          "title": "Identity protection is on by default for every application",
+          "supportKind": "risk",
+          "today": "Each builder must add access control correctly or anyone with the link can open the application.",
+          "problem": "A mandatory security control depends on every builder remembering and implementing it without error.",
+          "impact": "One omission can expose internal or personal data, while local accounts and one off lists leave access behind after offboarding.",
+          "withVercel": "Company identity protects every application by default, and central identity removal revokes access across the estate.",
+          "lenses": [
+            "risk",
+            "cost"
+          ],
+          "quantBasis": "Share protected by company identity, exposure exceptions found, audit hours, and revocation latency after offboarding.",
+          "status": "validated"
+        },
+        {
+          "id": "authenticate-2",
+          "title": "User identity carries existing permissions into production systems",
+          "supportKind": "value",
+          "today": "Applications query production systems through one shared service identity regardless of which employee initiated the request.",
+          "problem": "The source system sees the application rather than the person, bypassing existing grants and user level audit records.",
+          "impact": "Users may receive data they cannot access directly, turning the application into a privilege escalation path.",
+          "withVercel": "The signed in user’s identity reaches the production system, which applies the permissions it already governs.",
+          "lenses": [
+            "risk",
+            "value"
+          ],
+          "quantBasis": "Sensitive requests carrying end user identity, unauthorized row exposure tests, and custom access logic eliminated per application.",
+          "status": "validated"
+        },
+        {
+          "id": "authenticate-3",
+          "title": "End-to-end attribution follows consequential actions",
+          "supportKind": "risk",
+          "today": "A user signs in, but downstream API calls and agent actions execute under unrelated shared credentials.",
+          "problem": "The identity chain breaks before the query, change, or external action that matters.",
+          "impact": "Investigators cannot attribute actions, and compliance cannot demonstrate least privilege or individual accountability.",
+          "withVercel": "Human and agent actions remain connected to the initiating identity across application and production system boundaries.",
+          "lenses": [
+            "risk"
+          ],
+          "quantBasis": "Sensitive actions with end to end attribution and forensic hours spent reconstructing actor identity.",
+          "status": "validated"
+        }
+      ]
+    },
+    {
+      "phase": "govern",
+      "label": "Govern",
+      "value": "One control plane for every application and agent, with enforceable policies, named ownership, complete audit history, controlled production access, and attributable spending.",
+      "riskMitigated": "Prevents decentralized development from becoming shadow IT with unknown owners, uncontrolled costs, inconsistent policies, and no reliable way to contain risk.",
+      "items": [
+        {
+          "id": "govern-1",
+          "title": "One inventory connects every asset to its owner and operating record",
+          "supportKind": "value",
+          "today": "Tools are distributed across laptops, personal accounts, and unrelated hosts without one inventory or owner of record.",
+          "problem": "Security, procurement, and IT cannot govern assets they cannot find.",
+          "impact": "Unknown applications retain access, cost money, and survive owner changes, making the total exposure impossible to approve or contain.",
+          "withVercel": "One inventory connects every application and agent to an owner, team, source, deployment, and operating record.",
+          "lenses": [
+            "risk",
+            "cost"
+          ],
+          "quantBasis": "Unregistered applications discovered; share with named owner, data classification, and source lineage; inventory hours avoided.",
+          "status": "proposed"
+        },
+        {
+          "id": "govern-2",
+          "title": "Layered controls reduce the risk of excessive bills",
+          "supportKind": "risk",
+          "today": "Application, infrastructure, and AI usage grow without one consistent set of visibility, alerting, traffic, and response controls.",
+          "problem": "Self-built safeguards vary by application, so abnormal consumption may continue until an owner or central team notices and intervenes.",
+          "impact": "Traffic spikes, automated loops, abusive requests, or unexpected AI usage can create excessive bills and force broad restrictions on otherwise useful workloads.",
+          "withVercel": "Vercel combines spend visibility, alerts, automated responses, AI usage reporting, inbound traffic controls, and restricted agent or sandbox egress to reduce the chance that abnormal usage becomes an uncontrolled bill.",
+          "lenses": [
+            "cost",
+            "risk",
+            "ai"
+          ],
+          "quantBasis": "Unexpected spend events; time from anomaly to action; abusive requests blocked; restricted outbound calls; spend attribution; and reconciliation hours.",
+          "status": "discuss"
+        },
+        {
+          "id": "govern-3",
+          "title": "Ingress and sandbox egress controls contain runaway or abusive traffic",
+          "supportKind": "risk",
+          "today": "Each self-hosted application must implement its own inbound abuse controls and rate limits, while agent or untrusted-code execution needs a separate outbound network policy.",
+          "problem": "Application code becomes the last line of defense: malicious requests and software loops can reach compute or paid APIs before a limit runs, while unrestricted sandbox egress can call any external destination.",
+          "impact": "A denial-of-service event, credential abuse, runaway retry loop, or compromised workload can multiply compute, data-transfer, model, and third-party API costs before an operator intervenes.",
+          "withVercel": "Vercel WAF filters, denies, challenges, and rate-limits incoming requests at the edge; Vercel Sandbox policies can deny all egress or allowlist specific domains and network ranges before untrusted code or agents run.",
+          "lenses": [
+            "risk",
+            "cost",
+            "ai"
+          ],
+          "quantBasis": "Requests blocked before application resources; rate-limit events; outbound destinations denied; and compute, model, data-transfer, or third-party API calls avoided during abusive or runaway activity.",
+          "status": "validated"
+        },
+        {
+          "id": "govern-4",
+          "title": "One audit chain connects identity, code, deployment, and activity",
+          "supportKind": "risk",
+          "today": "Identity, code changes, deployments, and production activity are logged in separate tools or not logged consistently.",
+          "problem": "There is no complete chain from a named person to the code, release, and production action.",
+          "impact": "Audit preparation becomes an investigation, while missing evidence expands incident scope, response time, and legal uncertainty.",
+          "withVercel": "Identity, source, deployment, and production activity form one exportable record for internal security systems.",
+          "lenses": [
+            "risk",
+            "cost"
+          ],
+          "quantBasis": "Audit requests × evidence collection hours; required events available centrally; incident scoping time.",
+          "status": "validated"
+        },
+        {
+          "id": "govern-5",
+          "title": "Governed run records make agent actions reviewable and containable",
+          "supportKind": "risk",
+          "today": "Agents can query data, send messages, and change external systems without one record of trigger, tool calls, approvals, cost, and outcome.",
+          "problem": "Machine speed actions lack the evidence needed to distinguish intended automation from unauthorized behavior.",
+          "impact": "An error can propagate across systems before detection, and investigators must treat every connected system as affected.",
+          "withVercel": "Each run records the initiating identity, trigger, actions, approvals, cost, and outcome for review and containment.",
+          "lenses": [
+            "risk",
+            "ai"
+          ],
+          "quantBasis": "Agent runs with complete trace and named approval; time to reconstruct a failed run; systems touched per incident.",
+          "status": "validated"
+        }
+      ]
+    },
+    {
+      "phase": "maintain",
+      "label": "Maintain",
+      "value": "Operate thousands of applications and agents as one managed fleet, with standardized operations, centralized visibility, platform updates, clear ownership, and enterprise support.",
+      "riskMitigated": "Prevents each application from becoming a separate operational liability with its own infrastructure, dependencies, security updates, expertise, and support burden.",
+      "items": [
+        {
+          "id": "maintain-1",
+          "title": "One managed fleet absorbs platform maintenance across the estate",
+          "supportKind": "value",
+          "today": "Self managed applications require capacity planning, runtime patching, cluster maintenance, upgrades, and deployment tooling.",
+          "problem": "Operations grow with application count even when business usage does not.",
+          "impact": "Each successful application adds permanent platform work until maintenance requires more specialists or new development is restricted.",
+          "withVercel": "One managed fleet absorbs capacity, runtime, patching, and platform maintenance across the entire application estate.",
+          "lenses": [
+            "cost",
+            "risk"
+          ],
+          "quantBasis": "Platform FTE per 100 applications, annual patch and upgrade hours, and incidents caused by platform maintenance.",
+          "status": "proposed"
+        },
+        {
+          "id": "maintain-2",
+          "title": "Standard structure and company-owned source make ownership transferable",
+          "supportKind": "risk",
+          "today": "Business teams adopt applications whose source, knowledge, and operating context remain with the original builder.",
+          "problem": "Adoption turns a personal project into business infrastructure without creating transferable ownership.",
+          "impact": "When the builder changes role, the application degrades and the dependent process becomes an emergency handover.",
+          "withVercel": "Company owned source, standard structure, explicit ownership, and common operations let another team take over.",
+          "lenses": [
+            "risk",
+            "value"
+          ],
+          "quantBasis": "Adopted applications without a secondary owner; business hours lost after owner departure; takeover effort per application.",
+          "status": "proposed"
+        },
+        {
+          "id": "maintain-3",
+          "title": "Default telemetry shortens diagnosis before specialist escalation",
+          "supportKind": "risk",
+          "today": "Logs and traces are missing, fragmented, or accessible only to specialists.",
+          "problem": "The person closest to the workflow cannot distinguish code, data access, external system, and infrastructure failures.",
+          "impact": "Every incident enters a specialist queue and begins with reproduction while the business process remains unavailable.",
+          "withVercel": "Default telemetry and one operating model let builders diagnose more failures before escalating them.",
+          "lenses": [
+            "cost",
+            "risk",
+            "ai"
+          ],
+          "quantBasis": "Incidents × time to first diagnosis and resolution; specialist escalations avoided; share resolved with default telemetry.",
+          "status": "validated"
+        },
+        {
+          "id": "maintain-4",
+          "title": "Enterprise support absorbs platform questions as adoption grows",
+          "supportKind": "value",
+          "today": "A small internal team becomes the help desk for every build, deployment, access, and incident question.",
+          "problem": "Support grows with applications and builders, including questions about the underlying platform.",
+          "impact": "Rollout is limited by internal support capacity or displaces governance, security, and platform work.",
+          "withVercel": "Enterprise support absorbs platform questions while the internal team retains policy, business context, and escalation ownership.",
+          "lenses": [
+            "cost",
+            "value"
+          ],
+          "quantBasis": "Tickets per 100 applications × handling time × loaded support rate; share resolved without internal platform intervention.",
+          "status": "proposed"
+        },
+        {
+          "id": "maintain-5",
+          "title": "Portfolio visibility supports improvement, transfer, and retirement",
+          "supportKind": "value",
+          "today": "After release, usage, ownership, and operating health are not visible across the portfolio.",
+          "problem": "Valuable, failing, and abandoned applications look the same to central teams.",
+          "impact": "The company funds unused tools, retains unnecessary access, and discovers ownerless applications only during incidents or audits.",
+          "withVercel": "Portfolio level usage, cost, health, and ownership data supports targeted improvement, transfer, or retirement.",
+          "lenses": [
+            "cost",
+            "risk",
+            "value"
+          ],
+          "quantBasis": "Active users, cost per active user, ownerless applications, and applications retired below an agreed usage threshold.",
+          "status": "proposed"
+        }
+      ]
+    }
+  ]
+}

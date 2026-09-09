@@ -1,0 +1,54 @@
+{
+  "items": [
+    {
+      "id": "role-sponsor",
+      "name": "Engineering / platform lead",
+      "email": "",
+      "role": "Sponsor",
+      "team": "Platform Engineering",
+      "status": "invited",
+      "notes": "Owns the governed path today. Decides whether the new default replaces or sits beside the existing one.",
+      "position": 1
+    },
+    {
+      "id": "role-builder",
+      "name": "Non-engineering builder",
+      "email": "",
+      "role": "Participant",
+      "team": "Any business function",
+      "status": "invited",
+      "notes": "The actual target user. If someone outside engineering cannot ship without help, the evaluation has not proved anything.",
+      "position": 2
+    },
+    {
+      "id": "role-data",
+      "name": "Data platform owner",
+      "email": "",
+      "role": "Participant",
+      "team": "Data",
+      "status": "invited",
+      "notes": "Owns warehouse access patterns. Validates that apps reach production data with scoped, auditable credentials.",
+      "position": 3
+    },
+    {
+      "id": "role-security",
+      "name": "Security reviewer",
+      "email": "",
+      "role": "Reviewer",
+      "team": "Security",
+      "status": "invited",
+      "notes": "Reviews identity, secrets handling, network egress, and audit posture against internal standards.",
+      "position": 4
+    },
+    {
+      "id": "role-finance",
+      "name": "Finance / procurement",
+      "email": "",
+      "role": "Reviewer",
+      "team": "Procurement",
+      "status": "invited",
+      "notes": "Confirms seat model, cost attribution, and how spend is tracked per team once the estate grows.",
+      "position": 5
+    }
+  ]
+}
