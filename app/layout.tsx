@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { PortalShell } from '@/components/portal-shell'
-import { hidePocUsers } from '@/flags'
 
 const geistSans = Geist({
   subsets: ['latin'],
@@ -30,18 +29,15 @@ export const viewport: Viewport = {
   maximumScale: 1,
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const shouldHidePocUsers = await hidePocUsers()
-  const hiddenStepKeys = shouldHidePocUsers ? ['poc-users'] : []
-
   return (
     <html lang="en" className={`light ${geistSans.variable} ${geistMono.variable}`}>
       <body className="bg-background font-sans antialiased">
-        <PortalShell hiddenStepKeys={hiddenStepKeys}>{children}</PortalShell>
+        <PortalShell>{children}</PortalShell>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

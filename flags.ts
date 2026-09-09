@@ -26,8 +26,6 @@ function optionalFlag(key: string, description: string, defaultValue = false) {
   })
 }
 
-export const hidePocUsers = optionalFlag('hide-poc-users', 'Hide POC Users from portal navigation, overview, and direct access')
-
 export const hideCloudflare = optionalFlag('hide-cloudflare', 'Hide Cloudflare from the competitor analysis')
 
 export const hideSinglePersonSharing = optionalFlag('hide-single-person-sharing', 'Hide the single-person sharing capability from the competitor analysis')

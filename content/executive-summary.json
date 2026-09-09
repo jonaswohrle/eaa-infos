@@ -65,11 +65,6 @@
       "title": "Competitor analysis",
       "description": "The full vendor matrix with rationale and sources behind every verdict.",
       "href": "/procurement/competitors"
-    },
-    {
-      "title": "Running a POC",
-      "description": "The roles across engineering, data, and security that an evaluation needs in the room.",
-      "href": "/technical/poc-users"
     }
   ]
 }

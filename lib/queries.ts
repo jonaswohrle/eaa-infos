@@ -9,7 +9,6 @@ import type {
   ContentBlock,
   DemoEnvItem,
   PocStep,
-  PocUser,
   SecurityItem,
 } from '@/lib/types'
 
@@ -44,10 +43,6 @@ export async function getStepByKey(stepKey: string): Promise<PocStep | null> {
 
 export async function getDemoEnv(): Promise<DemoEnvItem[]> {
   return getContentItems<DemoEnvItem>('/demo-environment')
-}
-
-export async function getPocUsers(): Promise<PocUser[]> {
-  return getContentItems<PocUser>('/poc-users')
 }
 
 export async function getCapabilities(): Promise<Capability[]> {

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FileText, Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { NAV_GROUPS } from '@/lib/nav'
+import { NAV_LINKS } from '@/lib/nav'
 
 function VercelMark({ className }: { className?: string }) {
   return (
@@ -28,11 +28,9 @@ function BrandLockup() {
 
 function NavContents({
   pathname,
-  hiddenStepKeys,
   onNavigate,
 }: {
   pathname: string
-  hiddenStepKeys: string[]
   onNavigate?: () => void
 }) {
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/')
@@ -47,49 +45,38 @@ function NavContents({
         )}
       >
         <FileText className="h-5 w-5 shrink-0" aria-hidden="true" />
-        <span>Executive summary</span>
+        <span>Overview</span>
       </Link>
 
-      {NAV_GROUPS.map((group) => (
-        <div key={group.label} className="mt-5">
-          <p className="px-3 pb-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground/70">
-            {group.label}
-          </p>
-          {group.links.filter((link) => !link.stepKey || !hiddenStepKeys.includes(link.stepKey)).map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={onNavigate}
+      <div className="mt-2">
+        {NAV_LINKS.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={onNavigate}
+            className={cn(
+              'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand',
+              isActive(link.href)
+                ? 'bg-muted text-foreground'
+                : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+            )}
+          >
+            <span
               className={cn(
-                'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand',
-                isActive(link.href)
-                  ? 'bg-muted text-foreground'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+                'h-1.5 w-1.5 shrink-0 rounded-full',
+                isActive(link.href) ? 'bg-brand' : 'bg-border',
               )}
-            >
-              <span
-                className={cn(
-                  'h-1.5 w-1.5 shrink-0 rounded-full',
-                  isActive(link.href) ? 'bg-brand' : 'bg-border',
-                )}
-                aria-hidden="true"
-              />
-              <span>{link.label}</span>
-            </Link>
-          ))}
-        </div>
-      ))}
+              aria-hidden="true"
+            />
+            <span>{link.label}</span>
+          </Link>
+        ))}
+      </div>
     </>
   )
 }
 
-export function PortalShell({
-  children,
-  hiddenStepKeys,
-}: {
-  children: React.ReactNode
-  hiddenStepKeys: string[]
-}) {
+export function PortalShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -133,11 +120,7 @@ export function PortalShell({
                 <X className="h-5 w-5" aria-hidden="true" />
               </button>
             </div>
-            <NavContents
-              pathname={pathname}
-              hiddenStepKeys={hiddenStepKeys}
-              onNavigate={() => setMobileOpen(false)}
-            />
+            <NavContents pathname={pathname} onNavigate={() => setMobileOpen(false)} />
           </nav>
         </div>
       ) : null}
@@ -148,7 +131,7 @@ export function PortalShell({
           <BrandLockup />
         </div>
         <nav aria-label="Portal sections" className="flex-1 overflow-y-auto px-3 py-4">
-          <NavContents pathname={pathname} hiddenStepKeys={hiddenStepKeys} />
+          <NavContents pathname={pathname} />
         </nav>
       </aside>
 

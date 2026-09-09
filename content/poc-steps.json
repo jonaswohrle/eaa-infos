@@ -21,16 +21,6 @@
       "position": 4
     },
     {
-      "id": "5a7e8c84-29d8-4cfa-833e-a1fc227190d7",
-      "track": "technical",
-      "step_key": "poc-users",
-      "title": "POC users",
-      "summary": "Identify and onboard participants across engineering, data, and security.",
-      "status": "in_progress",
-      "detail": "Map named users to Okta groups and in-app roles for the pilot.",
-      "position": 2
-    },
-    {
       "id": "98271305-f9b4-4247-ac8d-6149e1f70b7b",
       "track": "technical",
       "step_key": "capabilities",

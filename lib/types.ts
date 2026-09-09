@@ -32,17 +32,6 @@ export type DemoEnvItem = {
   details: DemoEnvDetail[]
 }
 
-export type PocUser = {
-  id: string
-  name: string
-  email: string
-  role: string
-  team: string
-  status: string
-  notes: string
-  position: number
-}
-
 export type Coverage = 'native' | 'configurable' | 'discuss'
 
 export type PocStatus = 'not_started' | 'in_progress' | 'met'
