@@ -5,20 +5,6 @@
     "title": "Give AI-built applications a governed home.",
     "description": "Employees across the business already build working applications with AI coding tools — most of them outside engineering. Those applications will run somewhere. This site sets out why that needs a governed home, what a platform has to do about it, and where to read the detail."
   },
-  "decision_context": [
-    {
-      "label": "Who builds",
-      "value": "Employees outside engineering"
-    },
-    {
-      "label": "What it needs",
-      "value": "Identity, data access, audit, cost"
-    },
-    {
-      "label": "Who decides",
-      "value": "CTO & central technology leadership"
-    }
-  ],
   "whys": [
     {
       "key": "why-anything",

@@ -63,15 +63,6 @@ function Hero({ content }: { content: ExecutiveSummaryContent }) {
       <p className="mt-3 max-w-3xl text-base leading-relaxed text-pretty text-muted-foreground">
         {content.hero.description}
       </p>
-
-      <dl className="mt-6 flex flex-col divide-y divide-border overflow-hidden rounded-xl border border-border bg-card sm:flex-row sm:divide-x sm:divide-y-0">
-        {content.decision_context.map((item) => (
-          <div key={item.label} className="flex-1 px-4 py-3">
-            <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{item.label}</dt>
-            <dd className="mt-1 text-sm font-medium text-foreground">{item.value}</dd>
-          </div>
-        ))}
-      </dl>
     </header>
   )
 }

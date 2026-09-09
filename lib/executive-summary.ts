@@ -7,7 +7,6 @@ import type { CompetitorAnalysis } from '@/lib/types'
 export type ExecutiveSummaryContent = {
   updated_at: string
   hero: { eyebrow: string; title: string; description: string }
-  decision_context: { label: string; value: string }[]
   whys: {
     key: string
     eyebrow: string
