@@ -687,63 +687,6 @@
       }
     },
     {
-      "question": "can a builder share an app with exactly one person — e.g. only their manager — without creating a team or filing a ticket?",
-      "priority": null,
-      "segment": "Share",
-      "vendors": {
-        "Vercel": {
-          "answer": "No",
-          "justification": "Passport grants access via IdP app assignment, so per-person sharing today requires an Okta assignment change (automatable via Okta APIs as a self-service workflow, which is the demonstrated workaround). Google-Docs-style native sharing controls are on the product roadmap.",
-          "sources": [
-            "https://vercel.com/docs/passport",
-            "https://vercel.slack.com/archives/C0AQ6BMLQCQ/p1786738463652929 (internal)"
-          ],
-          "needs_review": true
-        },
-        "AWS": {
-          "answer": "Partial",
-          "justification": "Native Hosting access control is a shared username and password at app or branch scope, not a named-person share. Cognito can admit one administratively created user, but only after the app adds its own authentication and user-pool setup.",
-          "sources": [
-            "https://docs.aws.amazon.com/amplify/latest/userguide/access-control.html",
-            "https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-create-user-accounts.html"
-          ],
-          "needs_review": false
-        },
-        "Netlify": {
-          "answer": "Partial",
-          "justification": "On a credit-based Pro plan, a private project can be shared with one email and scoped to that project, but the docs assign granular access administration to Team Owners and the invitee must use a Netlify login.",
-          "sources": [
-            "https://docs.netlify.com/manage/accounts-and-billing/team-management/manage-project-access/",
-            "https://docs.netlify.com/manage/security/secure-access-to-sites/project-visibility/"
-          ],
-          "needs_review": true
-        },
-        "Cloudflare": {
-          "answer": "Partial",
-          "justification": "An Access policy can allow one email address, and one-time PIN lets that recipient authenticate without an IdP account. Whether a builder can do this without a ticket depends on the builder having permission to manage the relevant Access policy.",
-          "sources": [
-            "https://developers.cloudflare.com/cloudflare-one/access-controls/policies/",
-            "https://developers.cloudflare.com/cloudflare-one/integrations/identity-providers/one-time-pin/"
-          ],
-          "needs_review": false
-        },
-        "Dokploy": {
-          "answer": "No",
-          "justification": "Enterprise Application Authentication has no per-email or per-group allow-list in Dokploy; any user accepted by the configured OIDC application is admitted. Restricting access to one person must be done through the upstream IdP, normally outside the builder's Dokploy workflow.",
-          "sources": [
-            "https://docs.dokploy.com/docs/core/enterprise/sso/application-authentication"
-          ],
-          "needs_review": false
-        },
-        "Internally built": {
-          "answer": "No",
-          "justification": "The Catalog UI manages contributors (who may edit an app), not viewers (who may open it). Restricting a running app to a single colleague requires auth work inside the app itself, not a self-service toggle. Source: DH engineering walkthrough of the internal middleware (Aug 2026).",
-          "sources": [],
-          "needs_review": true
-        }
-      }
-    },
-    {
       "question": "can access be granted to an existing IdP group, or a union of groups?",
       "priority": null,
       "segment": "Share",
