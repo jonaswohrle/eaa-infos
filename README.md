@@ -1,94 +1,97 @@
-# delivery-hero
+# EAA Infos
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+A shareable overview of the **Enterprise Agents & Apps** play: the case for giving
+AI-built applications a governed home.
 
-## Built with v0
+Employees across the business already build working applications with AI coding
+tools — most of them outside engineering. Those applications will run somewhere.
+This site sets out why that needs a governed home, what a platform has to do
+about it, and how the alternatives compare.
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
+**Live:** https://eaa-infos.vercel.app
 
-[Continue working on v0 →](https://v0.app/chat/projects/prj_0ZTE2cAQ4TS682h4tRF0FsSVlMXw)
+## Sections
 
-## Getting Started
+| Route | What it covers |
+|---|---|
+| `/` | Overview — the three whys and an index of the rest |
+| `/technical/capabilities` | The target operating model, stage by stage |
+| `/procurement/value-and-risk` | Two claims per lifecycle stage with the arguments behind each |
+| `/procurement/business-case` | The two-page executive brief |
+| `/procurement/competitors` | 47 capabilities scored across 6 vendors, with rationale and sources |
 
-Install dependencies and run the development server:
+## Content
+
+All content is filesystem JSON under [`content/`](./content), loaded with
+[Comark Content](https://content.comark.dev/integrations/nextjs). There are no
+editing or upload endpoints — edit the JSON in a branch and review it in a PR.
+
+## MCP server
+
+The whole corpus is exposed over the Model Context Protocol, so you can put it
+behind your own assistant — answer a prospect's question, compare against an
+incumbent, assemble a business case, draft outreach, and cite a real source for
+every claim.
+
+**Endpoint:** `https://eaa-infos.vercel.app/api/mcp` — Streamable HTTP, public, no auth.
+
+```json
+{
+  "mcpServers": {
+    "eaa-infos": { "url": "https://eaa-infos.vercel.app/api/mcp" }
+  }
+}
+```
+
+For stdio-only clients: `npx -y mcp-remote https://eaa-infos.vercel.app/api/mcp`
+
+### Tools
+
+| Tool | What it gives you |
+|---|---|
+| `search_play` | Cross-corpus search. Start here when unsure which tool fits. |
+| `get_lifecycle` | The six stages and their capabilities, with product links. |
+| `compare_vendors` | 47 questions scored across 6 vendors. Verdicts only unless you pass `detail: true`. |
+| `get_vendor_profile` | One alternative's coverage and gaps per segment. |
+| `get_value_and_risk` | The lifecycle claims and 25 supporting arguments. |
+| `get_business_case_brief` | The executive brief and advantage table. |
+| `get_references` | Every product, documentation and source link. |
+| `build_customer_brief` | Assembles material for a business case, call or email. |
+| `answer_question` | Evidence-backed material for a question, objection or RFP item. |
+
+**Prompts:** `write_business_case`, `draft_outreach_email`, `prep_discovery_call`,
+`answer_rfp_question`, `handle_objection`.
+
+**Resources:** `eaa://lifecycle`, `eaa://competitors/matrix`, `eaa://value-and-risk`,
+`eaa://business-case/brief`, `eaa://references`.
+
+### Response sizes are deliberate
+
+The competitor matrix is ~33k tokens in full, so no tool returns it wholesale.
+`compare_vendors` gives verdicts only (~3.7k for all 47 rows) and caps
+`detail: true` at 8 rows. Every tool has an asserted budget:
+
+```bash
+pnpm dev
+node scripts/check-mcp-budgets.mjs
+```
+
+A tool that quietly starts returning 30k tokens breaks every client, so that
+check is the one worth keeping green.
+
+### Implementation
+
+`app/api/mcp/route.ts` runs on [`mcp-handler`](https://github.com/vercel/mcp-handler)
+v2 — stateless Streamable HTTP, no Redis, no sessions. Content comes from
+[`lib/play`](./lib/play), which reads the same JSON and seed data the website
+renders, so the site and the MCP cannot drift.
+
+## Local development
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-## Content sources
-
-All published portal content lives in [`content/`](./content) and is loaded directly from the local filesystem with [Comark Content](https://content.comark.dev/integrations/nextjs). The website has no editing, status-update, save, or upload endpoints. Edit these JSON documents in a branch and review the changes in a pull request:
-
-- `answer-videos.json`
-- `capabilities.json`
-- `competitor-analysis.json`
-- `content-blocks.json`
-- `demo-environment.json`
-- `documents.json`
-- `poc-steps.json`
-- `poc-users.json`
-- `pricing-bands.json`
-- `recordings.json`
-- `requirements.json`
-- `saved-offers.json`
-- `security-items.json`
-
-Validate filesystem content before opening a pull request:
-
-```bash
-pnpm content:check
-```
-
-`competitor-analysis.json` is the app-content snapshot for the competitor matrix. The collaborative Notion export
-remains the raw source of truth; import its current questions, verdicts, rationale, and source links into this file,
-then review the resulting snapshot through a pull request.
-
-Import the current Notion research export into the app-content document with:
-
-```bash
-pnpm content:competitors:import -- /absolute/path/to/competitor-analysis-notion-current.json
-```
-
-The importer keeps each question, justification, and source, and normalizes the text before an em dash to `Yes`,
-`Partial`, or `No` without emoji.
-
-## Collaborative content review
-
-PostgreSQL is used only as an append-only review inbox. It is not read or written by the website. Initialize the queue after pulling the project environment:
-
-```bash
-pnpm content:review:migrate
-```
-
-Submit one proposed item. Every submission is assigned the `in-review` status:
-
-```bash
-pnpm content:review:submit -- \
-  --collection requirements \
-  --item-key requirement-id \
-  --file ./proposal.json \
-  --submitted-by "Name" \
-  --notes "Reason for the change"
-```
-
-Export pending proposals so they can be reviewed and promoted into `content/` in a pull request:
-
-```bash
-pnpm content:review:export
-```
-
-See [`content-reviews/README.md`](./content-reviews/README.md) for the promotion workflow.
-
-## Learn More
-
-To learn more, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+The site renders with no environment variables. Feature flags degrade to
+"show everything" when no flags service is configured.

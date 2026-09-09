@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { ExecutiveSummaryDocument } from '@/components/executive-summary-document'
 import { PageHeader } from '@/components/page-header'
+import { getBrief } from '@/lib/play'
 
 export const metadata: Metadata = {
   title: 'Business case | EAA Infos',
@@ -8,7 +9,9 @@ export const metadata: Metadata = {
     'The executive business case for governing citizen-built applications and AI agents on Vercel.',
 }
 
-export default function BusinessCasePage() {
+export default async function BusinessCasePage() {
+  const brief = await getBrief()
+
   return (
     <article className="business-case-document executive-business-case-document">
       <header className="business-case-print-masthead">
@@ -32,7 +35,7 @@ export default function BusinessCasePage() {
         />
       </div>
 
-      <ExecutiveSummaryDocument />
+      <ExecutiveSummaryDocument brief={brief} />
     </article>
   )
 }
