@@ -28,22 +28,10 @@ All content is filesystem JSON under `content/`, served through
 [`comark-content`](https://www.npmjs.com/package/comark-content) via `lib/queries.ts`.
 There is no write path — a shared link cannot be mutated by a reader.
 
-## Database
+## Data
 
-`lib/db.ts` connects to **Amazon Aurora PostgreSQL** through Vercel OIDC federation
-and RDS IAM auth — no connection string, no stored password. Nothing in the app
-currently reads from it; it is wired and probed at `/api/health/db` ready for the
-first feature that needs persistence.
-
-Connect the resource with:
-
-```bash
-vercel integration add aws/aws-apg
-vercel env pull
-```
-
-It expects `PGHOST`, `PGUSER`, `PGDATABASE`, `AWS_REGION` and `AWS_ROLE_ARN`.
-Until those exist the probe reports `configured: false` and the site runs normally.
+There is no database. All content is filesystem JSON, so the site has no runtime
+dependency beyond the app itself.
 
 ## Local development
 
