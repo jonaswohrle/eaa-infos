@@ -106,7 +106,7 @@ function GoDeeper({ content }: { content: ExecutiveSummaryContent }) {
       <h2 id="go-deeper-heading" className="mt-1.5 text-xl font-semibold tracking-tight text-foreground">
         Follow every claim into the underlying work
       </h2>
-      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {content.go_deeper.map((item) => (
           <Link
             key={item.href}
