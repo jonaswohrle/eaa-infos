@@ -16,7 +16,6 @@ export type ExecutiveSummaryContent = {
     link_label: string
     link_href: string
   }[]
-  comparison: { eyebrow: string; title: string; description: string; footnote: string }
   go_deeper: { title: string; description: string; href: string }[]
 }
 

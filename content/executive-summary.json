@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-08-26",
+  "updated_at": "2026-09-02",
   "hero": {
     "eyebrow": "Overview",
     "title": "Give AI-built applications a governed home.",
-    "description": "In a growing number of enterprises, thousands of employees already build working applications with AI coding tools — most of them outside engineering. Creation has scaled; the operating model underneath has not. This is an overview of what that gap looks like, what a governed platform has to do about it, and how the alternatives compare."
+    "description": "Employees across the business already build working applications with AI coding tools — most of them outside engineering. Those applications will run somewhere. This site sets out why that needs a governed home, what a platform has to do about it, and where to read the detail."
   },
   "decision_context": [
     {
@@ -23,35 +23,39 @@
     {
       "key": "why-anything",
       "eyebrow": "Why anything?",
-      "title": "Creation has scaled. The operating model has not.",
-      "body": "Roughly 2,500 employees turn ideas into working apps with Claude Code — most of them outside engineering. Those apps need identity, bounded data access, audit trails, and cost attribution that the existing Kubernetes path was never designed to provide at this scale.",
-      "link_label": "See the problem statement",
-      "link_href": "/technical/capabilities"
+      "title": "A prototype creates potential. A governed application creates value.",
+      "body": "A durable business application is company-owned, securely connected, reliably operated, observable, and transferable. Without those properties, more creation means more unsupported software, unmanaged access, and hidden cost.",
+      "link_label": "Read the business case",
+      "link_href": "/procurement/business-case"
     },
     {
       "key": "why-now",
       "eyebrow": "Why now?",
-      "title": "Every ungoverned week makes the standard harder.",
-      "body": "Apps that ship without a governed path accumulate shared credentials, unknown data access, and unowned operations. Every week without a standard makes the eventual standard more expensive — you end up migrating a live estate instead of setting a default.",
-      "link_label": "See the business case",
-      "link_href": "/procurement/business-case"
+      "title": "Citizen developers will host their applications. The question is where.",
+      "body": "Employees across the business already create applications with AI coding tools. Without an approved route to production, useful applications remain prototypes, wait for central IT, or move to personal accounts and public services.",
+      "link_label": "Review value and risk",
+      "link_href": "/procurement/value-and-risk"
     },
     {
       "key": "why-vercel",
       "eyebrow": "Why Vercel?",
-      "title": "Buy the governed layer, not another integration project.",
-      "body": "Evaluated hands-on across the six lifecycle stages, Vercel is the only end-to-end fit. The alternatives cover parts of the lifecycle and leave the enterprise to assemble, govern, and operate the rest itself.",
+      "title": "One platform turns citizen development into a governed operating model.",
+      "body": "Vercel gives builders a direct route to production while administrators retain ownership, visibility, and control. Across the six lifecycle stages tested with the the company team, Vercel is the only end-to-end fit.",
       "link_label": "Compare the alternatives",
       "link_href": "/procurement/competitors"
     }
   ],
-  "comparison": {
-    "eyebrow": "Executive comparison",
-    "title": "Vercel against the alternatives, across the lifecycle",
-    "description": "A roll-up of the full capability matrix across the six lifecycle stages. Best point solution shows the strongest single vendor per stage; open any row for the per-capability verdicts, rationale, and sources.",
-    "footnote": "Verdicts roll up the per-capability Yes / Partial / No assessments from the current research export. Covered ≥ 85% · Partial ≥ 50% · Gap below."
-  },
   "go_deeper": [
+    {
+      "title": "Business case",
+      "description": "The executive brief: why anything, why now, why Vercel, and what it avoids.",
+      "href": "/procurement/business-case"
+    },
+    {
+      "title": "Value and Risk",
+      "description": "Two claims per lifecycle stage, with the arguments, measures, and documentation behind each.",
+      "href": "/procurement/value-and-risk"
+    },
     {
       "title": "Capabilities",
       "description": "The problem statement and the target operating model, capability by capability.",
@@ -61,6 +65,11 @@
       "title": "Competitor analysis",
       "description": "The full vendor matrix with rationale and sources behind every verdict.",
       "href": "/procurement/competitors"
+    },
+    {
+      "title": "Running a POC",
+      "description": "The roles across engineering, data, and security that an evaluation needs in the room.",
+      "href": "/technical/poc-users"
     }
   ]
 }

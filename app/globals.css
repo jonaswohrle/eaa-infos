@@ -256,6 +256,190 @@
   display: none;
 }
 
+.executive-business-case-thesis {
+  max-width: 46rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+}
+
+.executive-business-case-method {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-block: 1.25rem;
+  border-block: 1px solid var(--border);
+}
+
+.executive-business-case-method h2,
+.executive-business-case-outcomes h2,
+.executive-business-case-further h2 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.executive-business-case-method p,
+.executive-business-case-outcomes p {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.executive-business-case-section {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+.executive-business-case-section-heading > p {
+  color: var(--brand);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.executive-business-case-section-heading h2 {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.executive-business-case-reading {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.executive-business-case-reading strong {
+  font-weight: 600;
+}
+
+.executive-business-case-callout {
+  padding-left: 1rem;
+  border-left: 2px solid var(--brand);
+  font-weight: 500;
+}
+
+.executive-business-case-table-wrap {
+  grid-column: 1 / -1;
+  min-width: 0;
+  overflow-x: auto;
+  margin-top: 0.25rem;
+}
+
+.executive-business-case-table-wrap table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.executive-business-case-table-wrap th,
+.executive-business-case-table-wrap td {
+  padding: 0.875rem 1rem 0.875rem 0;
+  border-top: 1px solid var(--border);
+  vertical-align: top;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.executive-business-case-table-wrap thead th {
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.executive-business-case-table-wrap tbody th {
+  width: 16%;
+  font-weight: 600;
+}
+
+.executive-business-case-table-wrap td {
+  width: 28%;
+}
+
+.executive-business-case-table-wrap td:last-child {
+  width: 28%;
+  padding-right: 0;
+  color: var(--muted-foreground);
+}
+
+.executive-business-case-outcomes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--foreground);
+}
+
+.executive-business-case-outcomes p {
+  margin-top: 0.75rem;
+}
+
+.executive-business-case-further {
+  margin-top: 3rem;
+}
+
+.executive-business-case-further > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.executive-business-case-further a {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.executive-business-case-further a:hover strong {
+  color: var(--brand);
+}
+
+.executive-business-case-further span {
+  color: var(--muted-foreground);
+}
+
+@media (max-width: 48rem) {
+  .executive-business-case-method,
+  .executive-business-case-section,
+  .executive-business-case-outcomes,
+  .executive-business-case-further > div {
+    grid-template-columns: 1fr;
+  }
+
+  .executive-business-case-section {
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .executive-business-case-outcomes {
+    gap: 1.5rem;
+  }
+
+  .executive-business-case-table-wrap table {
+    min-width: 44rem;
+  }
+}
+
 @page {
   size: A4 portrait;
   margin: 0;
@@ -476,32 +660,160 @@
   }
 
   .business-case-executive-summary {
-    margin-top: 0 !important;
+    margin-top: 5mm !important;
     padding-top: 0 !important;
   }
 
-  .business-case-executive-summary h2 {
-    font-size: 16pt !important;
-    line-height: 1.15 !important;
-    margin-bottom: 3mm !important;
-  }
-
-  .business-case-executive-summary h3 {
-    font-size: 10pt !important;
-    font-weight: 600 !important;
-    margin-bottom: 2mm !important;
+  .executive-business-case-thesis {
+    max-width: 168mm;
     color: #151515 !important;
+    font-size: 13pt !important;
+    line-height: 1.28 !important;
   }
 
-  .business-case-executive-summary p,
-  .business-case-executive-summary li {
-    font-size: 8.5pt !important;
-    line-height: 1.45 !important;
-    color: #151515 !important;
-  }
-
-  .business-case-executive-summary .border-b,
-  .business-case-executive-summary .border-t {
+  .executive-business-case-method {
+    grid-template-columns: 34mm minmax(0, 1fr);
+    gap: 6mm;
+    margin-top: 5mm;
+    padding-block: 3mm;
     border-color: #d8dade !important;
+  }
+
+  .executive-business-case-method h2,
+  .executive-business-case-outcomes h2,
+  .executive-business-case-further h2 {
+    color: #151515 !important;
+    font-size: 8pt !important;
+    line-height: 1.3 !important;
+  }
+
+  .executive-business-case-method p,
+  .executive-business-case-outcomes p {
+    color: #666a70 !important;
+    font-size: 7.5pt !important;
+    line-height: 1.42 !important;
+  }
+
+  .executive-business-case-section {
+    grid-template-columns: 54mm minmax(0, 1fr);
+    gap: 8mm;
+    margin-top: 8mm;
+  }
+
+  .executive-business-case-section-heading > p {
+    color: #d91f2b !important;
+    font-size: 6.7pt !important;
+  }
+
+  .executive-business-case-section-heading h2 {
+    margin-top: 1.5mm !important;
+    color: #151515 !important;
+    font-size: 12.5pt !important;
+    line-height: 1.16 !important;
+  }
+
+  .executive-business-case-reading {
+    gap: 2.4mm;
+    color: #151515 !important;
+    font-size: 7.7pt !important;
+    line-height: 1.43 !important;
+  }
+
+  .executive-business-case-callout {
+    padding-left: 3mm;
+    border-color: #d91f2b !important;
+  }
+
+  .executive-business-case-page-two {
+    display: block;
+    break-before: page;
+    page-break-before: always;
+    margin-top: 0;
+    padding-top: 17mm;
+  }
+
+  .executive-business-case-page-two .executive-business-case-section-heading {
+    display: grid;
+    grid-template-columns: 54mm minmax(0, 1fr);
+    gap: 8mm;
+  }
+
+  .executive-business-case-page-two > .executive-business-case-reading {
+    max-width: 116mm;
+    margin: 4mm 0 0 62mm;
+  }
+
+  .executive-business-case-table-wrap {
+    overflow: visible;
+    margin-top: 6mm;
+  }
+
+  .executive-business-case-table-wrap table {
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .executive-business-case-table-wrap th,
+  .executive-business-case-table-wrap td {
+    padding: 2.2mm 2.4mm 2.2mm 0;
+    border-color: #d8dade !important;
+    color: #151515 !important;
+    font-size: 6.5pt !important;
+    line-height: 1.3 !important;
+  }
+
+  .executive-business-case-table-wrap thead th {
+    color: #666a70 !important;
+    font-size: 6.1pt !important;
+  }
+
+  .executive-business-case-table-wrap tbody th {
+    width: 16%;
+  }
+
+  .executive-business-case-table-wrap td,
+  .executive-business-case-table-wrap td:last-child {
+    width: 28%;
+  }
+
+  .executive-business-case-table-wrap td:last-child {
+    color: #666a70 !important;
+  }
+
+  .executive-business-case-outcomes {
+    gap: 8mm;
+    margin-top: 7mm;
+    padding-top: 4mm;
+    border-color: #151515 !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .executive-business-case-outcomes p {
+    margin-top: 2mm;
+  }
+
+  .executive-business-case-further {
+    margin-top: 7mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .executive-business-case-further > div {
+    gap: 5mm;
+    margin-top: 2.5mm;
+  }
+
+  .executive-business-case-further a {
+    gap: 0.7mm;
+    padding-top: 2mm;
+    border-color: #d8dade !important;
+    color: #151515 !important;
+    font-size: 6.5pt !important;
+    line-height: 1.3 !important;
+  }
+
+  .executive-business-case-further span {
+    color: #666a70 !important;
   }
 }

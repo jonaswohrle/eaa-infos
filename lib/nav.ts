@@ -25,6 +25,7 @@ export const NAV_GROUPS: NavGroup[] = [
     links: [
       { href: '/procurement/competitors', label: 'Competitor analysis', stepKey: 'competitors' },
       { href: '/procurement/business-case', label: 'Business case', stepKey: 'business-case' },
+      { href: '/procurement/value-and-risk', label: 'Value and Risk' },
     ],
   },
 ]

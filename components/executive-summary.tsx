@@ -1,12 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import type {
-  ComparisonCell,
-  ComparisonRow,
-  ExecutiveComparison,
-  ExecutiveSummaryContent,
-} from '@/lib/executive-summary'
+import type { ExecutiveSummaryContent } from '@/lib/executive-summary'
 
 /* ------------------------------------------------------------------ */
 /* Shared bits                                                         */
@@ -110,148 +105,7 @@ function ThreeWhys({ content }: { content: ExecutiveSummaryContent }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* 4. Executive comparison                                             */
-/* ------------------------------------------------------------------ */
-
-const COMPARISON_VERDICT_META = {
-  covered: {
-    label: 'Covered',
-    classes:
-      'border-emerald-200 bg-emerald-50 text-emerald-700',
-  },
-  partial: {
-    label: 'Partial',
-    classes: 'border-amber-200 bg-amber-50 text-amber-800',
-  },
-  gap: {
-    label: 'Gap',
-    classes: 'border-red-200 bg-red-50 text-red-700',
-  },
-} as const
-
-function ComparisonCellView({ cell, showVendor = false }: { cell: ComparisonCell; showVendor?: boolean }) {
-  const meta = COMPARISON_VERDICT_META[cell.verdict]
-  return (
-    <div className="flex flex-col items-start gap-1">
-      <span
-        className={cn(
-          'inline-flex rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em]',
-          meta.classes,
-        )}
-      >
-        {meta.label}
-      </span>
-      <span className="font-mono text-[10px] tabular-nums text-muted-foreground">
-        {cell.yes}/{cell.total} yes
-        {cell.partial > 0 ? ` · ${cell.partial} partial` : ''}
-      </span>
-      {showVendor && cell.vendorName ? (
-        <span className="text-[10px] font-medium text-muted-foreground">{cell.vendorName}</span>
-      ) : null}
-    </div>
-  )
-}
-
-const COMPARISON_GRID = 'md:grid md:grid-cols-[minmax(0,1.6fr)_repeat(3,minmax(0,1fr))] md:items-center'
-
-function ComparisonRowLink({ row }: { row: ComparisonRow }) {
-  return (
-    <Link
-      href={`/procurement/competitors?segment=${row.segmentId}`}
-      className={cn(
-        'group block border-b border-border px-5 py-4 outline-none transition-colors last:border-b-0 hover:bg-muted/35 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
-        COMPARISON_GRID,
-      )}
-    >
-      <div className="flex items-start justify-between gap-3 md:block md:pr-4">
-        <div className="min-w-0">
-          <p className="text-sm font-semibold text-foreground">
-            {row.label}
-            <span className="ml-2 font-mono text-[10px] font-normal tabular-nums text-muted-foreground">
-              {row.capabilityCount} {row.capabilityCount === 1 ? 'capability' : 'capabilities'}
-            </span>
-          </p>
-        </div>
-        <ChevronRight
-          className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/60 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none md:hidden"
-          aria-hidden="true"
-        />
-      </div>
-
-      <div className="mt-3 grid grid-cols-3 gap-3 md:col-span-3 md:mt-0 md:grid md:grid-cols-subgrid">
-        <div>
-          <p className="mb-1 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground md:hidden">
-            Vercel
-          </p>
-          <ComparisonCellView cell={row.vercel} />
-        </div>
-        <div>
-          <p className="mb-1 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground md:hidden">
-            Internally built
-          </p>
-          <ComparisonCellView cell={row.internal} />
-        </div>
-        <div>
-          <p className="mb-1 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground md:hidden">
-            Best point solution
-          </p>
-          <ComparisonCellView cell={row.bestPoint} showVendor />
-        </div>
-      </div>
-    </Link>
-  )
-}
-
-function ComparisonSection({
-  content,
-  comparison,
-}: {
-  content: ExecutiveSummaryContent
-  comparison: ExecutiveComparison
-}) {
-  const updatedDate = new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  }).format(new Date(`${comparison.updatedAt}T00:00:00`))
-
-  return (
-    <section aria-labelledby="comparison-heading">
-      <SectionHeading
-        id="comparison-heading"
-        eyebrow={content.comparison.eyebrow}
-        title={content.comparison.title}
-        description={content.comparison.description}
-        aside={<InlineLink href="/procurement/competitors">Open the full matrix</InlineLink>}
-      />
-
-      <div className="mt-4 overflow-hidden rounded-xl border border-border bg-card">
-        <div className={cn('hidden border-b border-border bg-muted/35 px-5 py-2.5', COMPARISON_GRID)}>
-          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Lifecycle stage</p>
-          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-brand">Vercel</p>
-          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Internally built</p>
-          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Best point solution</p>
-        </div>
-
-        <div>
-          {comparison.rows.map((row) => (
-            <ComparisonRowLink key={row.segmentId} row={row} />
-          ))}
-        </div>
-
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-border bg-muted/25 px-5 py-3">
-          <p className="text-xs leading-5 text-muted-foreground">{content.comparison.footnote}</p>
-          <p className="shrink-0 font-mono text-[10px] text-muted-foreground">
-            Point solutions: {comparison.pointSolutionNames.join(', ')} · Updated {updatedDate}
-          </p>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/* 6. Go deeper grid                                                   */
+/* 3. Go deeper grid                                                   */
 /* ------------------------------------------------------------------ */
 
 function GoDeeper({ content }: { content: ExecutiveSummaryContent }) {
@@ -287,18 +141,11 @@ function GoDeeper({ content }: { content: ExecutiveSummaryContent }) {
 /* Page assembly                                                       */
 /* ------------------------------------------------------------------ */
 
-export function ExecutiveSummary({
-  content,
-  comparison,
-}: {
-  content: ExecutiveSummaryContent
-  comparison: ExecutiveComparison | null
-}) {
+export function ExecutiveSummary({ content }: { content: ExecutiveSummaryContent }) {
   return (
     <div className="flex flex-col gap-12">
       <Hero content={content} />
       <ThreeWhys content={content} />
-      {comparison ? <ComparisonSection content={content} comparison={comparison} /> : null}
       <GoDeeper content={content} />
     </div>
   )
