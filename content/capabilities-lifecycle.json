@@ -117,7 +117,7 @@
       "id": "authenticate",
       "label": "Authenticate",
       "headline": "Private by default, behind your identity.",
-      "summary": "An app is protected the moment it exists \u2014 access runs through your own identity provider, not a login each builder invents. When an app needs to reach a backend system, it uses short-lived, scoped credentials instead of long-lived keys copied between projects.",
+      "summary": "An app is protected the moment it exists \u2014 access runs through the company's own identity provider, not a login each builder invents. When an app needs to reach a backend system, it uses short-lived, scoped credentials instead of long-lived keys copied between projects.",
       "capabilities": [
         {
           "value": "Behind your identity provider from day one",
@@ -175,7 +175,7 @@
       "id": "maintain",
       "label": "Maintain",
       "headline": "Operate it like production, because it is.",
-      "summary": "Once an app is live, you own running it \u2014 with full visibility into logs, traces, and cost, instant rollback when something breaks, and a complete audit record for compliance. An AI agent can investigate issues and propose fixes, with a human always approving the action.",
+      "summary": "Once an app is live, the company owns running it \u2014 with full visibility into logs, traces, and cost, instant rollback when something breaks, and a complete audit record for compliance. An AI agent can investigate issues and propose fixes, with a human always approving the action.",
       "capabilities": [
         {
           "value": "See everything the app is doing",
@@ -211,7 +211,7 @@
   "flow": {
     "eyebrow": "How it all connects",
     "title": "Every stage is one platform, not six products bolted together.",
-    "lead": "Identity, source, previews, production, and system connectivity are the same governed surface. That is why the whole lifecycle holds together instead of leaking work back to your teams at every hand-off."
+    "lead": "Identity, source, previews, production, and system connectivity are the same governed surface. That is why the whole lifecycle holds together instead of leaking work back to the company at every hand-off."
   },
   "closing": {
     "text": "This maps directly to the criteria the team scored.",

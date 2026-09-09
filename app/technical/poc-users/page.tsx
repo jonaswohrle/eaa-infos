@@ -14,10 +14,10 @@ export default async function PocUsersPage() {
   return (
     <div>
       <PageHeader
-        eyebrow="Evaluation"
-        title="Running a POC"
-        description="The roles across engineering, data, and security that need to be in the room for an evaluation to produce a decision."
-        breadcrumb={{ label: 'Overview', href: '/' }}
+        eyebrow="Technical POC"
+        title="POC users"
+        description="The participants across engineering, data, and security who take part in a proof of concept."
+        breadcrumb={{ label: 'Executive summary', href: '/' }}
       />
       <StepBanner step={step} />
       <PocUsersView users={users} />

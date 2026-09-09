@@ -1,50 +1,94 @@
-# EAA Infos
+# delivery-hero
 
-A shareable overview of the **Enterprise Agents & Apps** play: the case for giving
-AI-built applications a governed home.
+This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
 
-Creation has scaled — thousands of employees in large enterprises now build working
-applications with AI coding tools, most of them outside engineering. The operating
-model underneath has not kept up. This site sets out what breaks, how the
-alternatives compare across the six lifecycle stages, and how to build the business
-case for a specific organisation.
+## Built with v0
 
-It is deliberately generic. The capability assessments and arguments come out of a
-real enterprise evaluation, but no customer specifics are reproduced here.
+This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
 
-## Sections
+[Continue working on v0 →](https://v0.app/chat/projects/prj_0ZTE2cAQ4TS682h4tRF0FsSVlMXw)
 
-| Route | What it covers |
-|---|---|
-| `/` | Overview — the three whys, an index of the site, and the lifecycle comparison roll-up |
-| `/technical/capabilities` | The target operating model, stage by stage |
-| `/procurement/competitors` | 48 capabilities scored across 6 vendors, with rationale and sources |
-| `/procurement/business-case` | 25 arguments by lifecycle stage, each with a basis for quantification |
-| `/technical/poc-users` | The roles that need to be in the room for an evaluation |
+## Getting Started
 
-## Content
-
-All content is filesystem JSON under `content/`, served through
-[`comark-content`](https://www.npmjs.com/package/comark-content) via `lib/queries.ts`.
-There is no write path — a shared link cannot be mutated by a reader.
-
-## Data
-
-There is no database. All content is filesystem JSON, so the site has no runtime
-dependency beyond the app itself.
-
-## Local development
+Install dependencies and run the development server:
 
 ```bash
 pnpm install
-vercel env pull      # optional — the site renders without any env
 pnpm dev
 ```
 
-Feature flags degrade to "show everything" when no flags service is configured.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Brand
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-Vercel monochrome. Colour tokens are pure neutrals (chroma 0) in `app/globals.css`;
-the logotype in `public/brand/vercel-logotype.svg` is the official mark from
-`@vercel/geistcn-assets`, unmodified and using `currentColor`.
+## Content sources
+
+All published portal content lives in [`content/`](./content) and is loaded directly from the local filesystem with [Comark Content](https://content.comark.dev/integrations/nextjs). The website has no editing, status-update, save, or upload endpoints. Edit these JSON documents in a branch and review the changes in a pull request:
+
+- `answer-videos.json`
+- `capabilities.json`
+- `competitor-analysis.json`
+- `content-blocks.json`
+- `demo-environment.json`
+- `documents.json`
+- `poc-steps.json`
+- `poc-users.json`
+- `pricing-bands.json`
+- `recordings.json`
+- `requirements.json`
+- `saved-offers.json`
+- `security-items.json`
+
+Validate filesystem content before opening a pull request:
+
+```bash
+pnpm content:check
+```
+
+`competitor-analysis.json` is the app-content snapshot for the competitor matrix. The collaborative Notion export
+remains the raw source of truth; import its current questions, verdicts, rationale, and source links into this file,
+then review the resulting snapshot through a pull request.
+
+Import the current Notion research export into the app-content document with:
+
+```bash
+pnpm content:competitors:import -- /absolute/path/to/competitor-analysis-notion-current.json
+```
+
+The importer keeps each question, justification, and source, and normalizes the text before an em dash to `Yes`,
+`Partial`, or `No` without emoji.
+
+## Collaborative content review
+
+PostgreSQL is used only as an append-only review inbox. It is not read or written by the website. Initialize the queue after pulling the project environment:
+
+```bash
+pnpm content:review:migrate
+```
+
+Submit one proposed item. Every submission is assigned the `in-review` status:
+
+```bash
+pnpm content:review:submit -- \
+  --collection requirements \
+  --item-key requirement-id \
+  --file ./proposal.json \
+  --submitted-by "Name" \
+  --notes "Reason for the change"
+```
+
+Export pending proposals so they can be reviewed and promoted into `content/` in a pull request:
+
+```bash
+pnpm content:review:export
+```
+
+See [`content-reviews/README.md`](./content-reviews/README.md) for the promotion workflow.
+
+## Learn More
+
+To learn more, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.

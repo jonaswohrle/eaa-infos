@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react'
 
 /* ---------- tokens resolved for SVG use ---------- */
-const BRAND = '#de2130'
-const BRAND_TINT = '#fef2f2'
-const BRAND_BORDER = '#f3c6ca'
+const BRAND = '#000000'
+const BRAND_TINT = '#fafafa'
+const BRAND_BORDER = '#e5e5e5'
 const INK = 'var(--foreground)'
 const MUTED = 'var(--muted-foreground)'
 const BORDER = 'var(--border)'

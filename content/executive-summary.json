@@ -1,22 +1,22 @@
 {
-  "updated_at": "2026-09-09",
+  "updated_at": "2026-08-26",
   "hero": {
-    "eyebrow": "Enterprise Agents & Apps",
+    "eyebrow": "Overview",
     "title": "Give AI-built applications a governed home.",
-    "description": "Across large enterprises, thousands of employees now build working applications with AI coding tools — most of them outside engineering. Creation has scaled; the operating model has not. This site sets out the case for a governed platform underneath that activity: what breaks today, how the alternatives compare across the six lifecycle stages, and how to build the business case for your own organisation."
+    "description": "In a growing number of enterprises, thousands of employees already build working applications with AI coding tools — most of them outside engineering. Creation has scaled; the operating model underneath has not. This is an overview of what that gap looks like, what a governed platform has to do about it, and how the alternatives compare."
   },
-  "at_a_glance": [
+  "decision_context": [
     {
-      "label": "Lifecycle stages",
-      "value": "Build → Maintain"
+      "label": "Who builds",
+      "value": "Employees outside engineering"
     },
     {
-      "label": "Capabilities assessed",
-      "value": "48, hands-on"
+      "label": "What it needs",
+      "value": "Identity, data access, audit, cost"
     },
     {
-      "label": "Alternatives compared",
-      "value": "5 + build-in-house"
+      "label": "Who decides",
+      "value": "CTO & central technology leadership"
     }
   ],
   "whys": [
@@ -24,76 +24,43 @@
       "key": "why-anything",
       "eyebrow": "Why anything?",
       "title": "Creation has scaled. The operating model has not.",
-      "body": "Employees turn ideas into working apps with AI coding tools faster than any review process was designed for — and most of them sit outside engineering. Those apps still need identity, bounded data access, audit trails and cost attribution that an existing Kubernetes path was never meant to provide at this volume.",
-      "link_label": "See the capabilities",
+      "body": "Roughly 2,500 employees turn ideas into working apps with Claude Code — most of them outside engineering. Those apps need identity, bounded data access, audit trails, and cost attribution that the existing Kubernetes path was never designed to provide at this scale.",
+      "link_label": "See the problem statement",
       "link_href": "/technical/capabilities"
     },
     {
       "key": "why-now",
       "eyebrow": "Why now?",
       "title": "Every ungoverned week makes the standard harder.",
-      "body": "Apps that ship without a governed path accumulate shared credentials, unknown data access and unowned operations. The longer the sprawl runs, the more expensive the eventual standard becomes — you end up migrating a live estate instead of setting a default.",
-      "link_label": "Read the business case",
+      "body": "Apps that ship without a governed path accumulate shared credentials, unknown data access, and unowned operations. Every week without a standard makes the eventual standard more expensive — you end up migrating a live estate instead of setting a default.",
+      "link_label": "See the business case",
       "link_href": "/procurement/business-case"
     },
     {
       "key": "why-vercel",
       "eyebrow": "Why Vercel?",
       "title": "Buy the governed layer, not another integration project.",
-      "body": "Assessed hands-on across all six lifecycle stages, Vercel is the only end-to-end fit. The alternatives cover parts of the lifecycle and leave you to assemble, govern and operate the rest yourself.",
+      "body": "Evaluated hands-on across the six lifecycle stages, Vercel is the only end-to-end fit. The alternatives cover parts of the lifecycle and leave the enterprise to assemble, govern, and operate the rest itself.",
       "link_label": "Compare the alternatives",
       "link_href": "/procurement/competitors"
     }
   ],
-  "sections": {
-    "eyebrow": "What's in here",
-    "title": "Four ways into the same argument",
-    "description": "Start wherever the conversation is. Each section stands on its own and links back into the others.",
-    "items": [
-      {
-        "title": "Capabilities",
-        "description": "The target operating model stage by stage — what a governed path actually has to do, from first prompt to long-term maintenance.",
-        "href": "/technical/capabilities",
-        "meta": "6 lifecycle stages"
-      },
-      {
-        "title": "Competitor analysis",
-        "description": "The full vendor matrix: every capability scored Yes / Partial / No against each alternative, with written rationale and sources behind each verdict.",
-        "href": "/procurement/competitors",
-        "meta": "48 capabilities · 6 vendors"
-      },
-      {
-        "title": "Business case",
-        "description": "The argument for giving citizen-built software a governed home. Every lifecycle stage makes two claims — one about the value created, one about the risk removed — each backed by evidence rather than asserted numbers.",
-        "href": "/procurement/business-case",
-        "meta": "Value & risk, per stage"
-      },
-      {
-        "title": "Running a POC",
-        "description": "Who to involve and what to prove. The roles that need to be in the room for an evaluation to produce a decision rather than a demo.",
-        "href": "/technical/poc-users",
-        "meta": "Roles & scope"
-      }
-    ]
-  },
   "comparison": {
     "eyebrow": "Executive comparison",
     "title": "Vercel against the alternatives, across the lifecycle",
-    "description": "A roll-up of the full capability matrix across the six lifecycle stages. Best point solution shows the strongest single vendor per stage; open any row for the per-capability verdicts, rationale and sources.",
+    "description": "A roll-up of the full capability matrix across the six lifecycle stages. Best point solution shows the strongest single vendor per stage; open any row for the per-capability verdicts, rationale, and sources.",
     "footnote": "Verdicts roll up the per-capability Yes / Partial / No assessments from the current research export. Covered ≥ 85% · Partial ≥ 50% · Gap below."
   },
-  "closing": {
-    "title": "This play was proven on a real deployment.",
-    "body": "The capability assessments and the arguments in the business case come out of a full enterprise evaluation with a global business running AI-assisted app development at scale. The specifics of that deal are not reproduced here — what carries over is the structure, the evidence and the questions worth asking.",
-    "links": [
-      {
-        "label": "Start with the capabilities",
-        "href": "/technical/capabilities"
-      },
-      {
-        "label": "Or jump to the business case",
-        "href": "/procurement/business-case"
-      }
-    ]
-  }
+  "go_deeper": [
+    {
+      "title": "Capabilities",
+      "description": "The problem statement and the target operating model, capability by capability.",
+      "href": "/technical/capabilities"
+    },
+    {
+      "title": "Competitor analysis",
+      "description": "The full vendor matrix with rationale and sources behind every verdict.",
+      "href": "/procurement/competitors"
+    }
+  ]
 }

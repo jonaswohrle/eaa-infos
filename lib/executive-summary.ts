@@ -7,7 +7,7 @@ import type { CompetitorAnalysis } from '@/lib/types'
 export type ExecutiveSummaryContent = {
   updated_at: string
   hero: { eyebrow: string; title: string; description: string }
-  at_a_glance: { label: string; value: string }[]
+  decision_context: { label: string; value: string }[]
   whys: {
     key: string
     eyebrow: string
@@ -16,18 +16,8 @@ export type ExecutiveSummaryContent = {
     link_label: string
     link_href: string
   }[]
-  sections: {
-    eyebrow: string
-    title: string
-    description: string
-    items: { title: string; description: string; href: string; meta: string }[]
-  }
   comparison: { eyebrow: string; title: string; description: string; footnote: string }
-  closing: {
-    title: string
-    body: string
-    links: { label: string; href: string }[]
-  }
+  go_deeper: { title: string; description: string; href: string }[]
 }
 
 /* ------------------------------------------------------------------ */

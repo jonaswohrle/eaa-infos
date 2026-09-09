@@ -12,19 +12,19 @@ export type NavGroup = {
 
 export const NAV_GROUPS: NavGroup[] = [
   {
-    label: 'The platform',
+    label: 'Technical POC',
     track: 'technical',
     links: [
+      { href: '/technical/poc-users', label: 'POC users', stepKey: 'poc-users' },
       { href: '/technical/capabilities', label: 'Capabilities', stepKey: 'capabilities' },
-      { href: '/procurement/competitors', label: 'Competitor analysis', stepKey: 'competitors' },
     ],
   },
   {
-    label: 'Making the case',
+    label: 'Procurement',
     track: 'procurement',
     links: [
+      { href: '/procurement/competitors', label: 'Competitor analysis', stepKey: 'competitors' },
       { href: '/procurement/business-case', label: 'Business case', stepKey: 'business-case' },
-      { href: '/technical/poc-users', label: 'Running a POC', stepKey: 'poc-users' },
     ],
   },
 ]

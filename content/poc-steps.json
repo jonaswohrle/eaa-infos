@@ -1,26 +1,6 @@
 {
   "items": [
     {
-      "id": "f72cba08-2207-4e5c-9416-7835a687eaa6",
-      "track": "procurement",
-      "step_key": "documents",
-      "title": "Documents",
-      "summary": "Version and redline the Order Form, MSA, and DPA with procurement.",
-      "status": "in_progress",
-      "detail": "Each document carries versions, a what-is-new note, and a redline change list.",
-      "position": 1
-    },
-    {
-      "id": "ed362808-8131-4ee0-a029-9f37523ec55a",
-      "track": "procurement",
-      "step_key": "commercial",
-      "title": "Commercial offer",
-      "summary": "Configure the commercial offer with the calculator and save versioned offers.",
-      "status": "in_progress",
-      "detail": "Bands and discounts are managed in the admin space.",
-      "position": 2
-    },
-    {
       "id": "506d710a-02e4-4885-829f-42c997a3b57d",
       "track": "procurement",
       "step_key": "competitors",
@@ -49,16 +29,6 @@
       "status": "in_progress",
       "detail": "Map named users to Okta groups and in-app roles for the pilot.",
       "position": 2
-    },
-    {
-      "id": "630cd5bc-4d4f-4d7f-a17f-cbb9705acebe",
-      "track": "technical",
-      "step_key": "requirements",
-      "title": "Success criteria",
-      "summary": "Track the agreed technical success criteria, evidence, owners, and results.",
-      "status": "done",
-      "detail": "In the reference deployment the technical win was confirmed on-site: most technical areas were covered and open questions were answered or had a known answer. Scored criteria determine the recommendation, and remaining work stays bounded — multi-user builder validation, agreed go-live controls, and named product follow-ups.",
-      "position": 3
     },
     {
       "id": "98271305-f9b4-4247-ac8d-6149e1f70b7b",

@@ -1,27 +1,28 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutGrid, Menu, X } from 'lucide-react'
+import { FileText, Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { NAV_GROUPS } from '@/lib/nav'
 
+function VercelMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 76 65" aria-hidden="true" className={className} fill="currentColor">
+      <path d="M37.59.25l36.95 64H.64l36.95-64z" />
+    </svg>
+  )
+}
+
 function BrandLockup() {
   return (
-    <Link href="/" className="flex items-center gap-2 whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm">
-      <Image
-        src="/brand/vercel-logotype.svg"
-        alt="Vercel"
-        width={261}
-        height={52}
-        className="h-[13px] w-auto text-foreground"
-        priority
-      />
-      <span className="h-3.5 w-px bg-border" aria-hidden="true" />
-      <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">EAA Infos</span>
-    </Link>
+    <span className="flex items-center gap-1.5 whitespace-nowrap">
+      <span className="flex items-center gap-1 text-foreground">
+        <VercelMark className="h-3.5 w-3.5" />
+        <span className="text-sm font-semibold">Vercel</span>
+      </span>
+    </span>
   )
 }
 
@@ -45,8 +46,8 @@ function NavContents({
           pathname === '/' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground',
         )}
       >
-        <LayoutGrid className="h-5 w-5 shrink-0" aria-hidden="true" />
-        <span>Overview</span>
+        <FileText className="h-5 w-5 shrink-0" aria-hidden="true" />
+        <span>Executive summary</span>
       </Link>
 
       {NAV_GROUPS.map((group) => (

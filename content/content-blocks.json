@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "block_key": "business-case",
+      "title": "Business case",
+      "body": "The business case is not ready yet. This section will capture the internal justification — quantified value, cost comparison, and strategic rationale — once finalized with the deal team.",
+      "status": "placeholder",
+      "updated_at": "2026-08-02 10:46:07.302429+00"
+    },
+    {
+      "block_key": "demo-intro",
+      "title": "Demo environment",
+      "body": "<p>The governed Vercel org and reference architecture an enterprise tests against. Every environment below inherits SSO via <strong>Vercel Passport</strong>, private data access through <strong>Vercel Connect</strong>, and source protection through GitHub.</p>",
+      "status": "published",
+      "updated_at": "2026-08-02 12:48:00.019865+00"
+    },
+    {
+      "block_key": "procurement-intro",
+      "title": "Procurement",
+      "body": "We work with procurement across commercials, security, and legal. Documents are versioned, each version carries a what-is-new summary and a redline change list against the prior version.",
+      "status": "published",
+      "updated_at": "2026-08-02 10:46:07.302429+00"
+    },
+    {
+      "block_key": "technical-intro",
+      "title": "Technical POC",
+      "body": "The technical proof of concept covers the demo environment, POC users, success criteria, and a competitor-informed capability map.",
+      "status": "published",
+      "updated_at": "2026-08-20 16:56:43+00"
+    }
+  ]
+}

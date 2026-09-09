@@ -16,12 +16,10 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: {
-    default: 'EAA Infos — Enterprise Agents & Apps',
-    template: '%s · EAA Infos',
-  },
+  title: 'EAA Infos — Enterprise Agents & Apps',
   description:
-    'The case for giving AI-built applications a governed home: the target operating model, how the alternatives compare across the lifecycle, and a reusable business case.',
+    'An overview of Enterprise Agents & Apps on Vercel: the capabilities, how the alternatives compare, and the business case for a governed platform.',
+  generator: 'v0.app',
 }
 
 export const viewport: Viewport = {

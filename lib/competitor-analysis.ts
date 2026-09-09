@@ -39,7 +39,7 @@ const SEGMENTS = [
   },
 ] as const
 
-const VENDOR_ORDER = ['Vercel', 'AWS', 'Netlify', 'Cloudflare', 'Dokploy', 'Internally Built @ DH']
+const VENDOR_ORDER = ['Vercel', 'AWS', 'Netlify', 'Cloudflare', 'Dokploy', 'Internally built']
 
 const VENDOR_DESCRIPTORS: Record<string, string> = {
   Vercel: 'Unified EAA platform',
@@ -47,7 +47,7 @@ const VENDOR_DESCRIPTORS: Record<string, string> = {
   Netlify: 'Web delivery platform',
   Cloudflare: 'Developer platform',
   Dokploy: 'Self-hosted application platform',
-  'Internally Built @ DH': 'Current internal platform',
+  'Internally built': 'Current internal platform',
 }
 
 function slugify(value: string) {
@@ -118,7 +118,7 @@ export function buildCompetitorAnalysis({
     description:
       'A capability-by-capability view of the platforms an enterprise could use to build, share, deploy, authenticate, govern, and maintain internal apps and agents.',
     thesis:
-      'Vercel brings the complete operating model together. Other platforms cover important parts of the lifecycle, but require you to assemble and operate more of the platform itself.',
+      'Vercel brings the complete operating model together. Other platforms cover important parts of the lifecycle, but require the enterprise to assemble and operate more of the platform itself.',
     methodology:
       'Verdicts come directly from the Notion research export. Yes means the capability is available, Partial means it requires additional products, configuration, or trade-offs, and No means the capability is not available in the assessed approach.',
     updated_at: updatedAt,

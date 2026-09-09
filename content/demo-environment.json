@@ -1,0 +1,125 @@
+{
+  "items": [
+    {
+      "id": "7c7216c4-7c24-4286-b499-8c3962a95b98",
+      "label": "Governed enterprise trial team",
+      "value": "Full platform access during the POC",
+      "url": null,
+      "status": "done",
+      "notes": "Testers have full access to Vercel capabilities in a dedicated Enterprise trial team for the POC.",
+      "position": 1,
+      "details": [
+        {
+          "id": "2a86c0c4-8391-4250-afc9-351d6bff4329",
+          "item_id": "7c7216c4-7c24-4286-b499-8c3962a95b98",
+          "label": "Team setup",
+          "value": "Enterprise trial",
+          "notes": "A dedicated Vercel team hosts the POC. No Vercel organization or sub-organization was created.",
+          "position": 1
+        },
+        {
+          "id": "63cca31b-f705-42d5-8161-9bd7449d50ce",
+          "item_id": "7c7216c4-7c24-4286-b499-8c3962a95b98",
+          "label": "Capability access",
+          "value": "Full during the POC",
+          "notes": "Testers can use Vercel capabilities across the agreed build, share, authenticate, deploy, govern, and maintain tests.",
+          "position": 2
+        },
+        {
+          "id": "0d9928ee-f5ce-442e-901b-610b55ff96b8",
+          "item_id": "7c7216c4-7c24-4286-b499-8c3962a95b98",
+          "label": "Evaluation window",
+          "value": "11 Aug to 1 Sep 2026",
+          "notes": "The Enterprise trial covers the three-week evaluation and the technical decision review.",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "541cd2a3-1fe9-4c65-a14c-98fdbf4d1f46",
+      "label": "Identity",
+      "value": "Okta + Vercel Passport",
+      "url": null,
+      "status": "done",
+      "notes": "Okta SSO and SCIM lifecycle management are enforced through Vercel Passport on every POC app.",
+      "position": 2,
+      "details": [
+        {
+          "id": "9dd536b8-58b5-4ee0-84ed-e55e37f57d8e",
+          "item_id": "541cd2a3-1fe9-4c65-a14c-98fdbf4d1f46",
+          "label": "Okta SSO",
+          "value": "Enforced",
+          "notes": "Passport blocks unauthenticated access and sends POC users through Okta.",
+          "position": 1
+        },
+        {
+          "id": "81c6bacf-9cc5-4998-8791-d22bbbfad7bc",
+          "item_id": "541cd2a3-1fe9-4c65-a14c-98fdbf4d1f46",
+          "label": "Vercel Passport",
+          "value": "All POC apps",
+          "notes": "The Passport gate was validated on every demo app.",
+          "position": 2
+        },
+        {
+          "id": "524127ba-3b55-4ca0-b85b-41dd4cdbc85b",
+          "item_id": "541cd2a3-1fe9-4c65-a14c-98fdbf4d1f46",
+          "label": "SCIM lifecycle",
+          "value": "Provisioning and deprovisioning",
+          "notes": "Removing a test user in Okta revoked their Vercel access.",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "e7f7d3a6-10be-4891-bb11-d7bb373adae0",
+      "label": "Connected systems",
+      "value": "BigQuery, GitHub, Okta, Jira, Slack",
+      "url": null,
+      "status": "done",
+      "notes": "The POC connects identity, source control, data access, and agent workflows across five sandbox systems.",
+      "position": 3,
+      "details": [
+        {
+          "id": "1ff62a22-c4aa-43f4-8815-0dacdc0fc63e",
+          "item_id": "e7f7d3a6-10be-4891-bb11-d7bb373adae0",
+          "label": "BigQuery",
+          "value": "Per-user data access",
+          "notes": "Vercel Connect gives each signed-in user a short-lived token, so BigQuery applies that user's grants.",
+          "position": 1
+        },
+        {
+          "id": "8416a48d-3761-4915-9b4e-8d059674b92f",
+          "item_id": "e7f7d3a6-10be-4891-bb11-d7bb373adae0",
+          "label": "GitHub",
+          "value": "Source and delivery",
+          "notes": "A GitHub App creates repositories, commits, and pull requests without requiring each builder to hold a paid seat.",
+          "position": 2
+        },
+        {
+          "id": "fb4e63a1-4ee5-4f46-9d57-d536ed6ae1e9",
+          "item_id": "e7f7d3a6-10be-4891-bb11-d7bb373adae0",
+          "label": "Okta",
+          "value": "Identity and lifecycle",
+          "notes": "Okta provides SSO and SCIM provisioning through Vercel Passport.",
+          "position": 3
+        },
+        {
+          "id": "14e8b6ec-f9b4-4c4c-afe2-72b545172d57",
+          "item_id": "e7f7d3a6-10be-4891-bb11-d7bb373adae0",
+          "label": "Jira",
+          "value": "Agent read and write",
+          "notes": "The POC agent reads and updates Jira. Its actions appear in the audit log.",
+          "position": 4
+        },
+        {
+          "id": "496718e0-7936-4268-99dc-8f73ca129e94",
+          "item_id": "e7f7d3a6-10be-4891-bb11-d7bb373adae0",
+          "label": "Slack",
+          "value": "Agent output",
+          "notes": "The POC agent posts results to Slack for review.",
+          "position": 5
+        }
+      ]
+    }
+  ]
+}

@@ -4,9 +4,9 @@ import { cn } from '@/lib/utils'
 
 function statusClasses(status: string) {
   const s = status.toLowerCase()
-  if (s === 'active' || s === 'onboarded') return 'border-foreground bg-foreground text-background'
-  if (s === 'invited' || s === 'pending') return 'border-foreground/40 bg-background text-foreground'
-  if (s === 'blocked') return 'border-dashed border-foreground/50 bg-background text-foreground'
+  if (s === 'active' || s === 'onboarded') return 'border-green-300 bg-green-50 text-green-700'
+  if (s === 'invited' || s === 'pending') return 'border-amber-300 bg-amber-50 text-amber-700'
+  if (s === 'blocked') return 'border-red-300 bg-red-50 text-red-700'
   return 'border-border bg-muted/50 text-muted-foreground'
 }
 

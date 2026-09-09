@@ -1,13 +1,16 @@
 import 'server-only'
 import { content } from '@/lib/content'
 import { buildCompetitorAnalysis } from '@/lib/competitor-analysis'
-import type { BusinessCaseContent } from '@/lib/business-case'
 import type { ExecutiveSummaryContent } from '@/lib/executive-summary'
 import type {
+  Capability,
   CompetitorAnalysis,
   CompetitorAnalysisSourceDocument,
+  ContentBlock,
+  DemoEnvItem,
   PocStep,
   PocUser,
+  SecurityItem,
 } from '@/lib/types'
 
 type ContentCollection<T> = {
@@ -29,13 +32,26 @@ export async function getSteps(): Promise<PocStep[]> {
   return getContentItems<PocStep>('/poc-steps')
 }
 
+export async function getStepsByTrack(track: string): Promise<PocStep[]> {
+  const steps = await getSteps()
+  return steps.filter((step) => step.track === track)
+}
+
 export async function getStepByKey(stepKey: string): Promise<PocStep | null> {
   const steps = await getSteps()
   return steps.find((step) => step.step_key === stepKey) ?? null
 }
 
+export async function getDemoEnv(): Promise<DemoEnvItem[]> {
+  return getContentItems<DemoEnvItem>('/demo-environment')
+}
+
 export async function getPocUsers(): Promise<PocUser[]> {
   return getContentItems<PocUser>('/poc-users')
+}
+
+export async function getCapabilities(): Promise<Capability[]> {
+  return getContentItems<Capability>('/capabilities')
 }
 
 export type CapabilityLifecycleItem = {
@@ -89,18 +105,19 @@ export async function getCompetitorAnalysis({
   })
 }
 
+export async function getSecurityItems(): Promise<SecurityItem[]> {
+  return getContentItems<SecurityItem>('/security-items')
+}
+
+export async function getContentBlock(key: string): Promise<ContentBlock | null> {
+  const blocks = await getContentItems<ContentBlock>('/content-blocks')
+  return blocks.find((block) => block.block_key === key) ?? null
+}
+
 export async function getExecutiveSummaryContent(): Promise<ExecutiveSummaryContent> {
   const document = await content.get<ExecutiveSummaryContent>('/executive-summary')
   if (!document) {
     throw new Error('Missing or invalid filesystem content document: /executive-summary')
-  }
-  return document.data
-}
-
-export async function getBusinessCase(): Promise<BusinessCaseContent> {
-  const document = await content.get<BusinessCaseContent>('/business-case')
-  if (!document || !Array.isArray(document.data.phases)) {
-    throw new Error('Missing or invalid filesystem content document: /business-case')
   }
   return document.data
 }

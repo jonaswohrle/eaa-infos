@@ -1,54 +1,34 @@
 {
   "items": [
     {
-      "id": "role-sponsor",
-      "name": "Engineering / platform lead",
+      "id": "2c3ae9cb-10a5-48aa-9d8e-5550ac9809d2",
+      "name": "TBD — Engineering lead",
       "email": "",
       "role": "Sponsor",
       "team": "Platform Engineering",
       "status": "invited",
-      "notes": "Owns the governed path today. Decides whether the new default replaces or sits beside the existing one.",
+      "notes": "Primary technical sponsor for the POC.",
       "position": 1
     },
     {
-      "id": "role-builder",
-      "name": "Non-engineering builder",
-      "email": "",
-      "role": "Participant",
-      "team": "Any business function",
-      "status": "invited",
-      "notes": "The actual target user. If someone outside engineering cannot ship without help, the evaluation has not proved anything.",
-      "position": 2
-    },
-    {
-      "id": "role-data",
-      "name": "Data platform owner",
+      "id": "94ddd3a3-247e-44eb-af2a-a14e3561e105",
+      "name": "TBD — Data platform",
       "email": "",
       "role": "Participant",
       "team": "Data",
       "status": "invited",
-      "notes": "Owns warehouse access patterns. Validates that apps reach production data with scoped, auditable credentials.",
-      "position": 3
+      "notes": "Owns BigQuery access patterns.",
+      "position": 2
     },
     {
-      "id": "role-security",
-      "name": "Security reviewer",
+      "id": "5468010c-6f09-4ed2-ab32-084acf982cc0",
+      "name": "TBD — Security",
       "email": "",
       "role": "Reviewer",
       "team": "Security",
       "status": "invited",
-      "notes": "Reviews identity, secrets handling, network egress, and audit posture against internal standards.",
-      "position": 4
-    },
-    {
-      "id": "role-finance",
-      "name": "Finance / procurement",
-      "email": "",
-      "role": "Reviewer",
-      "team": "Procurement",
-      "status": "invited",
-      "notes": "Confirms seat model, cost attribution, and how spend is tracked per team once the estate grows.",
-      "position": 5
+      "notes": "Reviews Passport, Connect, and audit posture.",
+      "position": 3
     }
   ]
 }

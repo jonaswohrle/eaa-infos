@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "id": "6ce810a3-690d-4f27-8578-d59fdb982080",
+      "category": "Trust center",
+      "title": "Vercel Trust Center",
+      "description": "Live security, compliance, and certification information — SOC 2, ISO 27001, GDPR, and subprocessors.",
+      "link": "https://security.vercel.com",
+      "position": 1
+    },
+    {
+      "id": "865cb211-0bbd-4dd3-a945-d5a97b76b88d",
+      "category": "Certifications",
+      "title": "SOC 2 Type II & ISO 27001",
+      "description": "Independently audited controls for security, availability, and confidentiality.",
+      "link": null,
+      "position": 2
+    },
+    {
+      "id": "9d98ffd1-1831-46f9-abf6-b7e9c0d2ff6e",
+      "category": "Data protection",
+      "title": "DSGVO / GDPR & DPA",
+      "description": "EU data protection commitments with a signed Data Processing Agreement and documented subprocessors.",
+      "link": null,
+      "position": 3
+    },
+    {
+      "id": "4164397a-e796-4938-be75-e18c3926a4ef",
+      "category": "Access & identity",
+      "title": "Passport, SSO & audit logs",
+      "description": "Deployment protection by default, Okta SSO, SAML, directory sync, and enterprise audit logging.",
+      "link": null,
+      "position": 4
+    },
+    {
+      "id": "702cef1a-0667-4d24-a56b-e699d0d24445",
+      "category": "Network",
+      "title": "Secure Compute & Firewall",
+      "description": "Private networking, static IPs, and a managed firewall for enterprise workloads.",
+      "link": null,
+      "position": 5
+    }
+  ]
+}

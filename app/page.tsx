@@ -7,9 +7,9 @@ import { getCompetitorAnalysis, getExecutiveSummaryContent } from '@/lib/queries
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'EAA Infos — Enterprise Agents & Apps',
+  title: 'Overview — Enterprise Agents & Apps',
   description:
-    'The case for giving AI-built applications a governed home: the target operating model, how the alternatives compare across the lifecycle, and a reusable business case.',
+    'Why AI-built applications need a governed home, what a platform has to do about it, and how the alternatives compare across the lifecycle.',
 }
 
 export default async function OverviewPage() {
@@ -25,5 +25,7 @@ export default async function OverviewPage() {
 
   const comparison = analysis ? buildExecutiveComparison(analysis) : null
 
-  return <ExecutiveSummary content={content} comparison={comparison} />
+  return (
+    <ExecutiveSummary content={content} comparison={comparison} />
+  )
 }

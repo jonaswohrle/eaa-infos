@@ -17,21 +17,20 @@ const LABELS: Record<string, string> = {
 }
 
 const STYLES: Record<string, string> = {
-  // Monochrome density ramp: neutral (dormant) → outlined (in flight) → solid (settled).
   not_started: 'border-border bg-muted/50 text-muted-foreground',
+  in_progress: 'border-amber-300 bg-amber-50 text-amber-700 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-300',
+  blocked: 'border-red-300 bg-red-50 text-red-700 dark:border-red-500/40 dark:bg-red-500/10 dark:text-red-300',
+  done: 'border-green-300 bg-green-50 text-green-700 dark:border-green-500/40 dark:bg-green-500/10 dark:text-green-300',
   draft: 'border-border bg-muted/50 text-muted-foreground',
   planned: 'border-border bg-muted/50 text-muted-foreground',
   invited: 'border-border bg-muted/50 text-muted-foreground',
+  in_review: 'border-amber-300 bg-amber-50 text-amber-700 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-300',
+  shared: 'border-sky-300 bg-sky-50 text-sky-700 dark:border-sky-500/40 dark:bg-sky-500/10 dark:text-sky-300',
+  ready: 'border-sky-300 bg-sky-50 text-sky-700 dark:border-sky-500/40 dark:bg-sky-500/10 dark:text-sky-300',
+  active: 'border-sky-300 bg-sky-50 text-sky-700 dark:border-sky-500/40 dark:bg-sky-500/10 dark:text-sky-300',
   coming_soon: 'border-border bg-muted/50 text-muted-foreground',
-  in_progress: 'border-foreground/40 bg-background text-foreground',
-  in_review: 'border-foreground/40 bg-background text-foreground',
-  blocked: 'border-dashed border-foreground/50 bg-background text-foreground',
-  shared: 'border-foreground/40 bg-background text-foreground',
-  ready: 'border-foreground/40 bg-background text-foreground',
-  active: 'border-foreground/40 bg-background text-foreground',
-  done: 'border-foreground bg-foreground text-background',
-  agreed: 'border-foreground bg-foreground text-background',
-  published: 'border-foreground bg-foreground text-background',
+  agreed: 'border-green-300 bg-green-50 text-green-700 dark:border-green-500/40 dark:bg-green-500/10 dark:text-green-300',
+  published: 'border-green-300 bg-green-50 text-green-700 dark:border-green-500/40 dark:bg-green-500/10 dark:text-green-300',
 }
 
 export function StatusBadge({ status, className }: { status: string; className?: string }) {

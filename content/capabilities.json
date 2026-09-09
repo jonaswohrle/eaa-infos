@@ -1,0 +1,104 @@
+{
+  "items": [
+    {
+      "id": "8a064db9-2cea-4e88-b925-9a0cf2bd12f9",
+      "name": "App creation",
+      "group_name": "Build & deploy",
+      "friction": "AI-built prototypes emerge outside a common operating model.",
+      "functionality": "Any creation tool can deploy into one governed organization.",
+      "outcome": "Faster experimentation without a new shadow platform.",
+      "roles": "cio,cto",
+      "position": 1
+    },
+    {
+      "id": "67e27d5f-607d-4bd1-b2a6-33545b50a9d8",
+      "name": "Source & CI/CD",
+      "group_name": "Build & deploy",
+      "friction": "Non-developers need help turning local work into a durable service.",
+      "functionality": "Git remains the source of truth with per-commit previews and atomic rollback.",
+      "outcome": "One delivery path for builders and engineering.",
+      "roles": "cio,cto",
+      "position": 2
+    },
+    {
+      "id": "6e35cfe5-c31d-4b4a-835a-0c6fc10599a4",
+      "name": "Agent execution",
+      "group_name": "Build & deploy",
+      "friction": "Generated code and long-running work require bespoke runtime operations.",
+      "functionality": "Isolated sandboxes, Fluid Compute, and durable workflows run on one platform.",
+      "outcome": "Less infrastructure to assemble and operate.",
+      "roles": "cto,ciso",
+      "position": 3
+    },
+    {
+      "id": "ee817785-b9f1-42e0-b050-d5b6102f4621",
+      "name": "Identity & access",
+      "group_name": "Identity & governance",
+      "friction": "Authentication and offboarding are wired independently for every app.",
+      "functionality": "SSO, SCIM, managed users, and deployment protection inherit IdP policy.",
+      "outcome": "Access is consistent from first preview to production.",
+      "roles": "cio,ciso",
+      "position": 4
+    },
+    {
+      "id": "553de3a9-48fc-4b4a-a003-1ebdbec60833",
+      "name": "Spend controls",
+      "group_name": "Identity & governance",
+      "friction": "Distributed keys and vendors make runaway usage difficult to stop.",
+      "functionality": "Project and key-level budgets, usage visibility, and hard caps.",
+      "outcome": "Attributable spend with an enforceable ceiling.",
+      "roles": "cio,cfo,ciso",
+      "position": 5
+    },
+    {
+      "id": "5e19ab61-fe8d-4626-a5b9-2959a1041b84",
+      "name": "Security posture",
+      "group_name": "Identity & governance",
+      "friction": "WAF, secrets, audit evidence, and controls are reconstructed per app.",
+      "functionality": "Managed secrets, edge protection, audit logs, and inherited platform controls.",
+      "outcome": "A smaller control surface with clearer evidence.",
+      "roles": "cio,ciso",
+      "position": 6
+    },
+    {
+      "id": "4d94631b-5832-4446-8f72-04c32db76150",
+      "name": "Internal developer platform",
+      "group_name": "Connectivity & operations",
+      "friction": "Portal and tooling contracts create another platform for engineering to maintain.",
+      "functionality": "Builders own native apps while RBAC, policy, and publishing stay centralized.",
+      "outcome": "More self-service with less platform overhead.",
+      "roles": "cio,cfo,cto",
+      "position": 7
+    },
+    {
+      "id": "15bcb225-a269-4cb8-bcd9-bbc5ff00086e",
+      "name": "Private connectivity",
+      "group_name": "Connectivity & operations",
+      "friction": "Each workload needs bespoke networking and credential exchange.",
+      "functionality": "Secure Compute, static egress, OIDC, and Vercel Connect reach private systems.",
+      "outcome": "Controlled access without long-lived credentials.",
+      "roles": "cto,ciso",
+      "position": 8
+    },
+    {
+      "id": "92bf5ad6-bc75-4ea1-aea9-55d55f6c5e25",
+      "name": "Observability & recovery",
+      "group_name": "Connectivity & operations",
+      "friction": "Telemetry fragments by app and recovery depends on team-specific runbooks.",
+      "functionality": "Unified traces, spend, ownership, immutable artifacts, and instant rollback.",
+      "outcome": "Faster diagnosis and a reliable recovery path.",
+      "roles": "cio,cto,ciso",
+      "position": 9
+    },
+    {
+      "id": "a3efd6a1-6d37-47fe-bb6c-65d2b78201a4",
+      "name": "Data & model access",
+      "group_name": "Connectivity & operations",
+      "friction": "Teams hand-roll connectors and operate separate model gateways.",
+      "functionality": "Marketplace integrations and AI Gateway centralize data and model access.",
+      "outcome": "One governed route to enterprise data and AI.",
+      "roles": "cio,cfo,cto,ciso",
+      "position": 10
+    }
+  ]
+}

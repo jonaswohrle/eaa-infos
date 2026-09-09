@@ -1,12 +1,16 @@
 {
-  "name": "eaa-infos",
+  "name": "my-project",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "content:check": "node scripts/check-content.mjs",
+    "content:competitors:import": "node scripts/import-competitor-analysis.mjs",
     "content:prepare": "comark-content prepare --config lib/content.ts",
+    "content:review:migrate": "node --env-file=.env.local scripts/migrate-content-review-queue.mjs",
+    "content:review:submit": "node --env-file=.env.local scripts/submit-content-review.mjs",
+    "content:review:export": "node --env-file=.env.local scripts/export-content-reviews.mjs",
     "start": "next start",
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint ."
@@ -25,6 +29,7 @@
     "flags": "^4.3.0",
     "lucide-react": "^1.16.0",
     "next": "16.2.6",
+    "pg": "^8.22.0",
     "react": "^19",
     "react-dom": "^19",
     "server-only": "^0.0.1",
@@ -35,10 +40,16 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.0",
     "@types/node": "^24",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "postcss": "^8.5",
     "tailwindcss": "^4.2.0",
     "typescript": "5.7.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "hono": "4.12.25"
+    }
   }
 }

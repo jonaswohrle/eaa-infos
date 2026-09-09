@@ -70,7 +70,7 @@ function Hero({ content }: { content: ExecutiveSummaryContent }) {
       </p>
 
       <dl className="mt-6 flex flex-col divide-y divide-border overflow-hidden rounded-xl border border-border bg-card sm:flex-row sm:divide-x sm:divide-y-0">
-        {content.at_a_glance.map((item) => (
+        {content.decision_context.map((item) => (
           <div key={item.label} className="flex-1 px-4 py-3">
             <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{item.label}</dt>
             <dd className="mt-1 text-sm font-medium text-foreground">{item.value}</dd>
@@ -117,15 +117,15 @@ const COMPARISON_VERDICT_META = {
   covered: {
     label: 'Covered',
     classes:
-      'border-foreground bg-foreground text-background',
+      'border-emerald-200 bg-emerald-50 text-emerald-700',
   },
   partial: {
     label: 'Partial',
-    classes: 'border-foreground/40 bg-background text-foreground',
+    classes: 'border-amber-200 bg-amber-50 text-amber-800',
   },
   gap: {
     label: 'Gap',
-    classes: 'border-dashed border-border bg-muted text-muted-foreground',
+    classes: 'border-red-200 bg-red-50 text-red-700',
   },
 } as const
 
@@ -187,7 +187,7 @@ function ComparisonRowLink({ row }: { row: ComparisonRow }) {
         </div>
         <div>
           <p className="mb-1 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground md:hidden">
-            Internal @ DH
+            Internally built
           </p>
           <ComparisonCellView cell={row.internal} />
         </div>
@@ -229,7 +229,7 @@ function ComparisonSection({
         <div className={cn('hidden border-b border-border bg-muted/35 px-5 py-2.5', COMPARISON_GRID)}>
           <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Lifecycle stage</p>
           <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-brand">Vercel</p>
-          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Internally Built @ DH</p>
+          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Internally built</p>
           <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Best point solution</p>
         </div>
 
@@ -251,59 +251,32 @@ function ComparisonSection({
 }
 
 /* ------------------------------------------------------------------ */
-/* 5. Section index                                                    */
+/* 6. Go deeper grid                                                   */
 /* ------------------------------------------------------------------ */
 
-function SectionIndex({ content }: { content: ExecutiveSummaryContent }) {
+function GoDeeper({ content }: { content: ExecutiveSummaryContent }) {
   return (
-    <section aria-labelledby="sections-heading">
-      <SectionHeading
-        id="sections-heading"
-        eyebrow={content.sections.eyebrow}
-        title={content.sections.title}
-        description={content.sections.description}
-      />
-      <div className="mt-5 grid gap-3 sm:grid-cols-2">
-        {content.sections.items.map((item) => (
+    <section aria-labelledby="go-deeper-heading">
+      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-brand">Decision evidence</p>
+      <h2 id="go-deeper-heading" className="mt-1.5 text-xl font-semibold tracking-tight text-foreground">
+        Follow every claim into the underlying work
+      </h2>
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {content.go_deeper.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="group flex flex-col rounded-xl border border-border bg-card p-5 outline-none transition-colors hover:border-foreground/30 hover:bg-foreground/[0.02] focus-visible:ring-2 focus-visible:ring-ring"
+            className="group flex items-start justify-between gap-3 rounded-xl border border-border bg-card p-4 outline-none transition-colors hover:border-brand/40 hover:bg-brand/[0.02] focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <div className="flex items-start justify-between gap-3">
-              <p className="text-base font-semibold text-foreground">{item.title}</p>
-              <ArrowUpRight
-                className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/60 transition-colors group-hover:text-foreground"
-                aria-hidden="true"
-              />
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-foreground">{item.title}</p>
+              <p className="mt-1 text-xs leading-5 text-muted-foreground">{item.description}</p>
             </div>
-            <p className="mt-2 flex-1 text-sm leading-6 text-pretty text-muted-foreground">{item.description}</p>
-            <p className="mt-4 border-t border-border/70 pt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-              {item.meta}
-            </p>
+            <ArrowUpRight
+              className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/60 transition-colors group-hover:text-brand"
+              aria-hidden="true"
+            />
           </Link>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/* 6. Closing                                                          */
-/* ------------------------------------------------------------------ */
-
-function Closing({ content }: { content: ExecutiveSummaryContent }) {
-  return (
-    <section aria-labelledby="closing-heading" className="rounded-xl border border-border bg-card p-6">
-      <h2 id="closing-heading" className="max-w-2xl text-lg font-semibold tracking-tight text-balance text-foreground">
-        {content.closing.title}
-      </h2>
-      <p className="mt-2 max-w-3xl text-sm leading-6 text-pretty text-muted-foreground">{content.closing.body}</p>
-      <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 border-t border-border/70 pt-4">
-        {content.closing.links.map((link) => (
-          <InlineLink key={link.href} href={link.href}>
-            {link.label}
-          </InlineLink>
         ))}
       </div>
     </section>
@@ -325,9 +298,8 @@ export function ExecutiveSummary({
     <div className="flex flex-col gap-12">
       <Hero content={content} />
       <ThreeWhys content={content} />
-      <SectionIndex content={content} />
       {comparison ? <ComparisonSection content={content} comparison={comparison} /> : null}
-      <Closing content={content} />
+      <GoDeeper content={content} />
     </div>
   )
 }
