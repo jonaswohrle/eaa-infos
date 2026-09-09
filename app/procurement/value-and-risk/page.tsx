@@ -8,7 +8,7 @@ export default async function ValueAndRiskPage() {
   const data = await getBusinessCase()
 
   return (
-    <article className="business-case-document mx-auto max-w-5xl px-6 py-12 sm:py-16">
+    <article className="business-case-document">
       <header className="business-case-print-masthead">
         <div className="business-case-print-lockup">
           <span className="business-case-print-vercel">

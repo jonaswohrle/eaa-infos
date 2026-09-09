@@ -23,7 +23,7 @@ export default async function CompetitorsPage({
   })
 
   return (
-    <div className="mx-auto w-full max-w-[1400px] px-4 py-12 sm:px-6 sm:py-16">
+    <div>
       <PageHeader
         eyebrow={analysis?.eyebrow ?? 'Procurement · Analysis'}
         title={analysis?.title ?? 'Competitor analysis'}
