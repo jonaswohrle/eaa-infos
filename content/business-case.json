@@ -5,6 +5,40 @@
     "title": "The case for giving citizen-built software a governed home.",
     "lead": "In a growing number of enterprises the people building working software already outnumber the engineers. Finance analysts, operations managers, support leads and marketers describe what they need to an AI coding tool and get something that runs. The applications are real, they reach real systems, and colleagues depend on them — but none of it was routed through the operating model that governs everything else the business runs on. This is the argument for closing that gap, stage by stage."
   },
+  "executiveSummary": {
+    "eyebrow": "Executive summary",
+    "title": "One platform. Two groups. Clear governance.",
+    "lead": "A governed platform removes the traditional trade-off between speed and control. Builders move fast inside company guardrails. Platform teams keep full visibility and enforceable policy without becoming the bottleneck.",
+    "groups": [
+      {
+        "title": "Citizen developers",
+        "lead": "Every new idea no longer requires a specialist queue.",
+        "body": [
+          "Builders work in company-owned source, with company identity and company guardrails from the first commit.",
+          "They see the same production logs, errors and traces the platform team sees. They diagnose and propose fixes themselves, then validate the change in a governed preview before it reaches production.",
+          "The platform records every action with owner, time and reason. Nothing disappears into shadow IT."
+        ]
+      },
+      {
+        "title": "Platform administrators",
+        "lead": "One live inventory replaces fragmented lists.",
+        "body": [
+          "Every asset, its owner, its policy status, its spend and its run history is visible in one place.",
+          "Alerts and automated responses surface abnormal consumption or traffic while it is still containable. Agent actions are proposed, reviewed and logged rather than executed unchecked.",
+          "Governance effort scales with the number of workloads, not the number of people."
+        ]
+      }
+    ],
+    "evidence": {
+      "title": "Evidence the logic holds",
+      "items": [
+        "Builders resolve a measurable share of production issues without escalation, because the same evidence is available inside their own workflow.",
+        "Abnormal spend and traffic are contained by layered alerts, reporting, rate limiting and egress controls rather than discovered after the bill arrives.",
+        "Every deployment carries immutable ownership and audit history, removing the \"who owns this and why is it running\" problem that grows with headcount."
+      ]
+    },
+    "footnote": "The detailed business case below sets out the full value and risk-mitigated statements for every lifecycle stage, the arguments supporting each one, and the documentation that substantiates them."
+  },
   "audience": {
     "title": "Who this is for",
     "body": "An enterprise where citizen developers — people outside engineering — are already shipping applications, and where that has outgrown the old assumption that everything reaching production passes through an engineering team first. The tell is simple: if the platform group is discovering applications rather than provisioning them, this describes your situation."

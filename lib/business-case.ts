@@ -36,6 +36,14 @@ export type BusinessCasePhase = {
 export type BusinessCaseContent = {
   updated_at: string
   hero: { eyebrow: string; title: string; lead: string }
+  executiveSummary: {
+    eyebrow: string
+    title: string
+    lead: string
+    groups: { title: string; lead: string; body: string[] }[]
+    evidence: { title: string; items: string[] }
+    footnote: string
+  }
   audience: { title: string; body: string }
   structure: { title: string; body: string }
   lenses: { key: Lens; label: string; long: string }[]

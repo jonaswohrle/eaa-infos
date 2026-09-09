@@ -1,4 +1,5 @@
 import { PageHeader } from '@/components/page-header'
+import { docLinksFor } from '@/lib/business-case-docs'
 import type {
   BusinessCaseContent,
   BusinessCaseItem,
@@ -33,6 +34,7 @@ function ArgumentCard({
   statusLabel: string
   supportLabel: string
 }) {
+  const docLinks = docLinksFor(item.title)
   const chain = [
     { label: 'Today', body: item.today },
     { label: 'Why it breaks', body: item.problem },
@@ -61,6 +63,27 @@ function ArgumentCard({
           </div>
         ))}
       </dl>
+
+      {docLinks.length > 0 ? (
+        <div className="mt-4 border-t border-border/70 pt-3">
+          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Documentation</p>
+          <ul className="mt-2 space-y-1.5">
+            {docLinks.map((link) => (
+              <li key={link.href} className="text-sm leading-relaxed">
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  {link.label}
+                </a>
+                <span className="text-muted-foreground"> — {link.proves}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       <footer className="mt-4 flex flex-wrap items-baseline justify-between gap-3 border-t border-border/70 pt-3">
         <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
@@ -161,10 +184,56 @@ function PhaseSection({
   )
 }
 
+function ExecutiveSummaryDocument({ content }: { content: BusinessCaseContent['executiveSummary'] }) {
+  return (
+    <section aria-labelledby="exec-summary" className="rounded-xl border border-border bg-card p-6 sm:p-8">
+      <div className="border-b border-border pb-6">
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{content.eyebrow}</p>
+        <h2 id="exec-summary" className="mt-2 text-balance text-2xl font-semibold tracking-tight text-foreground">
+          {content.title}
+        </h2>
+        <p className="mt-3 max-w-2xl text-pretty text-base leading-7 text-muted-foreground">{content.lead}</p>
+      </div>
+
+      <div className="grid gap-8 pt-6 md:grid-cols-2">
+        {content.groups.map((group) => (
+          <section key={group.title}>
+            <h3 className="mb-3 text-sm font-semibold tracking-tight text-foreground">{group.title}</h3>
+            <div className="space-y-4 text-sm leading-6 text-foreground">
+              {group.body.map((paragraph, index) => (
+                <p key={paragraph.slice(0, 32)}>
+                  {index === 0 ? <span className="font-medium">{group.lead} </span> : null}
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <div className="mt-8 border-t border-border pt-6">
+        <h3 className="mb-3 text-sm font-semibold tracking-tight text-foreground">{content.evidence.title}</h3>
+        <ul className="space-y-2 text-sm leading-6 text-foreground">
+          {content.evidence.items.map((entry) => (
+            <li key={entry.slice(0, 32)} className="flex gap-2">
+              <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-foreground" aria-hidden="true" />
+              <span>{entry}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <p className="mt-6 text-xs leading-relaxed text-muted-foreground">{content.footnote}</p>
+    </section>
+  )
+}
+
 export function BusinessCaseView({ content }: { content: BusinessCaseContent }) {
   return (
     <div className="space-y-10">
       <PageHeader eyebrow={content.hero.eyebrow} title={content.hero.title} description={content.hero.lead} />
+
+      <ExecutiveSummaryDocument content={content.executiveSummary} />
 
       <section className="grid gap-4 md:grid-cols-2">
         {[content.audience, content.structure].map((block) => (
