@@ -64,9 +64,9 @@
       },
       {
         "title": "Business case",
-        "description": "Twenty-five arguments organised by lifecycle stage, each following the same chain — what happens today, why it breaks, where it ends, and how it plays out on Vercel.",
+        "description": "The argument for giving citizen-built software a governed home. Every lifecycle stage makes two claims — one about the value created, one about the risk removed — each backed by evidence rather than asserted numbers.",
         "href": "/procurement/business-case",
-        "meta": "25 arguments · 4 lenses"
+        "meta": "Value & risk, per stage"
       },
       {
         "title": "Running a POC",

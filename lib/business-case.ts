@@ -36,13 +36,8 @@ export type BusinessCasePhase = {
 export type BusinessCaseContent = {
   updated_at: string
   hero: { eyebrow: string; title: string; lead: string }
-  howToUse: { title: string; body: string }
-  sizing: {
-    title: string
-    lead: string
-    inputs: { label: string; detail: string }[]
-    note: string
-  }
+  audience: { title: string; body: string }
+  structure: { title: string; body: string }
   lenses: { key: Lens; label: string; long: string }[]
   statusLabels: Record<Status, string>
   phases: BusinessCasePhase[]

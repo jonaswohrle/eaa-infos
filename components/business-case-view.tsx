@@ -162,48 +162,17 @@ function PhaseSection({
 }
 
 export function BusinessCaseView({ content }: { content: BusinessCaseContent }) {
-  const all = content.phases.flatMap((phase) => phase.items)
-  const valueCount = all.filter((item) => item.supportKind === 'value').length
-  const riskCount = all.filter((item) => item.supportKind === 'risk').length
-
   return (
     <div className="space-y-10">
       <PageHeader eyebrow={content.hero.eyebrow} title={content.hero.title} description={content.hero.lead} />
 
       <section className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-xl border border-border bg-card p-5">
-          <h2 className="text-sm font-semibold text-foreground">{content.howToUse.title}</h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{content.howToUse.body}</p>
-        </div>
-        <div className="rounded-xl border border-border bg-card p-5">
-          <h2 className="text-sm font-semibold text-foreground">{content.sizing.title}</h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{content.sizing.lead}</p>
-          <ul className="mt-3 space-y-2">
-            {content.sizing.inputs.map((input) => (
-              <li key={input.label} className="text-sm leading-relaxed">
-                <span className="font-medium text-foreground">{input.label}</span>
-                <span className="text-muted-foreground"> — {input.detail}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-3 border-t border-border/70 pt-3 text-xs leading-relaxed text-muted-foreground">
-            {content.sizing.note}
-          </p>
-        </div>
-      </section>
-
-      <section className="rounded-xl border border-border bg-card p-5">
-        <h2 className="text-sm font-semibold text-foreground">Every stage makes two claims</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          One about the <span className="font-medium text-foreground">value</span> a governed platform creates, one
-          about the <span className="font-medium text-foreground">risk</span> it removes. The arguments underneath each
-          claim are the evidence for it — expand a claim to see what backs it up.
-        </p>
-        <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 border-t border-border/70 pt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-          <span>{content.phases.length} stages</span>
-          <span>{valueCount} value arguments</span>
-          <span>{riskCount} risk arguments</span>
-        </p>
+        {[content.audience, content.structure].map((block) => (
+          <div key={block.title} className="rounded-xl border border-border bg-card p-5">
+            <h2 className="text-sm font-semibold text-foreground">{block.title}</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{block.body}</p>
+          </div>
+        ))}
       </section>
 
       <div className="space-y-8">

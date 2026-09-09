@@ -2,31 +2,16 @@
   "updated_at": "2026-09-09",
   "hero": {
     "eyebrow": "Business case",
-    "title": "The argument, phase by phase.",
-    "lead": "Twenty-five arguments for giving AI-built applications a governed home, organised across the six lifecycle stages. Each one follows the same chain: what happens today, why it breaks, where it ends, and how it plays out on Vercel. The quantification column tells you what to measure in your own organisation rather than asserting a number for it."
+    "title": "The case for giving citizen-built software a governed home.",
+    "lead": "In a growing number of enterprises the people building working software already outnumber the engineers. Finance analysts, operations managers, support leads and marketers describe what they need to an AI coding tool and get something that runs. The applications are real, they reach real systems, and colleagues depend on them — but none of it was routed through the operating model that governs everything else the business runs on. This is the argument for closing that gap, stage by stage."
   },
-  "howToUse": {
-    "title": "How to use this",
-    "body": "This is a template, not a filled-in case. The arguments are drawn from a real enterprise evaluation — a global business with roughly 2,500 employees already building applications with AI coding tools — and generalised. Take the phases that match your exposure, apply your own population and rates to the basis given, and drop the rest."
+  "audience": {
+    "title": "Who this is for",
+    "body": "An enterprise where citizen developers — people outside engineering — are already shipping applications, and where that has outgrown the old assumption that everything reaching production passes through an engineering team first. The tell is simple: if the platform group is discovering applications rather than provisioning them, this describes your situation."
   },
-  "sizing": {
-    "title": "Sizing it for your organisation",
-    "lead": "Three inputs drive most of the model. Everything else is derived from them.",
-    "inputs": [
-      {
-        "label": "Builder population",
-        "detail": "People already creating applications with AI tooling — usually far more than your engineering headcount, and mostly outside it."
-      },
-      {
-        "label": "Applications per builder per year",
-        "detail": "How often an idea becomes something that needs to run somewhere. This is the multiplier on every review, credential and support cost below."
-      },
-      {
-        "label": "Loaded specialist rate",
-        "detail": "Fully loaded hourly cost of the engineering, security and platform time currently absorbed per application."
-      }
-    ],
-    "note": "The reference deployment sized the seat-licence line alone into six figures annually before any productivity or risk value was counted."
+  "structure": {
+    "title": "How the argument is built",
+    "body": "Six lifecycle stages, from a first prompt through to long-term maintenance. Each stage makes two claims — one about the value a governed platform creates, one about the risk it removes — and each claim is backed by arguments that follow the same chain: what happens today, why it breaks, where it ends, and how it plays out on Vercel. No stage is quantified here; what each argument offers instead is the basis on which your own finance partner would size it."
   },
   "lenses": [
     {
@@ -60,7 +45,7 @@
     {
       "phase": "build",
       "label": "Build",
-      "value": "10× faster delivery of applications and agents, with approved access to production systems and no setup or technical expertise required from builders.",
+      "value": "Dramatically faster delivery of applications and agents, with approved access to production systems and no setup or technical expertise required from builders.",
       "riskMitigated": "Prevents inconsistent architectures, copied credentials, and unsupported code from turning rapid experimentation into security debt and costly rework.",
       "items": [
         {
@@ -76,7 +61,7 @@
             "cost",
             "value"
           ],
-          "quantBasis": "Applications created × review and remediation hours avoided × loaded specialist rate.",
+          "quantBasis": "Measured from applications created, review and remediation hours avoided, and loaded specialist rate.",
           "status": "validated"
         },
         {
@@ -91,7 +76,7 @@
             "risk",
             "value"
           ],
-          "quantBasis": "Credentials copied per application, incidents avoided, and response hours × loaded security and legal cost.",
+          "quantBasis": "Measured from credentials copied per application, incidents avoided, response hours, and the loaded security and legal cost of each.",
           "status": "discuss"
         },
         {
@@ -106,7 +91,7 @@
             "cost",
             "value"
           ],
-          "quantBasis": "Builder releases × engineering assistance hours avoided × loaded engineering rate; compare completion rates before and after.",
+          "quantBasis": "Measured from builder releases, engineering assistance hours avoided, and loaded engineering rate. Compare completion rates before and after.",
           "status": "validated"
         },
         {
@@ -122,7 +107,7 @@
             "value",
             "risk"
           ],
-          "quantBasis": "Integration requests × elapsed days and specialist hours; compare time from prototype to a working connected application.",
+          "quantBasis": "Measured from integration requests, elapsed days, and specialist hours. Compare time from prototype to a working connected application.",
           "status": "proposed"
         },
         {
@@ -137,7 +122,7 @@
             "cost",
             "risk"
           ],
-          "quantBasis": "Builders who need source access × per-seat licence cost × 12 months. Substitute your own seat price and builder population — in the reference deployment this line alone accounted for a six-figure annual avoidance.",
+          "quantBasis": "Builders who need source access, the per-seat licence cost avoided for each, and the share of the builder population that would otherwise be excluded from the governed source path.",
           "status": "validated"
         }
       ]
@@ -175,7 +160,7 @@
             "cost",
             "value"
           ],
-          "quantBasis": "Review cycles, first feedback latency, and defects found after approval × rework hours.",
+          "quantBasis": "Measured from review cycles, first feedback latency, defects found after approval, and the rework hours each causes.",
           "status": "proposed"
         },
         {
@@ -190,7 +175,7 @@
             "cost",
             "value"
           ],
-          "quantBasis": "Comments requiring clarification × average delay; reopened issues; meeting hours replaced by contextual asynchronous review.",
+          "quantBasis": "Measured from comments requiring clarification and average delay. Reopened issues; meeting hours replaced by contextual asynchronous review.",
           "status": "proposed"
         }
       ]
@@ -213,7 +198,7 @@
             "cost",
             "value"
           ],
-          "quantBasis": "Applications shipped × platform engineering hours per application, plus value lost during queue time.",
+          "quantBasis": "Measured from applications shipped and platform engineering hours per application, plus value lost during queue time.",
           "status": "proposed"
         },
         {
@@ -260,7 +245,7 @@
             "risk",
             "cost"
           ],
-          "quantBasis": "Release incidents caused by version mismatch × restoration time and affected employee hours; pipelines eliminated per application.",
+          "quantBasis": "Measured from release incidents caused by version mismatch, restoration time, and affected employee hours. Pipelines eliminated per application.",
           "status": "validated"
         }
       ]
@@ -382,7 +367,7 @@
             "risk",
             "cost"
           ],
-          "quantBasis": "Audit requests × evidence collection hours; required events available centrally; incident scoping time.",
+          "quantBasis": "Measured from audit requests and evidence collection hours. Required events available centrally; incident scoping time.",
           "status": "validated"
         },
         {
@@ -420,7 +405,7 @@
             "cost",
             "risk"
           ],
-          "quantBasis": "Platform FTE per 100 applications, annual patch and upgrade hours, and incidents caused by platform maintenance.",
+          "quantBasis": "Platform engineering effort per unit of estate, annual patch and upgrade hours, and incidents caused by platform maintenance rather than by the applications themselves.",
           "status": "proposed"
         },
         {
@@ -451,7 +436,7 @@
             "risk",
             "ai"
           ],
-          "quantBasis": "Incidents × time to first diagnosis and resolution; specialist escalations avoided; share resolved with default telemetry.",
+          "quantBasis": "Measured from incident count and the time to first diagnosis and resolution. Specialist escalations avoided; share resolved with default telemetry.",
           "status": "validated"
         },
         {
@@ -466,7 +451,7 @@
             "cost",
             "value"
           ],
-          "quantBasis": "Tickets per 100 applications × handling time × loaded support rate; share resolved without internal platform intervention.",
+          "quantBasis": "Support tickets per unit of estate, handling time, loaded support rate, and the share resolved without internal platform intervention.",
           "status": "proposed"
         },
         {
