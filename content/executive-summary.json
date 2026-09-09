@@ -33,9 +33,9 @@
   ],
   "go_deeper": [
     {
-      "title": "Business case",
-      "description": "The executive brief: why anything, why now, why Vercel, and what it avoids.",
-      "href": "/procurement/business-case"
+      "title": "Capabilities",
+      "description": "The problem statement and the target operating model, capability by capability.",
+      "href": "/technical/capabilities"
     },
     {
       "title": "Value and Risk",
@@ -43,9 +43,9 @@
       "href": "/procurement/value-and-risk"
     },
     {
-      "title": "Capabilities",
-      "description": "The problem statement and the target operating model, capability by capability.",
-      "href": "/technical/capabilities"
+      "title": "Business case",
+      "description": "The executive brief: why anything, why now, why Vercel, and what it avoids.",
+      "href": "/procurement/business-case"
     },
     {
       "title": "Competitor analysis",

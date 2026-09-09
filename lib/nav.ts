@@ -5,9 +5,9 @@ export type NavLink = {
 }
 
 export const NAV_LINKS: NavLink[] = [
-  { href: '/procurement/business-case', label: 'Business case', stepKey: 'business-case' },
-  { href: '/procurement/value-and-risk', label: 'Value and Risk' },
   { href: '/technical/capabilities', label: 'Capabilities', stepKey: 'capabilities' },
+  { href: '/procurement/value-and-risk', label: 'Value and Risk' },
+  { href: '/procurement/business-case', label: 'Business case', stepKey: 'business-case' },
   { href: '/procurement/competitors', label: 'Competitor analysis', stepKey: 'competitors' },
 ]
 
